@@ -1,6 +1,9 @@
 package com.example.electrorui.ui
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.text.InputType
 import android.widget.Toast
@@ -73,6 +76,10 @@ class StartActivity : AppCompatActivity() {
         }
 
         binding.buttonL.setOnClickListener {
+            val cm = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork : NetworkInfo? = cm.activeNetworkInfo
+            val isConnected : Boolean = activeNetwork?.isConnectedOrConnecting == true
+
             val userEt = binding.editTextUser.text.toString()
             val passEt = binding.editTextPass.text.toString()
 
@@ -81,7 +88,12 @@ class StartActivity : AppCompatActivity() {
             if (!userEt.isEmpty()){
                 if (!passEt.isEmpty()){
 
-                    dataActivityVM.verifyUserVM(userEt, passEt)
+                    if(isConnected){
+                        dataActivityVM.verifyUserVM(userEt, passEt)
+                    } else{
+                        Toast
+                            .makeText(applicationContext, "Conectate a internet para continuar", Toast.LENGTH_SHORT).show()
+                    }
 
                 } else {
                     Toast

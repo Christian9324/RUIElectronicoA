@@ -82,7 +82,7 @@ class PrefManager(context : Context?) {
 
     fun getPass() : String? = prefs?.getString(IS_PASS,"")
 
-    fun getConnection() : Boolean? = prefs?.getBoolean(IS_CONNECTED, true)
+    fun getConnection() : Boolean? = prefs?.getBoolean(IS_CONNECTED, false)
     fun getTipoRescate() : Int? = prefs?.getInt(TYPE_RESC, 0)
     fun getPuntoRevision() : String? = prefs?.getString(PUNTO_REVISION, "")
 
