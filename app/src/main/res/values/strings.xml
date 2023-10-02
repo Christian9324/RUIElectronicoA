@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">ElectroRUI</string>
+    <string name="title_home">Usuario</string>
+    <string name="title_1_window">Captura</string>
+    <string name="title_2_window">Resumen</string>
+    <string name="signin">Notificaciones</string>
+    <string name="cancel">Notificaciones</string>
+    <string name="str_guardar">Guardar</string>
+    <string name="hombres"><font size="18">Hombres</font></string>
+    <string name="mujeresN"><font size="12">Mujeres no Embarazadas</font></string>
+    <string name="mujeresE"><font size="11">Mujeres Embarazadas</font></string>
+    <string name="texto1_SinConexion"> &#128561;¿Sin conexión?😥</string>
+    <string name="texto2_SinConexion">¡No te preocupes!😎 \n ¡Ingresa los rescates y se enviarán cuando tengas conexión!&#128246;&#127758;&#128259;</string>
+    <string name="info_floating_button">Ingresa un conteo rapido</string>
+    <string name="presuntos">Presuntos Delincuentes Puestos a Disposición</string>
+    <string name="noDeDocumento">No. de documento</string>
+
+    <string-array name="tipo_rescate">
+        <item>Seleccionar qué tipo de rescate</item>
+        <item>AEROPUERTO</item>
+        <item>CARRETERO</item>
+        <item>CASA DE SEGURIDAD</item>
+        <item>CENTRAL DE AUTOBÚS</item>
+        <item>FERROCARRIL</item>
+        <item>HOTEL</item>
+        <item>PUESTOS A DISPOSICIÓN</item>
+        <item>VOLUNTARIOS</item>
+        <item>OTRO</item>
+    </string-array>
+
+    <string-array name="tipo_vehiculo">
+        <item>Seleccionar tipo de vehículo</item>
+        <item>AUTOBUS</item>
+        <item>CAMIÓN</item>
+        <item>TRANSPORTE PÚBLICO</item>
+        <item>MOTOCICLETA</item>
+        <item>VEHÍCULO PARTICULAR</item>
+        <item>TRÁILER</item>
+        <item>OTRO</item>
+    </string-array>
+
+    <string-array name="tipo_ferrocarril">
+        <item>Seleccionar empresa de ferrocarril</item>
+        <item>FerroMex</item>
+        <item>FerroSur</item>
+        <item>Kansas City</item>
+        <item>Fe. Istmo</item>
+    </string-array>
+
+    <string-array name="tipo_parentesco">
+        <item>Seleccionar parentesco</item>
+        <item>Hijo/a</item>
+        <item>Hermano/a</item>
+        <item>Padre</item>
+        <item>Madre</item>
+        <item>Tutor</item>
+        <item>Otro</item>
+    </string-array>
+
+</resources>

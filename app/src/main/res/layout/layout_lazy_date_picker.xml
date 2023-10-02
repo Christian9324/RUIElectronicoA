@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/edit_lazy_date_picker_real"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/layout_lazy_date_picker"
+        android:background="@null"
+        android:cursorVisible="false"
+        android:digits="0123456789"
+        android:inputType="number|none"
+        android:textSize="0sp"
+        tools:ignore="Autofill,LabelFor,TextFields" />
+
+    <LinearLayout
+        android:id="@+id/layout_lazy_date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="@dimen/lazy_date_picker_width_case"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/lazy_date_picker_width_margin"
+            android:layout_marginRight="@dimen/lazy_date_picker_width_margin"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_lazy_date_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="m"
+                android:textSize="@dimen/text_size_lazy"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view_lazy_date_1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/lazy_date_picker_height_focus"
+                android:background="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/lazy_date_picker_width_case"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/lazy_date_picker_width_margin"
+            android:layout_marginEnd="@dimen/lazy_date_picker_width_margin"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_lazy_date_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="m"
+                android:textSize="@dimen/text_size_lazy"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view_lazy_date_2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/lazy_date_picker_height_focus"
+                android:background="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="@dimen/lazy_date_picker_width_space"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:layout_marginTop="-7dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="1dp"
+            android:textSize="32sp"
+            android:textStyle="bold"/>
+
+
+        <LinearLayout
+            android:layout_width="@dimen/lazy_date_picker_width_case"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/lazy_date_picker_width_margin"
+            android:layout_marginEnd="@dimen/lazy_date_picker_width_margin"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_lazy_date_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="d"
+                android:textSize="@dimen/text_size_lazy"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view_lazy_date_3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/lazy_date_picker_height_focus"
+                android:background="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/lazy_date_picker_width_case"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/lazy_date_picker_width_margin"
+            android:layout_marginEnd="@dimen/lazy_date_picker_width_margin"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_lazy_date_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="d"
+                android:textSize="@dimen/text_size_lazy"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view_lazy_date_4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/lazy_date_picker_height_focus"
+                android:background="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="@dimen/lazy_date_picker_width_space"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:layout_marginTop="-7dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="1dp"
+            android:textSize="32sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="@dimen/lazy_date_picker_width_case"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/lazy_date_picker_width_margin"
+            android:layout_marginEnd="@dimen/lazy_date_picker_width_margin"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_lazy_date_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="a"
+                android:textSize="@dimen/text_size_lazy"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view_lazy_date_5"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/lazy_date_picker_height_focus"
+                android:background="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/lazy_date_picker_width_case"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/lazy_date_picker_width_margin"
+            android:layout_marginEnd="@dimen/lazy_date_picker_width_margin"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_lazy_date_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="a"
+                android:textSize="@dimen/text_size_lazy"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view_lazy_date_6"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/lazy_date_picker_height_focus"
+                android:background="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/lazy_date_picker_width_case"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/lazy_date_picker_width_margin"
+            android:layout_marginEnd="@dimen/lazy_date_picker_width_margin"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_lazy_date_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="a"
+                android:textSize="@dimen/text_size_lazy"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view_lazy_date_7"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/lazy_date_picker_height_focus"
+                android:background="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/lazy_date_picker_width_case"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/lazy_date_picker_width_margin"
+            android:layout_marginEnd="@dimen/lazy_date_picker_width_margin"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_lazy_date_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="a"
+                android:textSize="@dimen/text_size_lazy"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view_lazy_date_8"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/lazy_date_picker_height_focus"
+                android:background="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_lazy_date_picker_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/text_size_lazy"
+        android:visibility="gone"
+        android:textAllCaps="true"
+        tools:text="01 jav. 1900" />
+
+    <View
+        android:id="@+id/btn_lazy_date_picker_on_focus"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@+id/layout_lazy_date_picker"
+        android:layout_alignLeft="@+id/layout_lazy_date_picker"
+        android:layout_alignTop="@+id/layout_lazy_date_picker"
+        android:layout_alignEnd="@+id/layout_lazy_date_picker"
+        android:layout_alignRight="@+id/layout_lazy_date_picker"
+        android:layout_alignBottom="@+id/layout_lazy_date_picker" />
+
+</RelativeLayout>

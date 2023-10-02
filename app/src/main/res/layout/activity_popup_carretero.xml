@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_close_24"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:background="@color/rojo"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/editTextTipo1"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="@dimen/margin_basic1"
+                        android:layout_marginTop="@dimen/margin_basic1"
+                        android:layout_marginEnd="@dimen/margin_basic1"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="@dimen/margin_basic1"
+                        android:gravity="center"
+                        android:hint="TIPO: "
+                        android:textColor="@color/marron"
+                        android:textColorHint="@color/marron"
+                        android:textSize="26sp" />
+
+                    <View
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/ic_save_24"
+                        android:layout_gravity="end"
+                        android:layout_margin="5dp"
+                        android:id="@+id/closeImg"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+
+                <!--            //////// Carretero  ////////  -->
+                <LinearLayout
+                    android:id="@+id/LLCarretero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_basic1"
+                        android:layout_gravity="center_horizontal">
+                        <Spinner
+                            android:id="@+id/spinnerTipoVehiculo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:hint="Tipo de vehiculo"
+                            android:textColor="@color/marron"
+                            android:textColorHint="@color/marron"
+                            android:backgroundTint="@color/marron"
+                            android:gravity="center_horizontal"
+                            tools:listitem="@layout/spinner_item"/>
+
+                        <ImageView
+                            android:id="@+id/spinnerTipoVehiculoE"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_error_24"
+                            android:tint="@color/yellow"
+                            android:visibility="gone"
+                            android:layout_gravity="center_vertical"/>
+
+                    </LinearLayout>
+
+
+
+                    <EditText
+                        android:id="@+id/etLineaAutobus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:ems="15"
+                        android:inputType="textVisiblePassword"
+                        android:hint="Línea de Autobús / Empresa :"
+                        android:textAllCaps="true"
+                        android:textColor="@color/marron"
+                        android:textColorHint="@color/marron"
+                        android:backgroundTint="@color/marron"
+                        android:gravity="center_horizontal"
+                        android:layout_margin="@dimen/margin_basic1"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="@dimen/margin_basic05">
+
+                        <EditText
+                            android:id="@+id/etEconomico"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="7"
+                            android:inputType="textVisiblePassword"
+                            android:hint="No Económico: "
+                            android:textAllCaps="true"
+                            android:backgroundTint="@color/marron"
+                            android:textColor="@color/marron"
+                            android:textColorHint="@color/marron"
+                            android:gravity="center_horizontal" />
+
+                        <EditText
+                            android:id="@+id/etPlacas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="7"
+                            android:inputType="textVisiblePassword"
+                            android:hint="Placas: "
+                            android:textAllCaps="true"
+                            android:backgroundTint="@color/marron"
+                            android:textColor="@color/marron"
+                            android:textColorHint="@color/marron"
+                            android:gravity="center_horizontal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="@dimen/margin_basic05">
+
+                        <TextView
+                            android:id="@+id/tvVehiculoA"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Vehículo Asegurado"
+                            android:textSize="18sp"
+                            android:backgroundTint="@color/marron"
+                            android:textColor="@color/marron"
+                            android:textColorHint="@color/marron"
+                            android:gravity="center_horizontal" />
+
+                        <CheckBox
+                            android:id="@+id/checkVehiculo"
+                            android:buttonTint="@color/marron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--            //////// Ferrocarril  //////  -->
+                <LinearLayout
+                    android:id="@+id/LLFerrocarril"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_basic1"
+                        android:layout_gravity="center_horizontal">
+                        <Spinner
+                            android:id="@+id/spinnerTipoFerro"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:hint="Tipo de vehiculo"
+                            android:textColor="@color/marron"
+                            android:textColorHint="@color/marron"
+                            android:backgroundTint="@color/marron"
+                            android:gravity="center_horizontal"
+                            tools:listitem="@layout/spinner_item"/>
+
+                        <ImageView
+                            android:id="@+id/spinnerTipoFerroE"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_error_24"
+                            android:tint="@color/yellow"
+                            android:visibility="gone"
+                            android:layout_gravity="center_vertical"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--            //////// Hotel  ////////  -->
+                <LinearLayout
+                    android:id="@+id/LLHotel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal">
+
+                    <EditText
+                        android:id="@+id/etNombreHotel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:ems="15"
+                        android:inputType="text"
+                        android:hint="Nombre del Hotel"
+                        android:textColor="@color/marron"
+                        android:textColorHint="@color/marron"
+                        android:backgroundTint="@color/marron"
+                        android:gravity="center_horizontal"
+                        android:layout_margin="@dimen/margin_basic05"/>
+
+                </LinearLayout>
+
+                <!--            //////// Puestos s Disposicion  ////////  -->
+                <LinearLayout
+                    android:id="@+id/LLPuestosaD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Juez Calificador"
+                            android:textColor="@color/marron"
+                            android:textSize="20sp"/>
+                        <CheckBox
+                            android:id="@+id/checkboxJuez"
+                            android:buttonTint="@color/marron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/marron"
+                            android:text="Reclusorio / Cereso"
+                            android:textSize="20sp"/>
+                        <CheckBox
+                            android:id="@+id/checkboxReclusorio"
+                            android:buttonTint="@color/marron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/marron"
+                            android:text="Policía Federal"
+                            android:textSize="20sp"/>
+                        <CheckBox
+                            android:id="@+id/checkboxPoliciaF"
+                            android:buttonTint="@color/marron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="DIF"
+                            android:textColor="@color/marron"
+                            android:textSize="20sp"/>
+                        <CheckBox
+                            android:id="@+id/checkboxDif"
+                            android:buttonTint="@color/marron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Policía Estatal"
+                            android:textColor="@color/marron"
+                            android:textSize="20sp"/>
+                        <CheckBox
+                            android:id="@+id/checkboxPoliciaE"
+                            android:buttonTint="@color/marron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Policía Municipal"
+                            android:textColor="@color/marron"
+                            android:textSize="20sp"/>
+                        <CheckBox
+                            android:id="@+id/checkboxPoliciaM"
+                            android:buttonTint="@color/marron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Guardia Nacional"
+                            android:textColor="@color/marron"
+                            android:textSize="20sp"/>
+                        <CheckBox
+                            android:id="@+id/checkboxGN"
+                            android:buttonTint="@color/marron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Fiscalía"
+                            android:textColor="@color/marron"
+                            android:textSize="20sp"/>
+                        <CheckBox
+                            android:id="@+id/checkboxFiscalia"
+                            android:buttonTint="@color/marron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Otras Autoridades"
+                            android:textColor="@color/marron"
+                            android:textSize="20sp"/>
+                        <CheckBox
+                            android:id="@+id/checkboxOtras"
+                            android:buttonTint="@color/marron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--            //////// Municipio  ////////  -->
+                <LinearLayout
+                    android:id="@+id/LLMunicipio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/spinnerMuncipio"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:hint="Municipio"
+                        android:textColor="@color/marron"
+                        android:textColorHint="@color/marron"
+                        android:backgroundTint="@color/marron"
+                        android:gravity="center"
+                        android:ellipsize="end"
+                        android:inputType="textAutoComplete"
+                        android:imeOptions="actionDone"
+                        android:layout_gravity="center_horizontal"/>
+
+                </LinearLayout>
+
+                <!--            //////// Presuntos Delincuentes-->
+                <LinearLayout
+                    android:id="@+id/LLPresuntosD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/presuntos"
+                        android:textColor="@color/marron"
+                        android:textSize="16sp"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_basic05">
+
+                        <CheckBox
+                            android:id="@+id/checkPuestos"
+                            android:buttonTint="@color/marron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <EditText
+                            android:id="@+id/etNumeroPuestos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="5"
+                            android:visibility="gone"
+                            android:backgroundTint="@color/marron"
+                            android:textColor="@color/marron"
+                            android:textColorHint="@color/marron"
+                            android:hint="Cuantos"
+                            android:layout_marginLeft="@dimen/margin_basic4"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnGuardar"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/str_guardar"
+                    android:layout_marginBottom="@dimen/margin_basic1"
+                    android:layout_marginTop="@dimen/margin_basic1"
+                    android:textColor="@color/rojo"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+</RelativeLayout>

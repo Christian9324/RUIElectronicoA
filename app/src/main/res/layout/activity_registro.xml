@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.RegistroActivity">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/spinnerPAIS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_basic3"
+            android:layout_marginBottom="@dimen/margin_basic3"
+            android:gravity="center"
+            android:textAlignment="center"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewAS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_basic05"
+                        android:gravity="center"
+                        android:text="Adultos Solos" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/margin_basic1"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView1"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_man_24"
+                                app:tint="@color/verde" />
+
+                            <EditText
+                                android:id="@+id/editTextAS_hombres"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ems="5"
+                                android:gravity="center"
+                                android:hint="@string/hombres"
+                                android:inputType="number" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView2"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_woman_24"
+                                app:tint="@color/verde" />
+
+                            <EditText
+                                android:id="@+id/editTextAS_mujeresNoEmb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ems="7"
+                                android:gravity="center"
+                                android:hint="@string/mujeresN"
+                                android:inputType="number" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView3"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_pregnant_woman_24"
+                                app:tint="@color/verde" />
+
+                            <EditText
+                                android:id="@+id/editTextAS_mujeresEmb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ems="6"
+                                android:gravity="center"
+                                android:hint="@string/mujeresE"
+                                android:inputType="number" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewFam"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_basic05"
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Numero de Nucleos Familiares" />
+
+                    <EditText
+                        android:id="@+id/editTextNucleosFam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="@dimen/margin_basic1"
+                        android:ems="5"
+                        android:inputType="number"
+                        android:text=""
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LLFamiliares"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewAA_NNAs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_basic05"
+                        android:gravity="center"
+                        android:text="Adultos que Acompañan NNas" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/margin_basic1"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageViewAA1"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_man_24"
+                                app:tint="@color/azul" />
+
+                            <EditText
+                                android:id="@+id/editTextAA_NNAs_hombres"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ems="5"
+                                android:gravity="center"
+                                android:hint="@string/hombres"
+                                android:inputType="number" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView2AA"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_woman_24"
+                                app:tint="@color/azul" />
+
+                            <EditText
+                                android:id="@+id/editTextAA_NNAs_mujeresNoEmb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ems="7"
+                                android:gravity="center"
+                                android:hint="@string/mujeresN"
+                                android:inputType="number" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView3AA"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_pregnant_woman_24"
+                                app:srcCompat="@drawable/ic_pregnant_woman_24"
+                                app:tint="@color/azul" />
+
+                            <EditText
+                                android:id="@+id/editTextAA_NNAs_mujeresEmb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ems="6"
+                                android:gravity="center"
+                                android:hint="@string/mujeresE"
+                                android:inputType="number" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textViewNNAs_A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_basic05"
+                        android:gravity="center"
+                        android:text="NNAs Acompañados" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/margin_basic1"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageViewNNAA1"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_man_24"
+                                app:tint="@color/rojo" />
+
+                            <EditText
+                                android:id="@+id/editTextNNAsA_hombres"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ems="5"
+                                android:hint="@string/hombres"
+                                android:gravity="center"
+                                android:inputType="number" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView2NNAA"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_woman_24"
+                                app:tint="@color/rojo" />
+
+                            <EditText
+                                android:id="@+id/editTextNNAsA_mujeresNoEmb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ems="7"
+                                android:gravity="center"
+                                android:hint="@string/mujeresN"
+                                android:inputType="number" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView3NNAA"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_pregnant_woman_24"
+                                app:srcCompat="@drawable/ic_pregnant_woman_24"
+                                app:tint="@color/rojo" />
+
+                            <EditText
+                                android:id="@+id/editTextNNAsA_mujeresEmb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ems="6"
+                                android:gravity="center"
+                                android:hint="@string/mujeresE"
+                                android:inputType="number" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewNNAs_S"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_basic05"
+                    android:gravity="center"
+                    android:text="NNAs Solos" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/margin_basic1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imageView1NNAS"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/ic_man_24"
+                            app:srcCompat="@drawable/ic_man_24" />
+
+                        <EditText
+                            android:id="@+id/editTextNNAsS_hombres"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="5"
+                            android:hint="@string/hombres"
+                            android:gravity="center"
+                            android:inputType="number" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imageView2NNAS"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/ic_woman_24" />
+
+                        <EditText
+                            android:id="@+id/editTextNNAsS_mujeresNoEmb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="7"
+                            android:gravity="center"
+                            android:hint="@string/mujeresN"
+                            android:inputType="number" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imageView3NNAS"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/ic_pregnant_woman_24"
+                            app:srcCompat="@drawable/ic_pregnant_woman_24" />
+
+                        <EditText
+                            android:id="@+id/editTextNNAsS_mujeresEmb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="6"
+                            android:gravity="center"
+                            android:hint="@string/mujeresE"
+                            android:inputType="number"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonGuardarForm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="GUARDAR"
+                android:layout_marginTop="@dimen/margin_basic1"
+                android:layout_marginBottom="@dimen/margin_basic3"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
