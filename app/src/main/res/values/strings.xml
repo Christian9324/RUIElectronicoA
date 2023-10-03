@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">ElectroRUI</string>
     <string name="title_home">Usuario</string>
     <string name="title_1_window">Captura</string>
@@ -12,15 +12,23 @@
     <string name="texto1_SinConexion"> &#128561;¿Sin conexión?😥</string>
     <string name="texto2_SinConexion">¡No te preocupes!😎 \n ¡Ingresa los rescates y se enviarán cuando tengas conexión!&#128246;&#127758;&#128259;</string>
     <string name="info_floating_button">Ingresa un conteo rapido</string>
-    <string name="presuntos">Presuntos Delincuentes Puestos a Disposición</string>
-    <string name="noDeDocumento">No. de documento</string>
+    <string name="pop_presuntos">Presuntos delincuentes puestos a disposición</string>
+    <string name="ingresaPais">Ingresa el país</string>
+    <string name="nombre">Nombre(s):</string>
+    <string name="apellidos">Apellidos:</string>
+    <string name="fNacimiento">Fecha de nacimiento:</string>
+    <string name="noDeDocumento">No. de documento:</string>
+    <string name="SplasS_t1">Utiliza el RUI electrónico para el registro de datos de la población migrante rescatada en México. \n\n¡Únete y contribuye a agilizar la operación migratoria a lo largo del país!</string>
+    <string name="SplasS_t2">¡Datos puntuales, verificados y accesibles!</string>
+    <string name="SplasS_direcciones">Dirección General de Control y Verificación Migratoria \nDirección General de Coordinación de Oficinas de Representación</string>
+    <string name="msj_resumen">Mesaje de resumen</string>
 
     <string-array name="tipo_rescate">
-        <item>Seleccionar qué tipo de rescate</item>
+        <item>Selecciona qué tipo de rescate</item>
         <item>AEROPUERTO</item>
         <item>CARRETERO</item>
         <item>CASA DE SEGURIDAD</item>
-        <item>CENTRAL DE AUTOBÚS</item>
+        <item>CENTRAL DE AUTOBUSES</item>
         <item>FERROCARRIL</item>
         <item>HOTEL</item>
         <item>PUESTOS A DISPOSICIÓN</item>
@@ -29,8 +37,8 @@
     </string-array>
 
     <string-array name="tipo_vehiculo">
-        <item>Seleccionar tipo de vehículo</item>
-        <item>AUTOBUS</item>
+        <item>Selecciona el tipo de vehículo</item>
+        <item>AUTOBÚS</item>
         <item>CAMIÓN</item>
         <item>TRANSPORTE PÚBLICO</item>
         <item>MOTOCICLETA</item>
@@ -56,5 +64,17 @@
         <item>Tutor</item>
         <item>Otro</item>
     </string-array>
+
+    <string name="ldp_year" tools:override="true">A</string>
+    <string name="pop_tipoVehiculo">Tipo de vehiculo</string>
+    <string name="pop_LineaAEmpr">Línea de Autobús / Empresa:</string>
+    <string name="pop_NoEcono">No. económico:</string>
+    <string name="pop_placas">Placas:</string>
+    <string name="pop_vehiAseg">Vehículo Asegurado</string>
+    <string name="pop_tipoFerroc">Empresa:</string>
+    <string name="pop_nomHotel">Nombre del hotel:</string>
+    <string name="pop_cuantos">Cuántos</string>
+    <string name="pop_municipio">Municipio</string>
+    <string name="pop_otrasAutor">Otras autoridades</string>
 
 </resources>

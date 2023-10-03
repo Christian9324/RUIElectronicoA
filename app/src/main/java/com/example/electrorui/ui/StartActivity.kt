@@ -1,11 +1,14 @@
 package com.example.electrorui.ui
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
 import android.text.InputType
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -76,6 +79,7 @@ class StartActivity : AppCompatActivity() {
         }
 
         binding.buttonL.setOnClickListener {
+            hideKeyboard()
             val cm = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val activeNetwork : NetworkInfo? = cm.activeNetworkInfo
             val isConnected : Boolean = activeNetwork?.isConnectedOrConnecting == true
@@ -159,4 +163,13 @@ class StartActivity : AppCompatActivity() {
 //        }
 //
 //    }
+
+    fun Activity.hideKeyboard() {
+        hideKeyboard(currentFocus ?: View(this))
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
 }

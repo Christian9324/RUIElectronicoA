@@ -96,6 +96,9 @@ class RepositoryApp @Inject constructor(
     suspend fun getTotalRegistrosNombresFromDB() : Int {
         return registroNombresDao.getTotal()
     }
+    suspend fun getTotalConteoRapidoDB() : Int{
+        return datosRegistroDao.getTotal()
+    }
     suspend fun getTotalRegistrosFamiliasFromDB() : Int {
         return registroFamiliasDao.getTotal()
     }

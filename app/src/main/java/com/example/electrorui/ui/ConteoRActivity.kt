@@ -37,6 +37,14 @@ class ConteoRActivity : AppCompatActivity() {
 
         dataActivityViewM.onCreate()
 
+        dataActivityViewM.masivo.observe(this){
+            if(it){
+                binding.tvRescateMasivo.visibility = View.VISIBLE
+            } else {
+                binding.tvRescateMasivo.visibility = View.GONE
+            }
+        }
+
         nacionalidadesAdapter = NacionalidadesAdapter(emptyList())
         { data, pos ->
             Toast.makeText(this, data.nacionalidad.toString(), Toast.LENGTH_LONG).show()

@@ -37,7 +37,7 @@ class RescateNombresActivity : AppCompatActivity() {
         val nacio  = emptyList<String>()
 
         var autocompleteArrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nacio)
-        binding.spinnerPAIS.threshold = 2
+        binding.spinnerPAIS.threshold = 1
         binding.spinnerPAIS.setAdapter(autocompleteArrayAdapter)
 
         binding.spinnerPAIS.setOnItemClickListener { adapterView, view, i, l ->

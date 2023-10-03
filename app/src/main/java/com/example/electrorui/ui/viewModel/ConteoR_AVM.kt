@@ -3,12 +3,14 @@ package com.example.electrorui.ui.viewModel
 import androidx.core.text.HtmlCompat
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
+import androidx.core.text.color
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.electrorui.usecase.DelAllRegistrosUC
 import com.example.electrorui.usecase.GetAllRegistrosConteoUC
 import com.example.electrorui.usecase.GetAllRescatesDB
+import com.example.electrorui.usecase.GetInfoMasivoConteoRap
 import com.example.electrorui.usecase.SetConteoRapidoCompletoAPI
 import com.example.electrorui.usecase.SetConteoRapidoCompletoDB
 import com.example.electrorui.usecase.SetMensajeDB
@@ -28,13 +30,18 @@ class ConteoR_AVM @Inject constructor(
     private val setConteoRapidoCompletoDB: SetConteoRapidoCompletoDB,
     private val setConteoRapidoCompletoAPI: SetConteoRapidoCompletoAPI,
     private val setMensajeDB: SetMensajeDB,
+    private val getInfoMasivoConteoRap: GetInfoMasivoConteoRap,
 ) : ViewModel(){
 
     val registros by lazy { MutableLiveData<List<RegistroNacionalidad>>() }
+    val noRescatados by lazy { MutableLiveData<Int>() }
+    val masivo by lazy { MutableLiveData<Boolean>() }
 
     fun onCreate(){
         viewModelScope.launch {
             registros.value = getAllRegistrosConteoUC()
+            noRescatados.value = getInfoMasivoConteoRap()
+            masivo.value = noRescatados.value!! >= 40
         }
     }
 
@@ -61,145 +68,148 @@ class ConteoR_AVM @Inject constructor(
                         )
             }
 
-            setConteoRapidoCompletoDB(rescatesNac)
-            setConteoRapidoCompletoAPI()
+            if(conteoTotal > 0){
+                setConteoRapidoCompletoDB(rescatesNac)
+                setConteoRapidoCompletoAPI()
 
-            val mensajeStr = buildSpannedString {
-                bold { appendLine("OR: ${puntoR.oficinaRepre}") }
-                appendLine("Fecha: ${puntoR.fecha}")
-                appendLine("Hora: ${puntoR.hora}")
-                appendLine()
-
-                bold { appendLine("No. de Rescatados: ${conteoTotal}") }
-                appendLine()
-
-                if (puntoR.aeropuerto == true){
-                    appendLine("Aeropuerto: ${puntoR.puntoEstra}")
+                val mensajeStr = buildSpannedString {
+                    bold { appendLine("OR: ${puntoR.oficinaRepre}") }
+                    appendLine("Fecha: ${puntoR.fecha}")
+                    appendLine("Hora: ${puntoR.hora}")
                     appendLine()
 
-                } else if (puntoR.carretero == true){
-                    appendLine("Carretero: ${puntoR.puntoEstra}")
+                    bold { appendLine("No. de Rescatados: ${conteoTotal}") }
+                    if(conteoTotal >= 40) bold { appendLine("¡Rescate Masivo!") }
                     appendLine()
-                    appendLine("Tipo de vehículo: ${puntoR.tipoVehic}")
-                    appendLine()
-                    appendLine("Línea/empresa: ${puntoR.lineaAutobus}")
-                    appendLine()
-                    appendLine("No. Economico: ${puntoR.numeroEcono}")
-                    appendLine()
-                    appendLine("Placas: ${puntoR.placas}")
-                    appendLine()
-                    if (puntoR.vehiculoAseg){
-                        appendLine("Vehiculo Asegurado")
+
+                    if (puntoR.aeropuerto == true){
+                        appendLine("Aeropuerto: ${puntoR.puntoEstra}")
                         appendLine()
-                    }
-                    appendLine("Municipio: ${puntoR.municipio}")
-                    appendLine()
-                    if (puntoR.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+
+                    } else if (puntoR.carretero == true){
+                        appendLine("Carretero: ${puntoR.puntoEstra}")
                         appendLine()
-                    }
-                }
-                else if (puntoR.casaSeguridad == true){
-                    appendLine("Casa de Seguridad")
-                    appendLine("Municipio: ${puntoR.municipio}")
-                    if (puntoR.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+                        appendLine("Tipo de vehículo: ${puntoR.tipoVehic}")
                         appendLine()
-                    }
-                }
-                else if (puntoR.centralAutobus == true){
-                    appendLine("Central de Autobús: ${puntoR.puntoEstra}")
-                    appendLine()
-                    if (puntoR.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+                        appendLine("Línea/empresa: ${puntoR.lineaAutobus}")
                         appendLine()
-                    }
-                }
-                else if (puntoR.ferrocarril == true){
-                    appendLine("Ferrocarril: ${puntoR.puntoEstra}")
-                    appendLine()
-                    appendLine("Empresa: ${puntoR.empresa}")
-                    appendLine()
-                    if (puntoR.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+                        appendLine("No. Economico: ${puntoR.numeroEcono}")
                         appendLine()
-                    }
-                }
-                else if (puntoR.hotel == true){
-                    appendLine("Hotel")
-                    appendLine("Nombre: ${puntoR.nombreHotel}")
-                    appendLine("Municipio: ${puntoR.municipio}")
-                    if (puntoR.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+                        appendLine("Placas: ${puntoR.placas}")
                         appendLine()
-                    }
-                }
-                else if (puntoR.puestosADispo == true){
-                    appendLine("Puestos a Disposición")
-                    appendLine("Por:")
-                    if (puntoR.juezCalif) {
-                        appendLine("Juez Calificador")
-                    }else if (puntoR.reclusorio){
-                        appendLine("Reclusorio")
-                    }else if (puntoR.policiaFede){
-                        appendLine("Policía Federal")
-                    }else if (puntoR.policiaEsta){
-                        appendLine("Policía Estatal")
-                    }else if (puntoR.policiaMuni){
-                        appendLine("Policía Municipal")
-                    }else if (puntoR.dif){
-                        appendLine("DIF")
-                    }else if (puntoR.fiscalia){
-                        appendLine("Fiscalia")
-                    }else if (puntoR.otrasAuto){
-                        appendLine("Otras Autoridades")
-                    }else{
-
-                    }
-                    appendLine()
-                    if (puntoR.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+                        if (puntoR.vehiculoAseg){
+                            appendLine("Vehiculo Asegurado")
+                            appendLine()
+                        }
+                        appendLine("Municipio: ${puntoR.municipio}")
                         appendLine()
+                        if (puntoR.presuntosDelincuentes){
+                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+                            appendLine()
+                        }
                     }
-                }
-                else if (puntoR.voluntarios == true){
-                    appendLine("Voluntarios")
-                    appendLine()
-                } else{
+                    else if (puntoR.casaSeguridad == true){
+                        appendLine("Casa de Seguridad")
+                        appendLine("Municipio: ${puntoR.municipio}")
+                        if (puntoR.presuntosDelincuentes){
+                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+                            appendLine()
+                        }
+                    }
+                    else if (puntoR.centralAutobus == true){
+                        appendLine("Central de Autobús: ${puntoR.puntoEstra}")
+                        appendLine()
+                        if (puntoR.presuntosDelincuentes){
+                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+                            appendLine()
+                        }
+                    }
+                    else if (puntoR.ferrocarril == true){
+                        appendLine("Ferrocarril: ${puntoR.puntoEstra}")
+                        appendLine()
+                        appendLine("Empresa: ${puntoR.empresa}")
+                        appendLine()
+                        if (puntoR.presuntosDelincuentes){
+                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+                            appendLine()
+                        }
+                    }
+                    else if (puntoR.hotel == true){
+                        appendLine("Hotel")
+                        appendLine("Nombre: ${puntoR.nombreHotel}")
+                        appendLine("Municipio: ${puntoR.municipio}")
+                        if (puntoR.presuntosDelincuentes){
+                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+                            appendLine()
+                        }
+                    }
+                    else if (puntoR.puestosADispo == true){
+                        appendLine("Puestos a Disposición")
+                        appendLine("Por:")
+                        if (puntoR.juezCalif) {
+                            appendLine("Juez Calificador")
+                        }else if (puntoR.reclusorio){
+                            appendLine("Reclusorio")
+                        }else if (puntoR.policiaFede){
+                            appendLine("Policía Federal")
+                        }else if (puntoR.policiaEsta){
+                            appendLine("Policía Estatal")
+                        }else if (puntoR.policiaMuni){
+                            appendLine("Policía Municipal")
+                        }else if (puntoR.dif){
+                            appendLine("DIF")
+                        }else if (puntoR.fiscalia){
+                            appendLine("Fiscalia")
+                        }else if (puntoR.otrasAuto){
+                            appendLine("Otras Autoridades")
+                        }else{
+
+                        }
+                        appendLine()
+                        if (puntoR.presuntosDelincuentes){
+                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+                            appendLine()
+                        }
+                    }
+                    else if (puntoR.voluntarios == true){
+                        appendLine("Voluntarios")
+                        appendLine()
+                    } else{
+
+                    }
+
+                    appendLine("Distribución por país")
+
+                    registrosConteo.forEach {
+                        appendLine()
+                        bold { appendLine("${it.nacionalidad}") }
+                        if(it.AS_hombres > 0) appendLine("${it.AS_hombres} ADULTO(S) MASCULINO(S)")
+                        if(it.AS_mujeresNoEmb > 0) appendLine("${it.AS_mujeresNoEmb} ADULTO(S) FEMENINO(S) NO EMBARAZADO(S)")
+                        if(it.AS_mujeresEmb > 0) appendLine("${it.AS_mujeresEmb} ADULTO(S) FEMENINO(S) EMBARAZADO(S)")
+                        if(it.NNAsS_hombres > 0) appendLine("${it.NNAsS_hombres} MENOR(ES) MASCULINO(S)")
+                        if(it.NNAsS_mujeresNoEmb > 0) appendLine("${it.NNAsS_mujeresNoEmb} MENOR(ES) FEMENINO(S) NO EMBARAZADO(S)")
+                        if(it.NNAsS_mujeresEmb > 0) appendLine("${it.NNAsS_mujeresEmb} MENOR(ES) FEMENINO(S) EMBARAZADO(S)")
+                        appendLine()
+                        if(it.nucleosFamiliares > 0){
+                            bold { appendLine("NÚCLEOS FAMILIARES: ${it.nucleosFamiliares}") }
+                            if(it.AA_NNAs_hombres > 0) appendLine("${it.AA_NNAs_hombres} ADULTO(S) MASCULINO(S)")
+                            if(it.AA_NNAs_mujeresNoEmb > 0) appendLine("${it.AA_NNAs_mujeresNoEmb} ADULTO(S) FEMENINO(S) NO EMBARAZADO(S)")
+                            if(it.AA_NNAs_mujeresEmb > 0) appendLine("${it.AA_NNAs_mujeresEmb} ADULTO(S) FEMENINO(S) EMBARAZADO(S)")
+                            if(it.NNAsA_hombres > 0) appendLine("${it.NNAsA_hombres} MENOR(ES) MASCULINOS")
+                            if(it.NNAsA_mujeresNoEmb > 0) appendLine("${it.NNAsA_mujeresNoEmb} MENOR(ES) FEMENINO(S) NO EMBARAZADO(S)")
+                            if(it.NNAsA_mujeresEmb > 0) appendLine("${it.NNAsA_mujeresEmb} MENOR(ES) FEMENINO(S) EMBARAZADO(S)")
+                        }
+                    }
+
+
 
                 }
+                val mensajeDB = HtmlCompat.toHtml(mensajeStr, HtmlCompat.TO_HTML_PARAGRAPH_LINES_INDIVIDUAL)
 
-                appendLine("Distribución por país")
-
-                registrosConteo.forEach {
-                    appendLine()
-                    bold { appendLine("${it.nacionalidad}") }
-                    appendLine("${it.AS_hombres} ADULTOS MASCULINOS")
-                    appendLine("${it.AS_mujeresNoEmb} ADULTOS FEMENINOS NO EMBARAZADOS")
-                    appendLine("${it.AS_mujeresEmb} ADULTOS FEMENINOS EMBARAZADOS")
-                    appendLine("${it.NNAsS_hombres} MENORES MASCULINOS")
-                    appendLine("${it.NNAsS_mujeresNoEmb} MENORES FEMENINOS NO EMBARAZADOS")
-                    appendLine("${it.NNAsS_mujeresEmb} MENORES FEMENINOS EMBARAZADOS")
-                    appendLine()
-                    bold { appendLine("NÚCLEOS FAMILIARES: ${it.nucleosFamiliares}") }
-                    appendLine("${it.AA_NNAs_hombres} ADULTOS MASCULINOS")
-                    appendLine("${it.AA_NNAs_mujeresNoEmb} ADULTOS FEMENINOS NO EMBARAZADOS")
-                    appendLine("${it.AA_NNAs_mujeresEmb} ADULTOS FEMENINOS EMBARAZADOS")
-                    appendLine("${it.NNAsA_hombres} MENORES MASCULINOS")
-                    appendLine("${it.NNAsA_mujeresNoEmb} MENORES FEMENINOS NO EMBARAZADOS")
-                    appendLine("${it.NNAsA_mujeresEmb} MENORES FEMENINOS EMBARAZADOS")
-                    appendLine()
-                }
-
-
-
+                setMensajeDB(
+                    listOf(Mensaje(0, mensajeDB))
+                )
             }
-            val mensajeDB = HtmlCompat.toHtml(mensajeStr, HtmlCompat.TO_HTML_PARAGRAPH_LINES_INDIVIDUAL)
-
-            setMensajeDB(
-                listOf(Mensaje(0, mensajeDB))
-            )
-
         }
     }
 

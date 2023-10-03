@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools">
@@ -53,10 +54,11 @@
                     <View
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/ic_save_24"
+                        android:background="@drawable/ic_close_24"
                         android:layout_gravity="end"
                         android:layout_margin="5dp"
                         android:id="@+id/closeImg"
+                        android:backgroundTint="@color/marron"
                         android:layout_alignParentRight="true"/>
 
                 </RelativeLayout>
@@ -75,13 +77,14 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_basic1"
                         android:layout_gravity="center_horizontal">
+
                         <Spinner
                             android:id="@+id/spinnerTipoVehiculo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_weight="1"
-                            android:hint="Tipo de vehiculo"
+                            android:hint="@string/pop_tipoVehiculo"
                             android:textColor="@color/marron"
                             android:textColorHint="@color/marron"
                             android:backgroundTint="@color/marron"
@@ -93,9 +96,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_error_24"
-                            android:tint="@color/yellow"
                             android:visibility="gone"
-                            android:layout_gravity="center_vertical"/>
+                            android:layout_gravity="center_vertical"
+                            app:tint="@color/yellow" />
 
                     </LinearLayout>
 
@@ -109,7 +112,7 @@
                         android:layout_weight="1"
                         android:ems="15"
                         android:inputType="textVisiblePassword"
-                        android:hint="Línea de Autobús / Empresa :"
+                        android:hint="@string/pop_LineaAEmpr"
                         android:textAllCaps="true"
                         android:textColor="@color/marron"
                         android:textColorHint="@color/marron"
@@ -130,7 +133,7 @@
                             android:layout_weight="1"
                             android:ems="7"
                             android:inputType="textVisiblePassword"
-                            android:hint="No Económico: "
+                            android:hint="@string/pop_NoEcono"
                             android:textAllCaps="true"
                             android:backgroundTint="@color/marron"
                             android:textColor="@color/marron"
@@ -144,7 +147,7 @@
                             android:layout_weight="1"
                             android:ems="7"
                             android:inputType="textVisiblePassword"
-                            android:hint="Placas: "
+                            android:hint="@string/pop_placas"
                             android:textAllCaps="true"
                             android:backgroundTint="@color/marron"
                             android:textColor="@color/marron"
@@ -164,7 +167,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Vehículo Asegurado"
+                            android:text="@string/pop_vehiAseg"
                             android:textSize="18sp"
                             android:backgroundTint="@color/marron"
                             android:textColor="@color/marron"
@@ -202,7 +205,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_weight="1"
-                            android:hint="Tipo de vehiculo"
+                            android:hint="@string/pop_tipoFerroc"
                             android:textColor="@color/marron"
                             android:textColorHint="@color/marron"
                             android:backgroundTint="@color/marron"
@@ -214,9 +217,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_error_24"
-                            android:tint="@color/yellow"
                             android:visibility="gone"
-                            android:layout_gravity="center_vertical"/>
+                            android:layout_gravity="center_vertical"
+                            app:tint="@color/yellow" />
 
                     </LinearLayout>
 
@@ -239,7 +242,7 @@
                         android:layout_weight="1"
                         android:ems="15"
                         android:inputType="text"
-                        android:hint="Nombre del Hotel"
+                        android:hint="@string/pop_nomHotel"
                         android:textColor="@color/marron"
                         android:textColorHint="@color/marron"
                         android:backgroundTint="@color/marron"
@@ -401,7 +404,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Otras Autoridades"
+                            android:text="@string/pop_otrasAutor"
                             android:textColor="@color/marron"
                             android:textSize="20sp"/>
                         <CheckBox
@@ -427,7 +430,7 @@
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:hint="Municipio"
+                        android:hint="@string/pop_municipio"
                         android:textColor="@color/marron"
                         android:textColorHint="@color/marron"
                         android:backgroundTint="@color/marron"
@@ -451,7 +454,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/presuntos"
+                        android:text="@string/pop_presuntos"
                         android:textColor="@color/marron"
                         android:textSize="16sp"/>
 
@@ -476,7 +479,7 @@
                             android:backgroundTint="@color/marron"
                             android:textColor="@color/marron"
                             android:textColorHint="@color/marron"
-                            android:hint="Cuantos"
+                            android:hint="@string/pop_cuantos"
                             android:layout_marginLeft="@dimen/margin_basic4"/>
 
                     </LinearLayout>

@@ -43,9 +43,10 @@ class NombresActivity : AppCompatActivity() {
         val nacionalidadPadre = intent.getStringExtra(EXTRA_NACIONALIDAD)
         binding.spinnerPAIS.setText(nacionalidadPadre)
 
+        binding.checkHombre.isChecked = true
 
         var autocompleteArrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nacio)
-        binding.spinnerPAIS.threshold = 2
+        binding.spinnerPAIS.threshold = 1
         binding.spinnerPAIS.setAdapter(autocompleteArrayAdapter)
 
         dataActivityViewM.paises.observe(this){

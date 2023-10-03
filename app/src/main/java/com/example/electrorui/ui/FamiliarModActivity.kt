@@ -41,6 +41,8 @@ class FamiliarModActivity : AppCompatActivity() {
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_item)
         binding.spinnerParentescoF.adapter = adapterSpinner
 
+        binding.checkHombre.isChecked = true
+
         val nacio  = emptyList<String>()
 
         var autocompleteArrayAdapter = ArrayAdapter<String>(this, R.layout.simple_spinner_dropdown_item, nacio)

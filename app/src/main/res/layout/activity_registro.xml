@@ -47,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/margin_basic05"
                         android:gravity="center"
-                        android:text="Adultos Solos" />
+                        android:text="Adultos No Acompañados" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -350,7 +350,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_basic05"
                     android:gravity="center"
-                    android:text="NNAs Solos" />
+                    android:text="NNAs No Acompañados" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

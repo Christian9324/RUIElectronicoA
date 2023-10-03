@@ -101,6 +101,7 @@
                             android:layout_marginRight="10dp"
                             android:gravity="center"
                             android:text="Familiar"
+                            android:textAllCaps="true"
                             android:textColor="@color/verde_claro"
                             android:textSize="20sp"
                             android:textStyle="bold" />

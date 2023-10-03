@@ -7,6 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.DisplayMetrics
@@ -78,15 +80,17 @@ class CapturaFragment : Fragment() {
 
 //        activity?.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        requireActivity().actionBar?.hide()
-//        val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-//        val activeNetwork : NetworkInfo? = cm.activeNetworkInfo
+        val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork : NetworkInfo? = cm.activeNetworkInfo
 //        val isConnected : Boolean = activeNetwork?.isConnectedOrConnecting == true
 
         icon = AppCompatResources.getDrawable(requireContext(),R.drawable.ic_error_24)!!
-        DrawableCompat.setTint(icon, Color.parseColor("#FFFF00"))
+        DrawableCompat.setTint(icon, resources.getColor(R.color.rojo))
         icon.setBounds(0, 0, icon.intrinsicWidth, icon.intrinsicHeight)
 
-        isConnected = prefManager.getConnection()!!
+//        isConnected = prefManager.getConnection()!!
+        isConnected = activeNetwork?.isConnectedOrConnecting == true
+        prefManager.setConnection(isConnected)
         vistoMensajeInternet = prefManager.vistoPopUInternet()!!
         if (!isConnected and !vistoMensajeInternet){
 //          Dialogo para la alerta de ingresos sin internet
@@ -96,9 +100,24 @@ class CapturaFragment : Fragment() {
 
 // -------- Floating Button Conteo Rapido ----------------
         binding.fbConteoRapido.setOnClickListener {
-            verifyData()
-            dataActivityViewM.saveTipoRescate()
-            startActivity(Intent(requireContext(),ConteoRActivity::class.java))
+
+            if (binding.editTextHora.text.isEmpty()){
+                binding.editTextHora.setError("llenar para continuar", icon)
+                binding.spinnerPuntoR.visibility = View.GONE
+                binding.spinnerTipo.setSelection(0)
+                showToastError("Ingresa la hora primero", Toast.LENGTH_LONG)
+            } else{
+                binding.editTextHora.error = null
+                if(binding.spinnerTipo.selectedItemPosition == 0){
+                    binding.spinnerTipoIcon.visibility = View.VISIBLE
+                    showToastError("Ingresa el tipo de rescate primero", Toast.LENGTH_LONG)
+                } else {
+                    binding.spinnerTipoIcon.visibility = View.GONE
+                    verifyData()
+                    dataActivityViewM.saveTipoRescate()
+                    startActivity(Intent(requireContext(),ConteoRActivity::class.java))
+                }
+            }
         }
 
         dataActivityViewM.oficinas.observe(viewLifecycleOwner){
@@ -147,6 +166,7 @@ class CapturaFragment : Fragment() {
 
 //---------------- spinner de Selección de Tipo de Punto de Rescate-------------
         binding.spinnerPuntoR.setOnItemClickListener { adapterView, view, i, l ->
+            binding.spinnerTipoIcon.visibility = View.GONE
             hideKeyboard()
             val textoPuntoR = binding.spinnerPuntoR.text.toString()
             dataActivityViewM.etPuntoRescate.value = textoPuntoR
@@ -351,22 +371,53 @@ class CapturaFragment : Fragment() {
 //            ----------------------
 //            ----------------------
 //            verificar Datos del Punto
-            dataRescateP.puntoEstra = binding.spinnerPuntoR.text.toString()
-            verifyData()
+            if (binding.editTextHora.text.isEmpty()){
+                binding.editTextHora.setError("llenar para continuar", icon)
+                binding.spinnerPuntoR.visibility = View.GONE
+                binding.spinnerTipo.setSelection(0)
+                showToastError("Ingresa la hora primero", Toast.LENGTH_LONG)
+            } else{
+                binding.editTextHora.error = null
+                if(binding.spinnerTipo.selectedItemPosition == 0){
+                    binding.spinnerTipoIcon.visibility = View.VISIBLE
+                    showToastError("Ingresa el tipo de rescate primero", Toast.LENGTH_LONG)
+                } else {
+                    binding.spinnerTipoIcon.visibility = View.GONE
 
-            val intentRegistroNombres = Intent(requireContext(), RescateNombresActivity::class.java)
-            startActivity(intentRegistroNombres)
+                    dataRescateP.puntoEstra = binding.spinnerPuntoR.text.toString()
+                    verifyData()
 
+                    val intentRegistroNombres = Intent(requireContext(), RescateNombresActivity::class.java)
+                    startActivity(intentRegistroNombres)
+                }
+            }
         }
 
         binding.btnFamilias.setOnClickListener {
             //            verificar Datos del Punto
-            dataRescateP.puntoEstra = binding.spinnerPuntoR.text.toString()
-            verifyData()
+            if (binding.editTextHora.text.isEmpty()){
+                binding.editTextHora.setError("llenar para continuar", icon)
+                binding.spinnerPuntoR.visibility = View.GONE
+                binding.spinnerTipo.setSelection(0)
+                showToastError("Ingresa la hora primero", Toast.LENGTH_LONG)
+            } else{
+                binding.editTextHora.error = null
+                if(binding.spinnerTipo.selectedItemPosition == 0){
+                    binding.spinnerTipoIcon.visibility = View.VISIBLE
+                    showToastError("Ingresa el tipo de rescate primero", Toast.LENGTH_LONG)
+                } else{
+                    binding.spinnerTipoIcon.visibility = View.GONE
 
-            val intentRegistroFamilias = Intent(requireContext(), RescateFamiliasActivity::class.java)
-            intentRegistroFamilias.putExtra( RescateFamiliasActivity.EXTRA_NOM_FAMILIA, dataActivityViewM.numFamilia.value)
-            startActivity(intentRegistroFamilias)
+                    dataRescateP.puntoEstra = binding.spinnerPuntoR.text.toString()
+                    verifyData()
+
+                    val intentRegistroFamilias = Intent(requireContext(), RescateFamiliasActivity::class.java)
+                    intentRegistroFamilias.putExtra( RescateFamiliasActivity.EXTRA_NOM_FAMILIA, dataActivityViewM.numFamilia.value)
+                    startActivity(intentRegistroFamilias)
+                }
+            }
+
+
         }
 
         dataActivityViewM.pasarVentana.observe(viewLifecycleOwner){
@@ -602,7 +653,9 @@ class CapturaFragment : Fragment() {
         bindings.editTextTipo1.setText(tipo)
 
         bindings.closeImg.setOnClickListener {
+            dialog.dismiss()
 
+/*
             when(tipo){
                 "CARRETERO" -> {
                     val tipoV = bindings.spinnerTipoVehiculo.selectedItem.toString()
@@ -907,7 +960,7 @@ class CapturaFragment : Fragment() {
                 bindings.LLPuestosaD.visibility = View.GONE
 
                 dialog.dismiss()
-            }
+            }*/
         }
 
         bindings.btnGuardar.setOnClickListener {
@@ -1214,6 +1267,7 @@ class CapturaFragment : Fragment() {
                 bindings.LLPresuntosD.visibility = View.GONE
                 bindings.LLPuestosaD.visibility = View.GONE
 
+                binding.spinnerTipoIcon.visibility = View.GONE
                 dialog.dismiss()
             }
         }

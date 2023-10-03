@@ -35,6 +35,8 @@ class FamiliarActivity : AppCompatActivity() {
         setContentView(binding.root)
         AndroidThreeTen.init(this)
 
+        binding.checkHombre.isChecked = true
+
         val nacio  = emptyList<String>()
 
         var autocompleteArrayAdapter = ArrayAdapter<String>(this, R.layout.simple_spinner_dropdown_item, nacio)

@@ -36,6 +36,8 @@ class NombresModActivity : AppCompatActivity() {
 
         val nacio  = emptyList<String>()
 
+        binding.checkHombre.isChecked = true
+
         var autocompleteArrayAdapter = ArrayAdapter<String>(this, R.layout.simple_spinner_dropdown_item, nacio)
         binding.spinnerPAIS.threshold = 1
         binding.spinnerPAIS.setAdapter(autocompleteArrayAdapter)

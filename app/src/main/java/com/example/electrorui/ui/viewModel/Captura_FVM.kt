@@ -258,189 +258,192 @@ class Captura_FVM @Inject constructor(
             val infoPinNombres = getDataPinNombres()
             val infoPinFamilias = getDataPinFamilias()
             val noRescatesTotales = noRescatados.value
+            val totalFam = getTotalFamilias()
 
-            val mensajeStr = buildSpannedString {
-                bold { appendLine("OR: ${infoPunto?.oficinaRepre}") }
-                appendLine("Fecha: ${infoPunto?.fecha}")
-                appendLine("Hora: ${infoPunto?.hora}")
-                appendLine()
-
-                bold { appendLine("No. de Rescatados: ${noRescatesTotales}") }
-                appendLine()
-
-                if (infoPunto?.aeropuerto == true){
-                    appendLine("Aeropuerto: ${infoPunto.puntoEstra}")
+            if(noRescatesTotales!! > 0){
+                val mensajeStr = buildSpannedString {
+                    bold { appendLine("OR: ${infoPunto?.oficinaRepre}") }
+                    appendLine("Fecha: ${infoPunto?.fecha}")
+                    appendLine("Hora: ${infoPunto?.hora}")
                     appendLine()
 
-                } else if (infoPunto?.carretero == true){
-                    appendLine("Carretero: ${infoPunto.puntoEstra}")
+                    bold { appendLine("No. de Rescatados: ${noRescatesTotales}") }
                     appendLine()
-                    appendLine("Tipo de vehículo: ${infoPunto.tipoVehic}")
-                    appendLine()
-                    appendLine("Línea/empresa: ${infoPunto.lineaAutobus}")
-                    appendLine()
-                    appendLine("No. Economico: ${infoPunto.numeroEcono}")
-                    appendLine()
-                    appendLine("Placas: ${infoPunto.placas}")
-                    appendLine()
-                    if (infoPunto.vehiculoAseg){
-                        appendLine("Vehiculo Asegurado")
-                        appendLine()
-                    }
-                    appendLine("Municipio: ${infoPunto.municipio}")
-                    appendLine()
-                    if (infoPunto.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
-                        appendLine()
-                    }
-                }
-                else if (infoPunto?.casaSeguridad == true){
-                    appendLine("Casa de Seguridad")
-                    appendLine("Municipio: ${infoPunto.municipio}")
-                    if (infoPunto.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
-                        appendLine()
-                    }
-                }
-                else if (infoPunto?.centralAutobus == true){
-                    appendLine("Central de Autobús: ${infoPunto.puntoEstra}")
-                    appendLine()
-                    if (infoPunto.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
-                        appendLine()
-                    }
-                }
-                else if (infoPunto?.ferrocarril == true){
-                    appendLine("Ferrocarril: ${infoPunto.puntoEstra}")
-                    appendLine()
-                    appendLine("Empresa: ${infoPunto.empresa}")
-                    appendLine()
-                    if (infoPunto.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
-                        appendLine()
-                    }
-                }
-                else if (infoPunto?.hotel == true){
-                    appendLine("Hotel")
-                    appendLine("Nombre: ${infoPunto.nombreHotel}")
-                    appendLine("Municipio: ${infoPunto.municipio}")
-                    if (infoPunto.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
-                        appendLine()
-                    }
-                }
-                else if (infoPunto?.puestosADispo == true){
-                    appendLine("Puestos a Disposición")
-                    appendLine("Por:")
-                    if (infoPunto.juezCalif) {
-                        appendLine("Juez Calificador")
-                    }else if (infoPunto.reclusorio){
-                        appendLine("Reclusorio")
-                    }else if (infoPunto.policiaFede){
-                        appendLine("Policía Federal")
-                    }else if (infoPunto.policiaEsta){
-                        appendLine("Policía Estatal")
-                    }else if (infoPunto.policiaMuni){
-                        appendLine("Policía Municipal")
-                    }else if (infoPunto.dif){
-                        appendLine("DIF")
-                    }else if (infoPunto.fiscalia){
-                        appendLine("Fiscalia")
-                    }else if (infoPunto.otrasAuto){
-                        appendLine("Otras Autoridades")
-                    }else{
 
-                    }
-                    appendLine()
-                    if (infoPunto.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
+                    if (infoPunto?.aeropuerto == true){
+                        appendLine("Aeropuerto: ${infoPunto.puntoEstra}")
                         appendLine()
-                    }
-                }
-                else if (infoPunto?.voluntarios == true){
-                    appendLine("Voluntarios")
-                    appendLine()
-                } else{
 
-                }
-                var nacioBase = ""
-                var familiaBase = 0
-                if (!infoPinNombres.isEmpty()){
-                    for (i in infoPinNombres){
-                        if (!i.nacionalidad.equals(nacioBase)){
+                    } else if (infoPunto?.carretero == true){
+                        appendLine("Carretero: ${infoPunto.puntoEstra}")
+                        appendLine()
+                        appendLine("Tipo de vehículo: ${infoPunto.tipoVehic}")
+                        appendLine()
+                        appendLine("Línea/empresa: ${infoPunto.lineaAutobus}")
+                        appendLine()
+                        appendLine("No. Economico: ${infoPunto.numeroEcono}")
+                        appendLine()
+                        appendLine("Placas: ${infoPunto.placas}")
+                        appendLine()
+                        if (infoPunto.vehiculoAseg){
+                            appendLine("Vehiculo Asegurado")
                             appendLine()
-                            bold { appendLine("${i.nacionalidad}") }
-                            nacioBase = i.nacionalidad
+                        }
+                        appendLine("Municipio: ${infoPunto.municipio}")
+                        appendLine()
+                        if (infoPunto.presuntosDelincuentes){
+                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
+                            appendLine()
+                        }
+                    }
+                    else if (infoPunto?.casaSeguridad == true){
+                        appendLine("Casa de Seguridad")
+                        appendLine("Municipio: ${infoPunto.municipio}")
+                        if (infoPunto.presuntosDelincuentes){
+                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
+                            appendLine()
+                        }
+                    }
+                    else if (infoPunto?.centralAutobus == true){
+                        appendLine("Central de Autobús: ${infoPunto.puntoEstra}")
+                        appendLine()
+                        if (infoPunto.presuntosDelincuentes){
+                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
+                            appendLine()
+                        }
+                    }
+                    else if (infoPunto?.ferrocarril == true){
+                        appendLine("Ferrocarril: ${infoPunto.puntoEstra}")
+                        appendLine()
+                        appendLine("Empresa: ${infoPunto.empresa}")
+                        appendLine()
+                        if (infoPunto.presuntosDelincuentes){
+                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
+                            appendLine()
+                        }
+                    }
+                    else if (infoPunto?.hotel == true){
+                        appendLine("Hotel")
+                        appendLine("Nombre: ${infoPunto.nombreHotel}")
+                        appendLine("Municipio: ${infoPunto.municipio}")
+                        if (infoPunto.presuntosDelincuentes){
+                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
+                            appendLine()
+                        }
+                    }
+                    else if (infoPunto?.puestosADispo == true){
+                        appendLine("Puestos a Disposición")
+                        appendLine("Por:")
+                        if (infoPunto.juezCalif) {
+                            appendLine("Juez Calificador")
+                        }else if (infoPunto.reclusorio){
+                            appendLine("Reclusorio")
+                        }else if (infoPunto.policiaFede){
+                            appendLine("Policía Federal")
+                        }else if (infoPunto.policiaEsta){
+                            appendLine("Policía Estatal")
+                        }else if (infoPunto.policiaMuni){
+                            appendLine("Policía Municipal")
+                        }else if (infoPunto.dif){
+                            appendLine("DIF")
+                        }else if (infoPunto.fiscalia){
+                            appendLine("Fiscalia")
+                        }else if (infoPunto.otrasAuto){
+                            appendLine("Otras Autoridades")
+                        }else{
 
-                            if (i.adulto and i.sexo){
-                                appendLine("${i.totales} ADULTOS MASCULINOS")
-                            }else if (i.adulto and !i.sexo){
-                                appendLine("${i.totales} ADULTOS FEMENINOS")
-                            }else if (!i.adulto and i.sexo){
-                                appendLine("${i.totales} MENORES MASCULINOS")
-                            }else if (!i.adulto and !i.sexo){
-                                appendLine("${i.totales} MENORES FEMENINOS")
-                            }
+                        }
+                        appendLine()
+                        if (infoPunto.presuntosDelincuentes){
+                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
+                            appendLine()
+                        }
+                    }
+                    else if (infoPunto?.voluntarios == true){
+                        appendLine("Voluntarios")
+                        appendLine()
+                    } else{
 
-                        } else{
-                            if (i.adulto and i.sexo){
-                                appendLine("${i.totales} ADULTOS MASCULINOS")
-                            }else if (i.adulto and !i.sexo){
-                                appendLine("${i.totales} ADULTOS FEMENINOS")
-                            }else if (!i.adulto and i.sexo){
-                                appendLine("${i.totales} MENORES MASCULINOS")
-                            }else if (!i.adulto and !i.sexo){
-                                appendLine("${i.totales} MENORES FEMENINOS")
+                    }
+                    var nacioBase = ""
+                    var familiaBase = 0
+                    if (!infoPinNombres.isEmpty()){
+                        for (i in infoPinNombres){
+                            if (!i.nacionalidad.equals(nacioBase)){
+                                appendLine()
+                                bold { appendLine("${i.nacionalidad}") }
+                                nacioBase = i.nacionalidad
+
+                                if (i.adulto and i.sexo){
+                                    appendLine("${i.totales} ADULTO(S) MASCULINO(S)")
+                                }else if (i.adulto and !i.sexo){
+                                    appendLine("${i.totales} ADULTOS FEMENINO(S)")
+                                }else if (!i.adulto and i.sexo){
+                                    appendLine("${i.totales} MENOR(ES) MASCULINO(S)")
+                                }else if (!i.adulto and !i.sexo){
+                                    appendLine("${i.totales} MENOR(ES) FEMENINO(S)")
+                                }
+
+                            } else{
+                                if (i.adulto and i.sexo){
+                                    appendLine("${i.totales} ADULTO(S) MASCULINO(S)")
+                                }else if (i.adulto and !i.sexo){
+                                    appendLine("${i.totales} ADULTO(S) FEMENINO(S)")
+                                }else if (!i.adulto and i.sexo){
+                                    appendLine("${i.totales} MENOR(ES) MASCULINO(S)")
+                                }else if (!i.adulto and !i.sexo){
+                                    appendLine("${i.totales} MENOR(ES) FEMENINO(S)")
+                                }
+
                             }
-                            
+                        }
+                    }
+
+                    if (totalFam > 0){
+                        appendLine()
+                        bold { appendLine("NÚCLEOS FAMILIARES ${totalFam}") }
+
+                        if (!infoPinFamilias.isEmpty()){
+                            for (i in infoPinFamilias){
+                                if (i.familia != familiaBase){
+                                    appendLine()
+                                    bold { appendLine("NUCLEO #${i.familia}") }
+                                    familiaBase = i.familia
+
+                                    if (i.adulto and i.sexo){
+                                        if(i.totales > 0) appendLine("${i.totales} ADULTO(S) MASCULINO(S) ${i.nacionalidad}")
+                                    }else if (i.adulto and !i.sexo){
+                                        if(i.totales > 0) appendLine("${i.totales} ADULTO(S) FEMENINO(S) ${i.nacionalidad}")
+                                    }else if (!i.adulto and i.sexo){
+                                        if(i.totales > 0) appendLine("${i.totales} MENOR(ES) MASCULINO(S) ${i.nacionalidad}")
+                                    }else if (!i.adulto and !i.sexo){
+                                        if(i.totales > 0) appendLine("${i.totales} MENOR(ES) FEMENINO(S) ${i.nacionalidad}")
+                                    }
+
+                                } else{
+                                    if (i.adulto and i.sexo){
+                                        if(i.totales > 0) appendLine("${i.totales} ADULTO(S) MASCULINO(S) ${i.nacionalidad}")
+                                    }else if (i.adulto and !i.sexo){
+                                        if(i.totales > 0) appendLine("${i.totales} ADULTO(S) FEMENINO(S) ${i.nacionalidad}")
+                                    }else if (!i.adulto and i.sexo){
+                                        if(i.totales > 0) appendLine("${i.totales} MENOR(ES) MASCULINO(S) ${i.nacionalidad}")
+                                    }else if (!i.adulto and !i.sexo){
+                                        if(i.totales > 0) appendLine("${i.totales} MENOR(ES) FEMENINO(S) ${i.nacionalidad}")
+                                    }
+
+                                }
+                            }
                         }
                     }
                 }
-
-                appendLine()
-                bold { appendLine("NÚCLEOS FAMILIARES") }
-
-                if (!infoPinFamilias.isEmpty()){
-                    for (i in infoPinFamilias){
-                        if (i.familia != familiaBase){
-                            appendLine()
-                            bold { appendLine("NUCLEO #${i.familia}") }
-                            familiaBase = i.familia
-
-                            if (i.adulto and i.sexo){
-                                appendLine("${i.totales} ADULTOS MASCULINOS ${i.nacionalidad}")
-                            }else if (i.adulto and !i.sexo){
-                                appendLine("${i.totales} ADULTOS FEMENINOS ${i.nacionalidad}")
-                            }else if (!i.adulto and i.sexo){
-                                appendLine("${i.totales} MENORES MASCULINOS ${i.nacionalidad}")
-                            }else if (!i.adulto and !i.sexo){
-                                appendLine("${i.totales} MENORES FEMENINOS ${i.nacionalidad}")
-                            }
-
-                        } else{
-                            if (i.adulto and i.sexo){
-                                appendLine("${i.totales} ADULTOS MASCULINOS ${i.nacionalidad}")
-                            }else if (i.adulto and !i.sexo){
-                                appendLine("${i.totales} ADULTOS FEMENINOS ${i.nacionalidad}")
-                            }else if (!i.adulto and i.sexo){
-                                appendLine("${i.totales} MENORES MASCULINOS ${i.nacionalidad}")
-                            }else if (!i.adulto and !i.sexo){
-                                appendLine("${i.totales} MENORES FEMENINOS ${i.nacionalidad}")
-                            }
-
-                        }
-                    }
-                }
-
-
-            }
 
 //            mensaje.value = Html.toHtml(mensajeStr)
-            mensaje.value = HtmlCompat.toHtml(mensajeStr, HtmlCompat.TO_HTML_PARAGRAPH_LINES_INDIVIDUAL)
+                mensaje.value = HtmlCompat.toHtml(mensajeStr, HtmlCompat.TO_HTML_PARAGRAPH_LINES_INDIVIDUAL)
 //            Log.e("Datos", mensaje.value!!)
-            setMensajeDB(
-                listOf(Mensaje(0, mensaje.value!! ))
-            )
+                setMensajeDB(
+                    listOf(Mensaje(0, mensaje.value!! ))
+                )
+            }
         }
     }
     fun savePin(){
