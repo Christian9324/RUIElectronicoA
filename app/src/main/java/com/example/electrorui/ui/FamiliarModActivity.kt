@@ -101,10 +101,10 @@ class FamiliarModActivity : AppCompatActivity() {
 
             val nacionalidad = binding.spinnerPAISF.text.toString()
             val iso3D = dataActivityViewM.iso3.value
-            val nom = binding.etNombreF.text.toString()
-            val apellidos = binding.etApellidosF.text.toString()
+            val nom = binding.etNombreF.text.toString().uppercase()
+            val apellidos = binding.etApellidosF.text.toString().uppercase()
             val noIdentidad = binding.etNoIdentidadF.text.toString()
-            val parentesco = binding.spinnerParentescoF.selectedItem.toString()
+            val parentesco = binding.spinnerParentescoF.selectedItem.toString().uppercase()
             val fechaNacimiento = binding.ldFechaNacimiento.localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
             val sexo : Boolean = binding.checkHombre.isChecked
             val numeroFamilia = intent.getIntExtra(FamiliarActivity.EXTRA_FAMILIA, 1)

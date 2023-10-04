@@ -167,6 +167,11 @@ class Captura_FVM @Inject constructor(
                     carreteros.add(it.nombrePunto)
                 }
             }
+
+            auxRN.forEach {
+                if (it.tipoP.equals("Volanta Móvil"))
+                    carreteros.add(it.NomPuntoRevision)
+            }
             puntoRescateNom.value = carreteros
         }
     }
@@ -182,6 +187,26 @@ class Captura_FVM @Inject constructor(
                     estacionBus.add(it.NomPuntoRevision)
             }
             puntoRescateNom.value = estacionBus
+        }
+    }
+
+    fun buscarMunicipio(){
+        viewModelScope.launch {
+            puntoRescateNom.value = municipiosNom.value
+        }
+    }
+
+    fun buscarFerroviario(){
+        viewModelScope.launch {
+            val auxRN = getFuerzaByOrUC(oficinaRepresentacion.value!!)
+            var ferro = ArrayList<String>()
+
+
+            auxRN.forEach {
+                if (it.tipoP.equals("Ferroviario"))
+                    ferro.add(it.NomPuntoRevision)
+            }
+            puntoRescateNom.value = ferro
         }
     }
 
@@ -264,7 +289,7 @@ class Captura_FVM @Inject constructor(
                 val mensajeStr = buildSpannedString {
                     bold { appendLine("OR: ${infoPunto?.oficinaRepre}") }
                     appendLine("Fecha: ${infoPunto?.fecha}")
-                    appendLine("Hora: ${infoPunto?.hora}")
+//                    appendLine("Hora: ${infoPunto?.hora}")
                     appendLine()
 
                     bold { appendLine("No. de Rescatados: ${noRescatesTotales}") }
@@ -277,59 +302,59 @@ class Captura_FVM @Inject constructor(
                     } else if (infoPunto?.carretero == true){
                         appendLine("Carretero: ${infoPunto.puntoEstra}")
                         appendLine()
-                        appendLine("Tipo de vehículo: ${infoPunto.tipoVehic}")
-                        appendLine()
-                        appendLine("Línea/empresa: ${infoPunto.lineaAutobus}")
-                        appendLine()
-                        appendLine("No. Economico: ${infoPunto.numeroEcono}")
-                        appendLine()
-                        appendLine("Placas: ${infoPunto.placas}")
-                        appendLine()
-                        if (infoPunto.vehiculoAseg){
-                            appendLine("Vehiculo Asegurado")
-                            appendLine()
-                        }
-                        appendLine("Municipio: ${infoPunto.municipio}")
-                        appendLine()
-                        if (infoPunto.presuntosDelincuentes){
-                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
-                            appendLine()
-                        }
+//                        appendLine("Tipo de vehículo: ${infoPunto.tipoVehic}")
+//                        appendLine()
+//                        appendLine("Línea/empresa: ${infoPunto.lineaAutobus}")
+//                        appendLine()
+//                        appendLine("No. Economico: ${infoPunto.numeroEcono}")
+//                        appendLine()
+//                        appendLine("Placas: ${infoPunto.placas}")
+//                        appendLine()
+//                        if (infoPunto.vehiculoAseg){
+//                            appendLine("Vehiculo Asegurado")
+//                            appendLine()
+//                        }
+//                        appendLine("Municipio: ${infoPunto.municipio}")
+//                        appendLine()
+//                        if (infoPunto.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                     }
                     else if (infoPunto?.casaSeguridad == true){
                         appendLine("Casa de Seguridad")
                         appendLine("Municipio: ${infoPunto.municipio}")
-                        if (infoPunto.presuntosDelincuentes){
-                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
-                            appendLine()
-                        }
+//                        if (infoPunto.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                     }
                     else if (infoPunto?.centralAutobus == true){
                         appendLine("Central de Autobús: ${infoPunto.puntoEstra}")
                         appendLine()
-                        if (infoPunto.presuntosDelincuentes){
-                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
-                            appendLine()
-                        }
+//                        if (infoPunto.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                     }
                     else if (infoPunto?.ferrocarril == true){
                         appendLine("Ferrocarril: ${infoPunto.puntoEstra}")
                         appendLine()
-                        appendLine("Empresa: ${infoPunto.empresa}")
-                        appendLine()
-                        if (infoPunto.presuntosDelincuentes){
-                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
-                            appendLine()
-                        }
+//                        appendLine("Empresa: ${infoPunto.empresa}")
+//                        appendLine()
+//                        if (infoPunto.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                     }
                     else if (infoPunto?.hotel == true){
                         appendLine("Hotel")
-                        appendLine("Nombre: ${infoPunto.nombreHotel}")
+//                        appendLine("Nombre: ${infoPunto.nombreHotel}")
                         appendLine("Municipio: ${infoPunto.municipio}")
-                        if (infoPunto.presuntosDelincuentes){
-                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
-                            appendLine()
-                        }
+//                        if (infoPunto.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                     }
                     else if (infoPunto?.puestosADispo == true){
                         appendLine("Puestos a Disposición")
@@ -354,10 +379,10 @@ class Captura_FVM @Inject constructor(
 
                         }
                         appendLine()
-                        if (infoPunto.presuntosDelincuentes){
-                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
-                            appendLine()
-                        }
+//                        if (infoPunto.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${infoPunto.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                     }
                     else if (infoPunto?.voluntarios == true){
                         appendLine("Voluntarios")

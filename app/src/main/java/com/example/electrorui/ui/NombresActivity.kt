@@ -82,8 +82,8 @@ class NombresActivity : AppCompatActivity() {
 
             val nacionalidad = binding.spinnerPAIS.text.toString()
             val iso3D = dataActivityViewM.iso3.value
-            val nom = binding.etNombre.text.toString()
-            val apellidos = binding.etApellidos.text.toString()
+            val nom = binding.etNombre.text.toString().uppercase()
+            val apellidos = binding.etApellidos.text.toString().uppercase()
             val noIdentidad = binding.etNoIdentidad.text.toString()
             val fechaNacimiento = binding.ldFechaNacimiento.localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
             val sexo : Boolean = binding.checkHombre.isChecked

@@ -87,6 +87,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     app:srcCompat="@drawable/ic_watch_24"
+                    android:visibility="gone"
                     app:tint="@color/rojo" />
 
                 <EditText
@@ -101,6 +102,7 @@
                     android:hapticFeedbackEnabled="true"
                     android:hint="  24hrs "
                     android:inputType="time"
+                    android:visibility="gone"
                     android:textColor="@color/gris_oscuro"
                     android:textSize="21sp" />
 
@@ -111,6 +113,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/margin_basic05"
                     android:text="hrs."
+                    android:visibility="gone"
                     android:textColor="@color/gris_oscuro"
                     android:textSize="21sp"
                     tools:text="hrs." />

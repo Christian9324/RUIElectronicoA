@@ -75,7 +75,7 @@ class ConteoR_AVM @Inject constructor(
                 val mensajeStr = buildSpannedString {
                     bold { appendLine("OR: ${puntoR.oficinaRepre}") }
                     appendLine("Fecha: ${puntoR.fecha}")
-                    appendLine("Hora: ${puntoR.hora}")
+//                    appendLine("Hora: ${puntoR.hora}")
                     appendLine()
 
                     bold { appendLine("No. de Rescatados: ${conteoTotal}") }
@@ -89,59 +89,59 @@ class ConteoR_AVM @Inject constructor(
                     } else if (puntoR.carretero == true){
                         appendLine("Carretero: ${puntoR.puntoEstra}")
                         appendLine()
-                        appendLine("Tipo de vehículo: ${puntoR.tipoVehic}")
-                        appendLine()
-                        appendLine("Línea/empresa: ${puntoR.lineaAutobus}")
-                        appendLine()
-                        appendLine("No. Economico: ${puntoR.numeroEcono}")
-                        appendLine()
-                        appendLine("Placas: ${puntoR.placas}")
-                        appendLine()
-                        if (puntoR.vehiculoAseg){
-                            appendLine("Vehiculo Asegurado")
-                            appendLine()
-                        }
-                        appendLine("Municipio: ${puntoR.municipio}")
-                        appendLine()
-                        if (puntoR.presuntosDelincuentes){
-                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
-                            appendLine()
-                        }
+//                        appendLine("Tipo de vehículo: ${puntoR.tipoVehic}")
+//                        appendLine()
+//                        appendLine("Línea/empresa: ${puntoR.lineaAutobus}")
+//                        appendLine()
+//                        appendLine("No. Economico: ${puntoR.numeroEcono}")
+//                        appendLine()
+//                        appendLine("Placas: ${puntoR.placas}")
+//                        appendLine()
+//                        if (puntoR.vehiculoAseg){
+//                            appendLine("Vehiculo Asegurado")
+//                            appendLine()
+//                        }
+//                        appendLine("Municipio: ${puntoR.municipio}")
+//                        appendLine()
+//                        if (puntoR.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                     }
                     else if (puntoR.casaSeguridad == true){
                         appendLine("Casa de Seguridad")
                         appendLine("Municipio: ${puntoR.municipio}")
-                        if (puntoR.presuntosDelincuentes){
-                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
-                            appendLine()
-                        }
+//                        if (puntoR.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                     }
                     else if (puntoR.centralAutobus == true){
                         appendLine("Central de Autobús: ${puntoR.puntoEstra}")
-                        appendLine()
-                        if (puntoR.presuntosDelincuentes){
-                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
-                            appendLine()
-                        }
+//                        appendLine()
+//                        if (puntoR.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                     }
                     else if (puntoR.ferrocarril == true){
                         appendLine("Ferrocarril: ${puntoR.puntoEstra}")
                         appendLine()
-                        appendLine("Empresa: ${puntoR.empresa}")
-                        appendLine()
-                        if (puntoR.presuntosDelincuentes){
-                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
-                            appendLine()
-                        }
+//                        appendLine("Empresa: ${puntoR.empresa}")
+//                        appendLine()
+//                        if (puntoR.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                     }
                     else if (puntoR.hotel == true){
                         appendLine("Hotel")
-                        appendLine("Nombre: ${puntoR.nombreHotel}")
+//                        appendLine("Nombre: ${puntoR.nombreHotel}")
                         appendLine("Municipio: ${puntoR.municipio}")
-                        if (puntoR.presuntosDelincuentes){
-                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
-                            appendLine()
-                        }
+//                        if (puntoR.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                     }
                     else if (puntoR.puestosADispo == true){
                         appendLine("Puestos a Disposición")
@@ -166,10 +166,10 @@ class ConteoR_AVM @Inject constructor(
 
                         }
                         appendLine()
-                        if (puntoR.presuntosDelincuentes){
-                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
-                            appendLine()
-                        }
+//                        if (puntoR.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                     }
                     else if (puntoR.voluntarios == true){
                         appendLine("Voluntarios")

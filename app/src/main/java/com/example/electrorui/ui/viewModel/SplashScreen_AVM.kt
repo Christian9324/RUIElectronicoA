@@ -62,7 +62,7 @@ class SplashScreen_AVM @Inject constructor(
 
 //                      Se descarga y guarda la información en la DB
                         getAllPaises()
-                        porcentProgress.value = 85
+                        porcentProgress.value = 80
 //
                         getAllMunicipios()
                         porcentProgress.value = 90

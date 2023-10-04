@@ -101,12 +101,12 @@ class CapturaFragment : Fragment() {
 // -------- Floating Button Conteo Rapido ----------------
         binding.fbConteoRapido.setOnClickListener {
 
-            if (binding.editTextHora.text.isEmpty()){
-                binding.editTextHora.setError("llenar para continuar", icon)
-                binding.spinnerPuntoR.visibility = View.GONE
-                binding.spinnerTipo.setSelection(0)
-                showToastError("Ingresa la hora primero", Toast.LENGTH_LONG)
-            } else{
+//            if (binding.editTextHora.text.isEmpty()){
+//                binding.editTextHora.setError("llenar para continuar", icon)
+//                binding.spinnerPuntoR.visibility = View.GONE
+//                binding.spinnerTipo.setSelection(0)
+//                showToastError("Ingresa la hora primero", Toast.LENGTH_LONG)
+//            } else{
                 binding.editTextHora.error = null
                 if(binding.spinnerTipo.selectedItemPosition == 0){
                     binding.spinnerTipoIcon.visibility = View.VISIBLE
@@ -117,7 +117,7 @@ class CapturaFragment : Fragment() {
                     dataActivityViewM.saveTipoRescate()
                     startActivity(Intent(requireContext(),ConteoRActivity::class.java))
                 }
-            }
+//            }
         }
 
         dataActivityViewM.oficinas.observe(viewLifecycleOwner){
@@ -189,6 +189,13 @@ class CapturaFragment : Fragment() {
 //---------------Spinner seleccion de Punto de rescate -------------------
         binding.spinnerTipo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if(p2 == 0){
+                    binding.spinnerTipo.setSelection(0)
+                    binding.spinnerPuntoR.setText("")
+                    prefManager.setPuntoRevision("")
+                    prefManager.setVisibilidadPuntoRevision(false)
+                    prefManager.setTipoRescate(0)
+                }
                 if ( p2 > 0) {
                     //              Se Coloca en 0 (default) el spinner de Tipo de Rescate
                     binding.spinnerTipo.setSelection(0)
@@ -197,14 +204,19 @@ class CapturaFragment : Fragment() {
                     prefManager.setVisibilidadPuntoRevision(false)
                     prefManager.setTipoRescate(0)
 
-//               Si no esta colocada la hora, no permite avanzar
-                    if (binding.editTextHora.text.isEmpty()){
-                        binding.editTextHora.setError("llenar para continuar", icon)
-                        binding.spinnerPuntoR.visibility = View.GONE
-                        showToastError("Ingresa la hora primero", Toast.LENGTH_LONG)
+                    val formatter = DateTimeFormatter.ofPattern("HH:mm")
+                    val current = LocalDateTime.now().format(formatter)
+                    binding.editTextHora.setText(current)
 
-                    }
-                    else {
+//                    Toast.makeText(requireContext(), current, Toast.LENGTH_SHORT).show()
+////               Si no esta colocada la hora, no permite avanzar
+//                    if (binding.editTextHora.text.isEmpty()){
+//                        binding.editTextHora.setError("llenar para continuar", icon)
+//                        binding.spinnerPuntoR.visibility = View.GONE
+//                        showToastError("Ingresa la hora primero", Toast.LENGTH_LONG)
+//
+//                    }
+//                    else {
 //                  Colocada la hora se quita el simbolo de error
                         binding.editTextHora.error = null
 //                  Se guarda el estado del spinner a la posición seleccionada por el usuario
@@ -235,7 +247,7 @@ class CapturaFragment : Fragment() {
                                 dataRescateP.carretero = true
                                 binding.spinnerPuntoR.visibility = View.VISIBLE
                                 prefManager.setVisibilidadPuntoRevision(true)
-                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
+//                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
                                 dataActivityViewM.buscarCarretero()
                             }
                             //                    ----- Casa de seguridad ------
@@ -245,9 +257,11 @@ class CapturaFragment : Fragment() {
                                 prefManager.setVisibilidadPuntoRevision(false)
                                 dataRescateP = TipoRescate()
                                 dataRescateP.casaSeguridad = true
-                                binding.spinnerPuntoR.visibility = View.GONE
+                                binding.spinnerPuntoR.visibility = View.VISIBLE
                                 prefManager.setVisibilidadPuntoRevision(false)
-                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
+                                binding.spinnerPuntoR.setText("")
+//                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
+                                dataActivityViewM.buscarMunicipio()
                             }
                             //                    ----- Central de Autobus ------
                             4 -> {
@@ -269,7 +283,8 @@ class CapturaFragment : Fragment() {
                                 dataRescateP.ferrocarril = true
                                 binding.spinnerPuntoR.visibility = View.VISIBLE
                                 prefManager.setVisibilidadPuntoRevision(true)
-                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
+//                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
+                                dataActivityViewM.buscarFerroviario()
                             }
                             //                    ----- Hotel ------
                             6 ->{
@@ -278,9 +293,11 @@ class CapturaFragment : Fragment() {
                                 prefManager.setVisibilidadPuntoRevision(false)
                                 dataRescateP = TipoRescate()
                                 dataRescateP.hotel = true
-                                binding.spinnerPuntoR.visibility = View.GONE
+                                binding.spinnerPuntoR.visibility = View.VISIBLE
+                                binding.spinnerPuntoR.setText("")
                                 prefManager.setVisibilidadPuntoRevision(false)
-                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
+//                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
+                                dataActivityViewM.buscarMunicipio()
                             }
                             //                    ----- Puestos a Disposición ------
                             7 ->{
@@ -310,7 +327,7 @@ class CapturaFragment : Fragment() {
                                 prefManager.setVisibilidadPuntoRevision(false)
                                 dataRescateP = TipoRescate()
                                 dataRescateP.otro = true
-                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
+//                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
                                 binding.spinnerPuntoR.visibility = View.VISIBLE
                                 prefManager.setVisibilidadPuntoRevision(true)
                                 dataActivityViewM.buscarOtros()
@@ -319,7 +336,7 @@ class CapturaFragment : Fragment() {
 
                             }
                         }
-                    }
+//                    }
                 }
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {  }
@@ -353,7 +370,8 @@ class CapturaFragment : Fragment() {
         }
 
 
-        binding.editTextHora.setOnClickListener { ShowTimePickerDialog() }
+//      EditText Para obtener informacion de la hora
+//        binding.editTextHora.setOnClickListener { ShowTimePickerDialog() }
 
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yy")
         val current = LocalDateTime.now().format(formatter)
@@ -364,6 +382,9 @@ class CapturaFragment : Fragment() {
             dataRescateP.puntoEstra = binding.spinnerPuntoR.text.toString()
             verifyData()
             showPopUpEnviar()
+            prefManager.setPuntoRevision("")
+            prefManager.setVisibilidadPuntoRevision(false)
+            prefManager.setTipoRescate(0)
         }
 
 
@@ -371,12 +392,12 @@ class CapturaFragment : Fragment() {
 //            ----------------------
 //            ----------------------
 //            verificar Datos del Punto
-            if (binding.editTextHora.text.isEmpty()){
-                binding.editTextHora.setError("llenar para continuar", icon)
-                binding.spinnerPuntoR.visibility = View.GONE
-                binding.spinnerTipo.setSelection(0)
-                showToastError("Ingresa la hora primero", Toast.LENGTH_LONG)
-            } else{
+//            if (binding.editTextHora.text.isEmpty()){
+//                binding.editTextHora.setError("llenar para continuar", icon)
+//                binding.spinnerPuntoR.visibility = View.GONE
+//                binding.spinnerTipo.setSelection(0)
+//                showToastError("Ingresa la hora primero", Toast.LENGTH_LONG)
+//            } else{
                 binding.editTextHora.error = null
                 if(binding.spinnerTipo.selectedItemPosition == 0){
                     binding.spinnerTipoIcon.visibility = View.VISIBLE
@@ -390,17 +411,17 @@ class CapturaFragment : Fragment() {
                     val intentRegistroNombres = Intent(requireContext(), RescateNombresActivity::class.java)
                     startActivity(intentRegistroNombres)
                 }
-            }
+//            }
         }
 
         binding.btnFamilias.setOnClickListener {
             //            verificar Datos del Punto
-            if (binding.editTextHora.text.isEmpty()){
-                binding.editTextHora.setError("llenar para continuar", icon)
-                binding.spinnerPuntoR.visibility = View.GONE
-                binding.spinnerTipo.setSelection(0)
-                showToastError("Ingresa la hora primero", Toast.LENGTH_LONG)
-            } else{
+//            if (binding.editTextHora.text.isEmpty()){
+//                binding.editTextHora.setError("llenar para continuar", icon)
+//                binding.spinnerPuntoR.visibility = View.GONE
+//                binding.spinnerTipo.setSelection(0)
+//                showToastError("Ingresa la hora primero", Toast.LENGTH_LONG)
+//            } else{
                 binding.editTextHora.error = null
                 if(binding.spinnerTipo.selectedItemPosition == 0){
                     binding.spinnerTipoIcon.visibility = View.VISIBLE
@@ -415,7 +436,7 @@ class CapturaFragment : Fragment() {
                     intentRegistroFamilias.putExtra( RescateFamiliasActivity.EXTRA_NOM_FAMILIA, dataActivityViewM.numFamilia.value)
                     startActivity(intentRegistroFamilias)
                 }
-            }
+//            }
 
 
         }
@@ -537,7 +558,7 @@ class CapturaFragment : Fragment() {
             }
             "PUESTOS A DISPOSICIÓN" -> {
                 bindings.LLPuestosaD.visibility = View.VISIBLE
-                bindings.LLPresuntosD.visibility = View.VISIBLE
+//                bindings.LLPresuntosD.visibility = View.VISIBLE
 
             }
             "OTRO" -> {
