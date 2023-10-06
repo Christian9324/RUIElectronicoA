@@ -85,17 +85,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etApellidosF" />
 
-            <Spinner
-                android:id="@+id/spinnerParentescoF"
-                android:layout_width="300dp"
-                android:layout_height="30sp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:hapticFeedbackEnabled="true"
-                android:layout_marginTop="@dimen/margin_basic2"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etApellidosF" />
+                app:layout_constraintTop_toBottomOf="@+id/etApellidosF"
+                android:layout_marginTop="@dimen/margin_basic2">
+
+                <Spinner
+                    android:id="@+id/spinnerParentescoF"
+                    android:layout_width="300dp"
+                    android:layout_height="40sp"
+                    android:layout_weight="1"
+                    android:hapticFeedbackEnabled="true"/>
+
+                <ImageView
+                    android:id="@+id/spinnerParentescoIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_error_24"
+                    android:visibility="gone"
+                    app:tint="@color/rojo" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvFechaNacimientoF"
@@ -110,16 +125,34 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etNoIdentidadF" />
 
-            <com.mikhaellopez.lazydatepicker.LazyLocalDatePicker
-                android:id="@+id/ldFechaNacimiento"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                app:ldp_date_format="dd-mm-yyyy"
-                app:ldp_text_color="@color/verde_oscuro"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvFechaNacimientoF" />
+                app:layout_constraintTop_toBottomOf="@+id/tvFechaNacimientoF">
+
+                <com.mikhaellopez.lazydatepicker.LazyLocalDatePicker
+                    android:id="@+id/ldFechaNacimiento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_basic1"
+                    app:ldp_date_format="dd-mm-yyyy"
+                    app:ldp_text_color="@color/verde_oscuro"
+                    />
+
+                <ImageView
+                    android:id="@+id/fechaNacIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_error_24"
+                    android:visibility="gone"
+                    android:layout_gravity="center_vertical"
+                    app:tint="@color/rojo"
+                    android:layout_marginLeft="@dimen/margin_basic1"
+                    />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"

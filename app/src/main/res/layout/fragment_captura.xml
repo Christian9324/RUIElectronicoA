@@ -27,16 +27,36 @@
         android:layout_gravity="center_horizontal"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/rojo"
-            android:gravity="center"
-            android:text="Rescates"
-            android:textAllCaps="true"
-            android:textColor="@color/marron"
-            android:textSize="35sp"
-            android:textStyle="bold"/>
+            android:orientation="vertical"
+            android:background="@color/rojo">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Rescates"
+                android:textAllCaps="true"
+                android:textColor="@color/marron"
+                android:textSize="35sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvAgenteM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="Rescates"
+                android:textAllCaps="true"
+                android:textColor="@color/marron"
+                android:textColorHint="@color/marron"
+                android:textSize="18sp"
+                android:layout_marginTop="-7dp"
+                android:layout_marginBottom="1dp"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -120,10 +140,25 @@
 
             </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo de rescate"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/montserrat"
+                android:textAllCaps="true"
+                android:textColor="@color/gris_oscuro"
+                android:textSize="14sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="-30dp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="-30dp"
+                android:layout_marginTop="-5dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -131,16 +166,30 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:paddingLeft="@dimen/margin_basic05"
+                    android:visibility="gone"
                     app:srcCompat="@drawable/ic_lista2"
                     app:tint="@color/rojo" />
 
-                <Spinner
+                <com.skydoves.powerspinner.PowerSpinnerView
                     android:id="@+id/spinnerTipo"
-                    android:layout_width="match_parent"
-                    android:layout_height="30sp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:hapticFeedbackEnabled="true" />
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:padding="9dp"
+                    android:text="Información"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gris_claro"
+                    android:textSize="16sp"
+                    app:spinner_arrow_gravity="end"
+                    app:spinner_arrow_padding="6dp"
+                    app:spinner_divider_color="@color/marron"
+                    app:spinner_divider_show="true"
+                    app:spinner_divider_size="1dp"
+                    app:spinner_item_height="60dp"
+                    app:spinner_popup_animation="normal"
+                    app:spinner_popup_background="@color/white"
+                    app:spinner_popup_elevation="14dp"/>
 
                 <ImageView
                     android:id="@+id/spinnerTipoIcon"
@@ -158,16 +207,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="-20dp"
+                android:layout_marginTop="-10dp">
 
                 <AutoCompleteTextView
                     android:id="@+id/spinnerPuntoR"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+
                     android:hint="Punto de rescate"
                     android:inputType="textAutoComplete"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:gravity="center"
                     android:ellipsize="end"
                     android:imeOptions="actionDone"
@@ -225,7 +277,7 @@
                         android:layout_gravity="center_horizontal"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                        app:spanCount="5"
+                        app:spanCount="4"
                         tools:listitem="@layout/view_registro_item" />
 
                     <FrameLayout

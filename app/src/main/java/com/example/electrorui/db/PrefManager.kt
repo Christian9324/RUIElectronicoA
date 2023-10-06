@@ -17,7 +17,6 @@ class PrefManager(context : Context?) {
     private val IS_CONNECTED = "conectado"
     private val TYPE_RESC = "rescateTipo"
     private val PUNTO_REVISION = "puntoRevision"
-    private val VISIBLE_PUNTO_REVISION = "visibilidadPuntoRevision"
     private val VISTAS_POPUP_INTERNET = "vistasPopUpInternet"
 
     val prefs: SharedPreferences? = context?.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
@@ -62,10 +61,6 @@ class PrefManager(context : Context?) {
         editor?.putString(PUNTO_REVISION, punto)
         editor?.commit()
     }
-    fun setVisibilidadPuntoRevision(visible : Boolean){
-        editor?.putBoolean(VISIBLE_PUNTO_REVISION, visible)
-        editor?.commit()
-    }
 
     fun setvistasPopUpInternet(vistas : Boolean){
         editor?.putBoolean(VISTAS_POPUP_INTERNET, vistas)
@@ -85,8 +80,6 @@ class PrefManager(context : Context?) {
     fun getConnection() : Boolean? = prefs?.getBoolean(IS_CONNECTED, false)
     fun getTipoRescate() : Int? = prefs?.getInt(TYPE_RESC, 0)
     fun getPuntoRevision() : String? = prefs?.getString(PUNTO_REVISION, "")
-
-    fun isVisiblePuntoRevision() : Boolean? = prefs?.getBoolean(VISIBLE_PUNTO_REVISION, false)
 
     fun vistoPopUInternet() : Boolean? = prefs?.getBoolean(VISTAS_POPUP_INTERNET, false)
 

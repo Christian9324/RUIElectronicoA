@@ -3,14 +3,23 @@ package com.example.electrorui.ui
 import android.R
 import android.app.Activity
 import android.content.Context
+import android.graphics.drawable.Drawable
+import android.hardware.display.DisplayManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.view.Display
+import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.getSystemService
+import androidx.core.graphics.drawable.DrawableCompat
 import com.example.electrorui.databinding.ActivityNombresModBinding
+import com.example.electrorui.databinding.ToastLayoutErrorBinding
 import com.example.electrorui.ui.viewModel.NombresMod_AVM
 import com.example.electrorui.usecase.model.RegistroNombres
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -28,6 +37,8 @@ class NombresModActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityNombresModBinding
     private val dataActivityViewM : NombresMod_AVM by viewModels()
+    private lateinit var icon : Drawable
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNombresModBinding.inflate(layoutInflater)
@@ -35,6 +46,10 @@ class NombresModActivity : AppCompatActivity() {
         AndroidThreeTen.init(this)
 
         val nacio  = emptyList<String>()
+
+        icon = AppCompatResources.getDrawable(this, com.example.electrorui.R.drawable.ic_error_24)!!
+        DrawableCompat.setTint(icon, resources.getColor(com.example.electrorui.R.color.rojo))
+        icon.setBounds(0, 0, icon.intrinsicWidth, icon.intrinsicHeight)
 
         binding.checkHombre.isChecked = true
 
@@ -97,35 +112,70 @@ class NombresModActivity : AppCompatActivity() {
             val nom = binding.etNombre.text.toString().uppercase()
             val apellidos = binding.etApellidos.text.toString().uppercase()
             val noIdentidad = binding.etNoIdentidad.text.toString()
-            val fechaNacimiento = binding.ldFechaNacimiento.localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
             val sexo : Boolean = binding.checkHombre.isChecked
 
             val paises = dataActivityViewM.paises.value
             val indexNacionalidad = paises?.indexOf(nacionalidad)
 
-            val fechaNacimientoDate = SimpleDateFormat("dd/MM/yyyy").parse(fechaNacimiento)
-            val fechaActual = Date(System.currentTimeMillis())
-            val diferencia = fechaActual.time - fechaNacimientoDate?.time!!
-            val edad : Float = diferencia.toFloat() / (31536000000)
+            if (nom.isNullOrEmpty()){
+                binding.etNombre.setError("LLENAR PARA CONTINUAR", icon)
+                binding.etNombre.requestFocus()
+            } else {
+                binding.etNombre.error = null
+                if (apellidos.isNullOrEmpty()) {
+                    binding.etApellidos.setError("LLENAR PARA CONTINUAR", icon)
+                    binding.etApellidos.requestFocus()
+                } else {
+                    binding.etApellidos.error = null
+                    if (binding.ldFechaNacimiento.localDate == null) {
+                        binding.fechaNacIcon.visibility = View.VISIBLE
+                        showToastError("LLENAR PARA CONTINUAR", Toast.LENGTH_LONG)
+                    } else {
+                        binding.fechaNacIcon.visibility = View.GONE
 
-            val datosRetorno = RegistroNombres(
-                intent.getIntExtra(EXTRA_IDNOMBRE_DB, 1),
-                nacionalidad,
-                iso3D!![indexNacionalidad!!],
-                nom,
-                apellidos,
-                noIdentidad,
-                fechaNacimiento,
-                edad > 18,
-                sexo,
-            )
+                        val fechaNacimiento = binding.ldFechaNacimiento.localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                        val fechaNacimientoDate = SimpleDateFormat("dd/MM/yyyy").parse(fechaNacimiento)
+                        val fechaActual = Date(System.currentTimeMillis())
+                        val diferencia = fechaActual.time - fechaNacimientoDate?.time!!
+                        val edad : Float = diferencia.toFloat() / (31536000000)
 
-            dataActivityViewM.updateNombresDB(datosRetorno)
-            Toast.makeText(applicationContext, "Actualizando información", Toast.LENGTH_SHORT).show()
-            finish()
+                        val datosRetorno = RegistroNombres(
+                            intent.getIntExtra(EXTRA_IDNOMBRE_DB, 1),
+                            nacionalidad,
+                            iso3D!![indexNacionalidad!!],
+                            nom,
+                            apellidos,
+                            noIdentidad,
+                            fechaNacimiento,
+                            edad > 18,
+                            sexo,
+                        )
+
+                        dataActivityViewM.updateNombresDB(datosRetorno)
+                        Toast.makeText(applicationContext, "Actualizando información", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                }
+            }
         }
 
         dataActivityViewM.onCreate(intent.getIntExtra(EXTRA_IDNOMBRE_DB, 1))
+
+    }
+
+    fun showToastError(texto : String, duracion : Int){
+
+        val displaySize = DisplayMetrics()
+        getSystemService<DisplayManager>()?.getDisplay(Display.DEFAULT_DISPLAY)?.getMetrics(displaySize)
+
+        val bindingToast = ToastLayoutErrorBinding.inflate(layoutInflater)
+        bindingToast.textview.setText(texto)
+        val toast = Toast(this)
+        toast.view = bindingToast.root
+        toast.duration = duracion
+        toast.setGravity(Gravity.BOTTOM, 0, (displaySize.heightPixels / 2) - 20)
+//        displaySize.heightPixels
+        toast.show()
 
     }
 

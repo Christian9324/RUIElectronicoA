@@ -57,8 +57,10 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
-    implementation("androidx.room:room-ktx:2.5.2")
     implementation("com.mikhaellopez:lazydatepicker:1.1.0")
+    implementation("com.github.skydoves:powerspinner:1.2.7")
+
+    implementation("androidx.room:room-ktx:2.5.2")
     kapt("androidx.room:room-compiler:2.5.2")
     androidTestImplementation("androidx.room:room-testing:2.5.2")
 

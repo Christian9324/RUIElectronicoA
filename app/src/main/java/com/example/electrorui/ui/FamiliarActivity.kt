@@ -3,14 +3,23 @@ package com.example.electrorui.ui
 import android.R
 import android.app.Activity
 import android.content.Context
+import android.graphics.drawable.Drawable
+import android.hardware.display.DisplayManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.view.Display
+import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.getSystemService
+import androidx.core.graphics.drawable.DrawableCompat
 import com.example.electrorui.databinding.ActivityFamiliarBinding
+import com.example.electrorui.databinding.ToastLayoutErrorBinding
 import com.example.electrorui.ui.viewModel.Familiar_AVM
 import com.example.electrorui.usecase.model.RegistroFamilias
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -28,6 +37,7 @@ class FamiliarActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFamiliarBinding
     private val dataActivityViewM : Familiar_AVM by viewModels()
+    private lateinit var icon : Drawable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +46,10 @@ class FamiliarActivity : AppCompatActivity() {
         AndroidThreeTen.init(this)
 
         binding.checkHombre.isChecked = true
+
+        icon = AppCompatResources.getDrawable(this, com.example.electrorui.R.drawable.ic_error_24)!!
+        DrawableCompat.setTint(icon, resources.getColor(com.example.electrorui.R.color.rojo))
+        icon.setBounds(0, 0, icon.intrinsicWidth, icon.intrinsicHeight)
 
         val nacio  = emptyList<String>()
 
@@ -85,42 +99,92 @@ class FamiliarActivity : AppCompatActivity() {
             val apellidos = binding.etApellidosF.text.toString().uppercase()
             val noIdentidad = binding.etNoIdentidadF.text.toString()
             val parentesco = binding.spinnerParentescoF.selectedItem.toString().uppercase()
-            val fechaNacimiento = binding.ldFechaNacimiento.localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+
             val sexo : Boolean = binding.checkHombre.isChecked
             val numeroFamilia = intent.getIntExtra(EXTRA_FAMILIA, 1)
 
             val paises = dataActivityViewM.paises.value
             val indexNacionalidad = paises?.indexOf(nacionalidad)
 
-            val fechaNacimientoDate = SimpleDateFormat("dd/MM/yyyy").parse(fechaNacimiento)
-            val fechaActual = Date(System.currentTimeMillis())
-            val diferencia = fechaActual.time - fechaNacimientoDate?.time!!
-            val edad : Int = (diferencia.toFloat() / (31536000000)).toInt()
 
 
-            val datosRetorno = RegistroFamilias(
-                1,
-                nacionalidad,
-                iso3D!![indexNacionalidad!!],
-                nom,
-                apellidos,
-                noIdentidad,
-                parentesco,
-                fechaNacimiento,
-                edad > 18,
-                sexo,
-                numeroFamilia,
-            )
+            if(nacionalidad.isNullOrEmpty()){
+                binding.spinnerPAISF.setError("LLENAR PARA CONTINUAR", icon)
+                binding.spinnerPAISF.requestFocus()
+            } else {
+                if (nom.isNullOrEmpty()){
+                    binding.etNombreF.setError("LLENAR PARA CONTINUAR", icon)
+                    binding.etNombreF.requestFocus()
+                } else{
+                    binding.etNombreF.error = null
+                    if (apellidos.isNullOrEmpty()){
+                        binding.etApellidosF.setError("LLENAR PARA CONTINUAR", icon)
+                        binding.etApellidosF.requestFocus()
+                    } else {
+                        binding.etApellidosF.error = null
+                        if(binding.spinnerParentescoF.selectedItemPosition == 0){
+                            binding.spinnerParentescoIcon.visibility = View.VISIBLE
+                            showToastError("LLENAR PARA CONTINUAR", Toast.LENGTH_LONG)
+                        } else {
+                            binding.spinnerParentescoIcon.visibility = View.GONE
+                            if (binding.ldFechaNacimiento.localDate == null){
+                                binding.fechaNacIcon.visibility = View.VISIBLE
+                                showToastError("LLENAR PARA CONTINUAR", Toast.LENGTH_LONG)
+                            } else {
+                                binding.fechaNacIcon.visibility = View.GONE
 
-            dataActivityViewM.saveToDB(datosRetorno)
-            Toast.makeText(applicationContext, "Guardando información", Toast.LENGTH_SHORT).show()
-            finish()
+                                val fechaNacimiento = binding.ldFechaNacimiento.localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+
+                                val fechaNacimientoDate = SimpleDateFormat("dd/MM/yyyy").parse(fechaNacimiento)
+                                val fechaActual = Date(System.currentTimeMillis())
+                                val diferencia = fechaActual.time - fechaNacimientoDate?.time!!
+                                val edad : Int = (diferencia.toFloat() / (31536000000)).toInt()
+
+                                val datosRetorno = RegistroFamilias(
+                                    1,
+                                    nacionalidad,
+                                    iso3D!![indexNacionalidad!!],
+                                    nom,
+                                    apellidos,
+                                    noIdentidad,
+                                    parentesco,
+                                    fechaNacimiento,
+                                    edad > 18,
+                                    sexo,
+                                    numeroFamilia,
+                                )
+
+                                dataActivityViewM.saveToDB(datosRetorno)
+                                Toast.makeText(applicationContext, "Guardando información", Toast.LENGTH_SHORT).show()
+                                finish()
+                            }
+                        }
+                    }
+                }
+            }
 
         }
 
         dataActivityViewM.onCreate()
 
     }
+
+    fun showToastError(texto : String, duracion : Int){
+
+        val displaySize = DisplayMetrics()
+        getSystemService<DisplayManager>()?.getDisplay(Display.DEFAULT_DISPLAY)?.getMetrics(displaySize)
+
+        val bindingToast = ToastLayoutErrorBinding.inflate(layoutInflater)
+        bindingToast.textview.setText(texto)
+        val toast = Toast(this)
+        toast.view = bindingToast.root
+        toast.duration = duracion
+        toast.setGravity(Gravity.BOTTOM, 0, (displaySize.heightPixels / 2) - 20)
+//        displaySize.heightPixels
+        toast.show()
+
+    }
+
     fun Activity.hideKeyboard() {
         hideKeyboard(currentFocus ?: View(this))
     }

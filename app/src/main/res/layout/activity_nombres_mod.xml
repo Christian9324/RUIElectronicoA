@@ -98,16 +98,34 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etNoIdentidad" />
 
-            <com.mikhaellopez.lazydatepicker.LazyLocalDatePicker
-                android:id="@+id/ldFechaNacimiento"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_basic1"
-                app:ldp_date_format="dd-mm-yyyy"
-                app:ldp_text_color="@color/verde_oscuro"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvFechaNacimiento" />
+                app:layout_constraintTop_toBottomOf="@+id/tvFechaNacimientoF">
+
+                <com.mikhaellopez.lazydatepicker.LazyLocalDatePicker
+                    android:id="@+id/ldFechaNacimiento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_basic1"
+                    app:ldp_date_format="dd-mm-yyyy"
+                    app:ldp_text_color="@color/verde_oscuro"
+                    />
+
+                <ImageView
+                    android:id="@+id/fechaNacIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_error_24"
+                    android:visibility="gone"
+                    android:layout_gravity="center_vertical"
+                    app:tint="@color/rojo"
+                    android:layout_marginLeft="@dimen/margin_basic1"
+                    />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
