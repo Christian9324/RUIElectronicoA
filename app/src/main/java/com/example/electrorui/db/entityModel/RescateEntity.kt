@@ -13,6 +13,8 @@ data class RescateEntity(
     @ColumnInfo(name = "Fecha") val fecha: String,
     @ColumnInfo(name = "Hora") val hora: String,
 
+    @ColumnInfo(name = "Agente") val nombreAgente: String,
+
     @ColumnInfo(name = "Aeropuerto") val aeropuerto : Boolean,
 
     @ColumnInfo(name = "Carretero") val carretero : Boolean,
@@ -59,6 +61,7 @@ fun Rescate.toDB() = RescateEntity(
     oficinaRepre = oficinaRepre,
     fecha = fecha,
     hora = hora,
+    nombreAgente = nombreAgente,
     aeropuerto = aeropuerto,
     carretero = carretero,
     tipoVehic = tipoVehic,

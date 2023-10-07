@@ -24,6 +24,7 @@ class GetAllConteoRapidoUC @Inject constructor(
                     "",
                     "",
                     "",
+                    "",
                     false,
                     false,
                     "",

@@ -164,10 +164,14 @@ class CapturaFragment : Fragment() {
         binding.spinnerPuntoR.threshold = 1
         binding.spinnerPuntoR.setAdapter(spinnerTipoRadapter)
 
-// --------- Cargar por defecto la información de la hora en el editText
+// --------- Cargar por defecto la información de la fecha y la hora en los editText
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yy")
         val current = LocalDateTime.now().format(formatter)
         binding.textViewFecha.text = "$current"
+
+        val formatterH = DateTimeFormatter.ofPattern("HH:mm")
+        val currentH = LocalDateTime.now().format(formatterH)
+        binding.editTextHora.setText(currentH)
 
 // --------- Cargar por defecto el tipo de Rescate Guardado
         binding.spinnerTipo.selectItemByIndex(prefManager.getTipoRescate()!!)
@@ -181,7 +185,7 @@ class CapturaFragment : Fragment() {
 
             val oficina = oficinas[estado-1]
             binding.textViewOR.setText("OR: ${oficina}")
-            dataActivityViewM.dataAditional(oficina)
+            dataActivityViewM.dataAditional(oficina, prefManager.getUsername()!!)
         }
 
 // --------- Se actualizan los datos a mostrar del spinner --Punto de Rescate--
@@ -209,225 +213,16 @@ class CapturaFragment : Fragment() {
 
         binding.spinnerTipo.setOnSpinnerItemSelectedListener(
                 OnSpinnerItemSelectedListener<IconSpinnerItem>() { oldIndex, oldItem, newIndex, newItem ->
+
                     binding.spinnerPuntoR.setText("")
                     binding.spinnerPuntoR.visibility = View.VISIBLE
-                    when(newIndex){
-//                        Aeropuero
-                        0 -> {
-                            dataRescateP = TipoRescate()
-                            dataRescateP.aeropuerto = true
-                            dataActivityViewM.buscarAeropuertos()
-                        }
-//                        Carretero
-                        1 ->{
-                            dataRescateP = TipoRescate()
-                            dataRescateP.carretero = true
-                            dataActivityViewM.buscarCarretero()
-                        }
-//                        Casa de seguridad
-                        2 ->{
-                            dataRescateP = TipoRescate()
-                            dataRescateP.casaSeguridad= true
-                            dataActivityViewM.buscarMunicipio()
-                        }
-//                        Central de Autobuses
-                        3 ->{
-                            dataRescateP = TipoRescate()
-                            dataRescateP.centralAutobus = true
-                            dataActivityViewM.buscarEstacionAuto()
-                        }
-//                        Ferrocarril
-                        4 ->{
-                            dataRescateP = TipoRescate()
-                            dataRescateP.ferrocarril = true
-                            dataActivityViewM.buscarFerroviario()
-                        }
-//                        Hotel
-                        5 ->{
-                            dataRescateP = TipoRescate()
-                            dataRescateP.hotel = true
-                            dataActivityViewM.buscarMunicipio()
-                        }
-//                        Puestos a Disposicion
-                        6 ->{
-                            dataRescateP = TipoRescate()
-                            dataRescateP.puestosADispo = true
-                            showPopUp1(newItem.text.toString())
-                        }
-//                        Voluntarios
-                        7 ->{
-                            dataRescateP = TipoRescate()
-                            dataRescateP.hotel = true
-                            dataActivityViewM.buscarMunicipio()
-                        }
-//                        Otros
-                        8 ->{
-                            dataRescateP = TipoRescate()
-                            dataRescateP.otro = true
-                            dataActivityViewM.buscarOtros()
-                        }
-//                            Toast.makeText(requireContext(), "Item seleccionado ${newItem.text}", Toast.LENGTH_SHORT).show()
-                        else ->{
 
-                        }
-                    }
                     prefManager.setTipoRescate(newIndex)
-                })
+                    prefManager.setNomTipoRescate(newItem.text.toString())
 
-//        binding.spinnerTipo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-//                if(p2 == 0){
-//                    binding.spinnerTipo.setSelection(0)
-//                    binding.spinnerPuntoR.setText("")
-//                    prefManager.setPuntoRevision("")
-//                    prefManager.setVisibilidadPuntoRevision(false)
-//                    prefManager.setTipoRescate(0)
-//                }
-//                if ( p2 > 0) {
-//                    //              Se Coloca en 0 (default) el spinner de Tipo de Rescate
-//                    binding.spinnerTipo.setSelection(0)
-//                    binding.spinnerPuntoR.setText("")
-//                    prefManager.setPuntoRevision("")
-//                    prefManager.setVisibilidadPuntoRevision(false)
-//                    prefManager.setTipoRescate(0)
-//
-//                    val formatter = DateTimeFormatter.ofPattern("HH:mm")
-//                    val current = LocalDateTime.now().format(formatter)
-//                    binding.editTextHora.setText(current)
-//
-////                    Toast.makeText(requireContext(), current, Toast.LENGTH_SHORT).show()
-//////               Si no esta colocada la hora, no permite avanzar
-////                    if (binding.editTextHora.text.isEmpty()){
-////                        binding.editTextHora.setError("llenar para continuar", icon)
-////                        binding.spinnerPuntoR.visibility = View.GONE
-////                        showToastError("Ingresa la hora primero", Toast.LENGTH_LONG)
-////
-////                    }
-////                    else {
-////                  Colocada la hora se quita el simbolo de error
-//                        binding.editTextHora.error = null
-////                  Se guarda el estado del spinner a la posición seleccionada por el usuario
-//                        prefManager.setTipoRescate(p2!!)
-//
-////                  Se coloca vacio el campo de Punto estrategico o (Punto de Revision)
-//                        dataActivityViewM.etPuntoRescate.value = ""
-////                  Se guarda como invisible el ET de Punto Estrategico
-//                        prefManager.setVisibilidadPuntoRevision(false)
-//                        when(p2){
-//                            //                    ----- Aeropuerto ------
-//                            1 -> {
-////                          Se asigna al spinner la opción que el usuario presiono
-//                                binding.spinnerTipo.setSelection(p2)
-////                          Se crea un tipo de rescate con los valores por defecto
-//                                dataRescateP = TipoRescate()
-////                          Se guardan los datos predeterminados para aeropuerto
-//                                dataRescateP.aeropuerto = true
-//                                binding.spinnerPuntoR.visibility = View.VISIBLE
-//                                dataActivityViewM.buscarAeropuertos()
-//                            }
-//                            //                   ----- Carretero ------
-//                            2 -> {
-//                                binding.spinnerTipo.setSelection(p2)
-//                                prefManager.setTipoRescate(p2)
-//                                prefManager.setVisibilidadPuntoRevision(false)
-//                                dataRescateP = TipoRescate()
-//                                dataRescateP.carretero = true
-//                                binding.spinnerPuntoR.visibility = View.VISIBLE
-//                                prefManager.setVisibilidadPuntoRevision(true)
-////                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
-//                                dataActivityViewM.buscarCarretero()
-//                            }
-//                            //                    ----- Casa de seguridad ------
-//                            3 ->{
-//                                binding.spinnerTipo.setSelection(p2)
-//                                prefManager.setTipoRescate(p2)
-//                                prefManager.setVisibilidadPuntoRevision(false)
-//                                dataRescateP = TipoRescate()
-//                                dataRescateP.casaSeguridad = true
-//                                binding.spinnerPuntoR.visibility = View.VISIBLE
-//                                prefManager.setVisibilidadPuntoRevision(false)
-//                                binding.spinnerPuntoR.setText("")
-////                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
-//                                dataActivityViewM.buscarMunicipio()
-//                            }
-//                            //                    ----- Central de Autobus ------
-//                            4 -> {
-//                                binding.spinnerTipo.setSelection(p2)
-//                                prefManager.setTipoRescate(p2)
-//                                prefManager.setVisibilidadPuntoRevision(false)
-//                                dataRescateP = TipoRescate()
-//                                dataRescateP.centralAutobus = true
-//                                binding.spinnerPuntoR.visibility = View.VISIBLE
-//                                prefManager.setVisibilidadPuntoRevision(true)
-//                                dataActivityViewM.buscarEstacionAuto()
-//                            }
-//                            //                    ----- Ferrocarril ------
-//                            5 -> {
-//                                binding.spinnerTipo.setSelection(p2)
-//                                prefManager.setTipoRescate(p2)
-//                                prefManager.setVisibilidadPuntoRevision(false)
-//                                dataRescateP = TipoRescate()
-//                                dataRescateP.ferrocarril = true
-//                                binding.spinnerPuntoR.visibility = View.VISIBLE
-//                                prefManager.setVisibilidadPuntoRevision(true)
-////                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
-//                                dataActivityViewM.buscarFerroviario()
-//                            }
-//                            //                    ----- Hotel ------
-//                            6 ->{
-//                                binding.spinnerTipo.setSelection(p2)
-//                                prefManager.setTipoRescate(p2)
-//                                prefManager.setVisibilidadPuntoRevision(false)
-//                                dataRescateP = TipoRescate()
-//                                dataRescateP.hotel = true
-//                                binding.spinnerPuntoR.visibility = View.VISIBLE
-//                                binding.spinnerPuntoR.setText("")
-//                                prefManager.setVisibilidadPuntoRevision(false)
-////                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
-//                                dataActivityViewM.buscarMunicipio()
-//                            }
-//                            //                    ----- Puestos a Disposición ------
-//                            7 ->{
-//                                binding.spinnerTipo.setSelection(p2)
-//                                prefManager.setTipoRescate(p2)
-//                                prefManager.setVisibilidadPuntoRevision(false)
-//                                dataRescateP = TipoRescate()
-//                                dataRescateP.puestosADispo = true
-//                                binding.spinnerPuntoR.visibility = View.GONE
-//                                prefManager.setVisibilidadPuntoRevision(false)
-//                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
-//                            }
-//                            //                    ----- Voluntarios ------
-//                            8->{
-//                                binding.spinnerTipo.setSelection(p2)
-//                                prefManager.setTipoRescate(p2)
-//                                prefManager.setVisibilidadPuntoRevision(false)
-//                                dataRescateP = TipoRescate()
-//                                dataRescateP.voluntarios = true
-//                                binding.spinnerPuntoR.visibility = View.GONE
-//                                prefManager.setVisibilidadPuntoRevision(false)
-//                            }
-//                            //                    ----- Otros ------
-//                            9->{
-//                                binding.spinnerTipo.setSelection(p2)
-//                                prefManager.setTipoRescate(p2)
-//                                prefManager.setVisibilidadPuntoRevision(false)
-//                                dataRescateP = TipoRescate()
-//                                dataRescateP.otro = true
-////                                showPopUp1(p0!!.getItemAtPosition(p2).toString())
-//                                binding.spinnerPuntoR.visibility = View.VISIBLE
-//                                prefManager.setVisibilidadPuntoRevision(true)
-//                                dataActivityViewM.buscarOtros()
-//                            }
-//                            else -> {
-//
-//                            }
-//                        }
-////                    }
-//                }
-//            }
-//            override fun onNothingSelected(p0: AdapterView<*>?) {  }
-//        }
+                    seleccionSpinerTipoDatos(binding.spinnerTipo.selectedIndex, 0)
+
+                })
 
 
 //---------------- spinner de Selección de Tipo de Punto de Rescate-------------
@@ -481,12 +276,14 @@ class CapturaFragment : Fragment() {
 // -------------- Floating Button de Conteo Rapido ----------------
         binding.fbConteoRapido.setOnClickListener {
 
+            val infoPuntoR = binding.spinnerPuntoR.text.toString()
+
             binding.editTextHora.error = null
-            if(binding.spinnerTipo.selectedIndex == 0){
-                binding.spinnerTipoIcon.visibility = View.VISIBLE
-                showToastError("Ingresa el tipo de rescate primero", Toast.LENGTH_LONG)
+            if(infoPuntoR.isNullOrEmpty()){
+                binding.spinnerPuntoR.setError("LLENAR PARA CONTINUAR", icon)
+                binding.spinnerPuntoR.requestFocus()
             } else {
-                binding.spinnerTipoIcon.visibility = View.GONE
+                binding.spinnerPuntoR.error = null
                 verifyData()
                 dataActivityViewM.saveTipoRescate()
                 startActivity(Intent(requireContext(),ConteoRActivity::class.java))
@@ -544,6 +341,10 @@ class CapturaFragment : Fragment() {
                 showPopUpEnviar()
                 prefManager.setPuntoRevision("")
                 prefManager.setTipoRescate(0)
+
+                prefManager.setFecha("")
+                prefManager.setHora("")
+                prefManager.setNomTipoRescate("")
             }
         }
 
@@ -563,11 +364,24 @@ class CapturaFragment : Fragment() {
 
     private fun verifyData() {
 
+        val oficinaR = (binding.textViewOR.text.toString()).replace("OR: ", "")
+        val fecha = (binding.textViewFecha.text.toString()).replace("Fecha: ", "")
+        val hora = binding.editTextHora.text.toString()
+
+//        Toast.makeText(requireContext(), hora, Toast.LENGTH_LONG).show()
+        seleccionSpinerTipoDatos(binding.spinnerTipo.selectedIndex, 1)
+
         dataActivityViewM.datosBRescate.value = Rescate(
-            (binding.textViewOR.text.toString()).replace("OR: ", ""),
-            (binding.textViewFecha.text.toString()).replace("Fecha: ", "") ,
-            binding.editTextHora.text.toString(),
-            dataRescateP)
+            oficinaR,
+            fecha,
+            hora,
+            prefManager.getUsername()!!,
+            dataRescateP
+        )
+
+        prefManager.setOR(oficinaR)
+        prefManager.setFecha(fecha)
+        prefManager.setHora(hora)
     }
 
     private fun navigateToNacionalidad(nacionalidad : String) {
@@ -580,6 +394,70 @@ class CapturaFragment : Fragment() {
         val intentRegistroFamilias = Intent(requireContext(), RescateFamiliasActivity::class.java)
         intentRegistroFamilias.putExtra( RescateFamiliasActivity.EXTRA_NOM_FAMILIA, datos)
         startActivity(intentRegistroFamilias)
+    }
+
+    fun seleccionSpinerTipoDatos(num : Int, tipo : Int){
+        when(num){
+//            aeropuerto
+            0 -> {
+                dataRescateP = TipoRescate()
+                dataRescateP.aeropuerto = true
+                if(tipo == 0) dataActivityViewM.buscarAeropuertos()
+                if(tipo == 1) dataRescateP.puntoEstra = binding.spinnerPuntoR.text.toString()
+            }
+//            carretero
+            1 -> {
+                dataRescateP = TipoRescate()
+                dataRescateP.carretero = true
+                if(tipo == 0) dataActivityViewM.buscarCarretero()
+                if(tipo == 1) dataRescateP.puntoEstra = binding.spinnerPuntoR.text.toString()
+            }
+//            casa de seguridad
+            2 -> {
+                dataRescateP = TipoRescate()
+                dataRescateP.casaSeguridad = true
+                if(tipo == 0) dataActivityViewM.buscarMunicipio()
+                if(tipo == 1) dataRescateP.municipio = binding.spinnerPuntoR.text.toString()
+            }
+//            central de autobuses
+            3 -> {
+                dataRescateP = TipoRescate()
+                dataRescateP.centralAutobus = true
+                if(tipo == 0) dataActivityViewM.buscarEstacionAuto()
+                if(tipo == 1) dataRescateP.puntoEstra = binding.spinnerPuntoR.text.toString()
+            }
+//            ferroca
+            4 -> {
+                dataRescateP = TipoRescate()
+                dataRescateP.ferrocarril = true
+                if(tipo == 0) dataActivityViewM.buscarFerroviario()
+                if(tipo == 1) dataRescateP.puntoEstra = binding.spinnerPuntoR.text.toString()
+            }
+//            hotel
+            5 -> {
+                dataRescateP = TipoRescate()
+                dataRescateP.hotel = true
+                if(tipo == 0) dataActivityViewM.buscarMunicipio()
+                if(tipo == 1) dataRescateP.municipio = binding.spinnerPuntoR.text.toString()
+            }
+//            puestos
+            6 -> {
+                dataRescateP = TipoRescate()
+                dataRescateP.puestosADispo = true
+                if(tipo == 0) showPopUp1(prefManager.getNomTipoRescate()!!)
+                if(tipo == 1) dataRescateP.municipio = binding.spinnerPuntoR.text.toString()
+            }
+//            voluntarios
+            7 -> { }
+//            otros
+            8 -> {
+                dataRescateP = TipoRescate()
+                dataRescateP.otro = true
+                if(tipo == 0) dataActivityViewM.buscarOtros()
+                if(tipo == 1) dataRescateP.puntoEstra = binding.spinnerPuntoR.text.toString()
+            }
+            else -> { }
+        }
     }
 
     private fun onTimeSelected(time: String){

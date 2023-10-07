@@ -8,6 +8,8 @@ data class ConteoRapidoCompModel(
     @SerializedName("fecha") val fecha: String,
     @SerializedName("hora") val hora: String,
 
+    @SerializedName("nombreAgente") val nombreAgente: String,
+
     @SerializedName("aeropuerto") val aeropuerto : Boolean,
 
     @SerializedName("carretero") val carretero : Boolean,
@@ -67,7 +69,7 @@ data class ConteoRapidoCompModel(
 )
 
 fun ConteoRapidoComp.toAPI() = ConteoRapidoCompModel(
-    oficinaRepre, fecha, hora,
+    oficinaRepre, fecha, hora, nombreAgente,
     aeropuerto,
     carretero, tipoVehic, lineaAutobus, numeroEcono, placas, vehiculoAseg,
     casaSeguridad,

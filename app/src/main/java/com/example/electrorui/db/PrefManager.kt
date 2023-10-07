@@ -15,7 +15,13 @@ class PrefManager(context : Context?) {
     private val IS_STATE = "state"
     private val IS_PASS = "pass"
     private val IS_CONNECTED = "conectado"
+
+    private val OFICINA_REPRE = "oficinaRepresentación"
+    private val FECHA = "fechaRescate"
+    private val HORA = "horaRescate"
+
     private val TYPE_RESC = "rescateTipo"
+    private val NOM_TYPE_RESC = "nombreRescateTipo"
     private val PUNTO_REVISION = "puntoRevision"
     private val VISTAS_POPUP_INTERNET = "vistasPopUpInternet"
 
@@ -57,6 +63,11 @@ class PrefManager(context : Context?) {
         editor?.commit()
     }
 
+    fun setNomTipoRescate(tipo : String){
+        editor?.putString(NOM_TYPE_RESC, tipo)
+        editor?.commit()
+    }
+
     fun setPuntoRevision(punto : String){
         editor?.putString(PUNTO_REVISION, punto)
         editor?.commit()
@@ -66,6 +77,22 @@ class PrefManager(context : Context?) {
         editor?.putBoolean(VISTAS_POPUP_INTERNET, vistas)
         editor?.commit()
     }
+
+    fun setOR(oficinaR : String){
+        editor?.putString(OFICINA_REPRE, oficinaR)
+        editor?.commit()
+    }
+
+    fun setFecha(fecha : String){
+        editor?.putString(FECHA, fecha)
+        editor?.commit()
+    }
+
+    fun setHora(hora : String){
+        editor?.putString(HORA, hora)
+        editor?.commit()
+    }
+
 
     fun isLogin() : Boolean? = prefs?.getBoolean(IS_LOGIN, false)
 
@@ -79,9 +106,15 @@ class PrefManager(context : Context?) {
 
     fun getConnection() : Boolean? = prefs?.getBoolean(IS_CONNECTED, false)
     fun getTipoRescate() : Int? = prefs?.getInt(TYPE_RESC, 0)
+    fun getNomTipoRescate() : String? = prefs?.getString(NOM_TYPE_RESC, "")
     fun getPuntoRevision() : String? = prefs?.getString(PUNTO_REVISION, "")
 
     fun vistoPopUInternet() : Boolean? = prefs?.getBoolean(VISTAS_POPUP_INTERNET, false)
+    fun getOR() : String? = prefs?.getString(OFICINA_REPRE, "")
+    fun getFecha() : String? = prefs?.getString(FECHA, "")
+    fun getHora() : String? = prefs?.getString(HORA, "")
+
+
 
     fun removeData(){
         editor?.clear()

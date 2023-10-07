@@ -34,6 +34,7 @@
             android:id="@+id/recyclerMensajes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:descendantFocusability="beforeDescendants"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:stackFromEnd="true"
             tools:listitem="@layout/recycler_item_msj" />

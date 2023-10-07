@@ -20,6 +20,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(): Retrofit{
         return Retrofit.Builder()
+//            .baseUrl("http://192.168.8.2:8080/")
             .baseUrl("https://ruie.dgcvm.com/")
             .client(OkHttpClient.Builder()
                 .retryOnConnectionFailure(true).build())

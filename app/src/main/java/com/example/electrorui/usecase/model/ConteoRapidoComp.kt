@@ -7,6 +7,8 @@ data class ConteoRapidoComp(
     var fecha: String,
     var hora: String,
 
+    var nombreAgente: String,
+
     var aeropuerto : Boolean,
 
     var carretero : Boolean,
@@ -67,6 +69,9 @@ data class ConteoRapidoComp(
         rescate.oficinaRepre,
         rescate.fecha,
         rescate.hora,
+
+        rescate.nombreAgente,
+
         rescate.aeropuerto,
 
         rescate.carretero,
@@ -131,6 +136,7 @@ fun ConteoRapidoCompEntity.toUC() = ConteoRapidoComp(
     oficinaRepre,
     fecha,
     hora,
+    nombreAgente,
     aeropuerto,
     carretero,
     tipoVehic,

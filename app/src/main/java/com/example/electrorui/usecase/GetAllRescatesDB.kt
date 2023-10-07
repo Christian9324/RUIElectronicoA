@@ -16,7 +16,7 @@ class GetAllRescatesDB @Inject constructor(
             rescate
         } else {
             val rescate = Rescate(
-                        "", "", "",
+                        "", "", "","",
                 false,
                 false,"","", "", "",false,
                 false,

@@ -10,6 +10,8 @@ data class Rescate(
     var fecha: String,
     var hora: String,
 
+    var nombreAgente: String,
+
     var aeropuerto : Boolean,
 
     var carretero : Boolean,
@@ -51,10 +53,11 @@ data class Rescate(
 
     var puntoEstra : String,
 ){
-    constructor(oficinaRepre: String, fecha: String, hora: String, tipoRescate: TipoRescate) : this(
+    constructor(oficinaRepre: String, fecha: String, hora: String, nombreAgente : String, tipoRescate: TipoRescate) : this(
         oficinaRepre,
         fecha,
         hora,
+        nombreAgente,
         tipoRescate.aeropuerto,
         tipoRescate.carretero,
         tipoRescate.tipoVehic,
@@ -91,6 +94,7 @@ fun RescateEntity.toUC() = Rescate(
     oficinaRepre,
     fecha,
     hora,
+    nombreAgente,
     aeropuerto,
     carretero,
     tipoVehic,

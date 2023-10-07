@@ -80,6 +80,7 @@ class Captura_FVM @Inject constructor(
     val mensaje by lazy { MutableLiveData<String>() }
     val pasarVentana by lazy { MutableLiveData<Boolean>() }
     val etPuntoRescate = MutableLiveData<String>()
+    val nomAgente by lazy { MutableLiveData<String>() }
 
 
     fun onCreate(){
@@ -119,12 +120,14 @@ class Captura_FVM @Inject constructor(
         }
     }
 
-    fun dataAditional(oficnaR : String){
+    fun dataAditional(oficnaR : String, nombreAgente : String){
         viewModelScope.launch {
             oficinaRepresentacion.value = oficnaR
             val auxMun = getMunicipiosByOR(oficnaR)
             municipios.value = auxMun
             municipiosNom.value = auxMun.map { it.nomMunicipio }
+
+            nomAgente.value = nombreAgente
 
 //            val auxRN = getFuerzaByOrUC(oficnaR)
 //            val auxRN = getFuerzaByOrUC(oficinaRepresentacion.value)
@@ -274,6 +277,7 @@ class Captura_FVM @Inject constructor(
         viewModelScope.launch {
             delAllFamiliasUC()
             delAllNombresUC()
+//      TODO() Agregar eliminar registros de rescates
         }
     }
 
@@ -290,6 +294,7 @@ class Captura_FVM @Inject constructor(
                     bold { appendLine("OR: ${infoPunto?.oficinaRepre}") }
                     appendLine("Fecha: ${infoPunto?.fecha}")
 //                    appendLine("Hora: ${infoPunto?.hora}")
+                    appendLine("Agente: ${nomAgente.value}")
                     appendLine()
 
                     bold { appendLine("No. de Rescatados: ${noRescatesTotales}") }

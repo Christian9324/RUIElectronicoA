@@ -44,6 +44,9 @@ class MensajesAdapter(
         private fun bindDetailMsg(mensajeET: TextView, mensaje: String) {
 //            mensajeET.text = Html.fromHtml(mensaje)
             mensajeET.text = HtmlCompat.fromHtml(mensaje, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            mensajeET.setTextIsSelectable(false);
+            mensajeET.measure(-1, -1);//you can specific other values.
+            mensajeET.setTextIsSelectable(true);
         }
     }
 
