@@ -18,6 +18,7 @@ data class RegistroFamiliasEntity(
     @ColumnInfo(name = "Fecha Nacimiento") val fechaNacimiento : String,
     @ColumnInfo(name = "Adulto") val adulto : Boolean,
     @ColumnInfo(name = "Sexo") val sexo : Boolean,
+    @ColumnInfo(name = "Embarazo") val embarazo : Boolean,
     @ColumnInfo(name = "Numero de Familia") val numFamilia : Int,
 )
 
@@ -31,6 +32,7 @@ fun RegistroFamilias.toDB() = RegistroFamiliasEntity(
     fechaNacimiento = fechaNacimiento,
     adulto = adulto,
     sexo = sexo,
+    embarazo = embarazo,
     numFamilia = numFamilia,
 )
 
@@ -45,5 +47,6 @@ fun RegistroFamilias.toUpdateDB() = RegistroFamiliasEntity(
     fechaNacimiento = fechaNacimiento,
     adulto = adulto,
     sexo = sexo,
+    embarazo = embarazo,
     numFamilia = numFamilia,
 )

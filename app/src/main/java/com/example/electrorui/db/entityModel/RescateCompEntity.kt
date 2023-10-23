@@ -64,6 +64,7 @@ data class RescateCompEntity(
     @ColumnInfo(name = "Parentesco") val parentesco : String,
     @ColumnInfo(name = "Fecha Nacimiento") val fechaNacimiento : String,
     @ColumnInfo(name = "Sexo") val sexo : Boolean,
+    @ColumnInfo(name = "Embarazo") val embarazo : Boolean,
     @ColumnInfo(name = "Numero de Familia") val numFamilia : Int,
 
     @ColumnInfo(name = "Edad") val edad : Int,
@@ -112,6 +113,7 @@ fun RescateComp.toDB() = RescateCompEntity(
     parentesco = parentesco,
     fechaNacimiento = fechaNacimiento,
     sexo = sexo,
+    embarazo = embarazo,
     numFamilia = numFamilia,
     edad = edad,
 

@@ -276,6 +276,10 @@ class CapturaFragment : Fragment() {
 // -------------- Floating Button de Conteo Rapido ----------------
         binding.fbConteoRapido.setOnClickListener {
 
+            val formatterH = DateTimeFormatter.ofPattern("HH:mm")
+            val currentH = LocalDateTime.now().format(formatterH)
+            binding.editTextHora.setText(currentH)
+
             val infoPuntoR = binding.spinnerPuntoR.text.toString()
 
             binding.editTextHora.error = null
@@ -293,14 +297,16 @@ class CapturaFragment : Fragment() {
         binding.btnNcionalidad.setOnClickListener {
 //            ----------------------
 //            verificar Datos del Punto
-            binding.editTextHora.error = null
-            if(binding.spinnerTipo.selectedIndex == 0){
-                binding.spinnerTipoIcon.visibility = View.VISIBLE
-                showToastError("Ingresa el tipo de rescate primero", Toast.LENGTH_LONG)
-            } else {
-                binding.spinnerTipoIcon.visibility = View.GONE
+            val infoPuntoR = binding.spinnerPuntoR.text.toString()
 
-                dataRescateP.puntoEstra = binding.spinnerPuntoR.text.toString()
+            binding.editTextHora.error = null
+            if(infoPuntoR.isNullOrEmpty()){
+                binding.spinnerPuntoR.setError("LLENAR PARA CONTINUAR", icon)
+                binding.spinnerPuntoR.requestFocus()
+            } else {
+                binding.spinnerPuntoR.error = null
+
+                dataRescateP.puntoEstra = infoPuntoR
                 verifyData()
 
                 val intentRegistroNombres = Intent(requireContext(), RescateNombresActivity::class.java)
@@ -312,14 +318,16 @@ class CapturaFragment : Fragment() {
         binding.btnFamilias.setOnClickListener {
 //------------------------------------
 //          verificar Datos del Punto
-            binding.editTextHora.error = null
-            if(binding.spinnerTipo.selectedIndex == 0){
-                binding.spinnerTipoIcon.visibility = View.VISIBLE
-                showToastError("Ingresa el tipo de rescate primero", Toast.LENGTH_LONG)
-            } else{
-                binding.spinnerTipoIcon.visibility = View.GONE
+            val infoPuntoR = binding.spinnerPuntoR.text.toString()
 
-                dataRescateP.puntoEstra = binding.spinnerPuntoR.text.toString()
+            binding.editTextHora.error = null
+            if(infoPuntoR.isNullOrEmpty()){
+                binding.spinnerPuntoR.setError("LLENAR PARA CONTINUAR", icon)
+                binding.spinnerPuntoR.requestFocus()
+            } else {
+                binding.spinnerPuntoR.error = null
+
+                dataRescateP.puntoEstra = infoPuntoR
                 verifyData()
 
                 val intentRegistroFamilias = Intent(requireContext(), RescateFamiliasActivity::class.java)
@@ -329,22 +337,23 @@ class CapturaFragment : Fragment() {
         }
 // -------------- Button de Enviar Información ----------------
         binding.btnEnviar.setOnClickListener {
-            binding.editTextHora.error = null
-            if(binding.spinnerTipo.selectedIndex == 0){
-                binding.spinnerTipoIcon.visibility = View.VISIBLE
-                showToastError("Ingresa el tipo de rescate primero", Toast.LENGTH_LONG)
-            } else{
-                binding.spinnerTipoIcon.visibility = View.GONE
+            val infoPuntoR = binding.spinnerPuntoR.text.toString()
+            val formatterH = DateTimeFormatter.ofPattern("HH:mm")
+            val currentH = LocalDateTime.now().format(formatterH)
+            binding.editTextHora.setText(currentH)
 
-                dataRescateP.puntoEstra = binding.spinnerPuntoR.text.toString()
+            binding.editTextHora.error = null
+            if(infoPuntoR.isNullOrEmpty()){
+                binding.spinnerPuntoR.setError("LLENAR PARA CONTINUAR", icon)
+                binding.spinnerPuntoR.requestFocus()
+            } else {
+                binding.spinnerPuntoR.error = null
+
+                dataRescateP.puntoEstra = infoPuntoR
                 verifyData()
                 showPopUpEnviar()
-                prefManager.setPuntoRevision("")
-                prefManager.setTipoRescate(0)
 
-                prefManager.setFecha("")
-                prefManager.setHora("")
-                prefManager.setNomTipoRescate("")
+
             }
         }
 
@@ -1054,9 +1063,17 @@ class CapturaFragment : Fragment() {
                         bindings1.pbEnvirarConteoPopUp.visibility = View.GONE
 
 //                      Se settean los valores en Cero de los datos guardados
-                        binding.spinnerTipo.selectItemByIndex(prefManager.getTipoRescate()!!)
-                        binding.spinnerPuntoR.setText(prefManager.getPuntoRevision())
-                        binding.LLPuntoRescate.visibility = View.GONE
+
+                        binding.spinnerTipo.selectItemByIndex(0)
+                        binding.spinnerPuntoR.setText("")
+                        prefManager.setPuntoRevision("")
+                        prefManager.setTipoRescate(0)
+
+                        prefManager.setFecha("")
+                        prefManager.setHora("")
+                        prefManager.setNomTipoRescate("")
+
+//                        binding.LLPuntoRescate.visibility = View.GONE
                         dataActivityViewM.numerosFamilias.value = emptyList()
                         dataActivityViewM.datosIso.value = emptyList()
                         dataActivityViewM.delAllDatos()

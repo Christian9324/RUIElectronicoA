@@ -15,6 +15,6 @@ class GetRegistroNombreById @Inject constructor(
         return if (!listOf(numFam).isEmpty()){
             numFam
         } else
-            RegistroNombres(0,"", "", "", "", "", "", false, false)
+            RegistroNombres(0,"", "", "", "", "", "", false, false, false)
     }
 }

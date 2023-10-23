@@ -59,6 +59,7 @@ data class RescateCompModel(
     @SerializedName("parentesco") val parentesco : String,
     @SerializedName("fechaNacimiento") val fechaNacimiento : String,
     @SerializedName("sexo") val sexo : Boolean,
+    @SerializedName("embarazo") val embarazo : Boolean,
     @SerializedName("numFamilia") val numFamilia : Int,
     @SerializedName("edad") val edad : Int,
     )
@@ -77,7 +78,7 @@ fun RescateComp.toAPI() = RescateCompModel(
     presuntosDelincuentes, numPresuntosDelincuentes,
     municipio, puntoEstra,
     nacionalidad, iso3,
-    nombre, apellidos, noIdentidad, parentesco, fechaNacimiento, sexo, numFamilia, edad,
+    nombre, apellidos, noIdentidad, parentesco, fechaNacimiento, sexo, embarazo, numFamilia, edad,
 )
 
 //

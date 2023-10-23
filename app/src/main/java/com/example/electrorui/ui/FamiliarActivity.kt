@@ -70,11 +70,16 @@ class FamiliarActivity : AppCompatActivity() {
         binding.checkHombre.setOnClickListener {
             binding.checkHombre.isChecked = true
             binding.checkMujer.isChecked = false
+
+            binding.LLEmbarazado.visibility = View.GONE
+            binding.checkEmbarazada.isChecked = false
         }
 
         binding.checkMujer.setOnClickListener {
             binding.checkHombre.isChecked = false
             binding.checkMujer.isChecked = true
+
+            binding.LLEmbarazado.visibility = View.VISIBLE
         }
 
         binding.ldFechaNacimiento.setMaxLocalDate(org.threeten.bp.LocalDate.now())
@@ -139,6 +144,7 @@ class FamiliarActivity : AppCompatActivity() {
                                 val fechaActual = Date(System.currentTimeMillis())
                                 val diferencia = fechaActual.time - fechaNacimientoDate?.time!!
                                 val edad : Int = (diferencia.toFloat() / (31536000000)).toInt()
+                                val embarazada = binding.checkEmbarazada.isChecked
 
                                 val datosRetorno = RegistroFamilias(
                                     1,
@@ -151,6 +157,7 @@ class FamiliarActivity : AppCompatActivity() {
                                     fechaNacimiento,
                                     edad > 18,
                                     sexo,
+                                    embarazada,
                                     numeroFamilia,
                                 )
 

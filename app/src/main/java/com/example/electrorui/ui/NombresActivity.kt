@@ -71,6 +71,9 @@ class NombresActivity : AppCompatActivity() {
         binding.checkHombre.setOnClickListener {
             binding.checkHombre.isChecked = true
             binding.checkMujer.isChecked = false
+
+            binding.LLEmbarazado.visibility = View.GONE
+            binding.checkEmbarazada.isChecked = false
         }
 
         binding.ldFechaNacimiento.setMaxLocalDate(org.threeten.bp.LocalDate.now())
@@ -90,6 +93,8 @@ class NombresActivity : AppCompatActivity() {
         binding.checkMujer.setOnClickListener {
             binding.checkHombre.isChecked = false
             binding.checkMujer.isChecked = true
+
+            binding.LLEmbarazado.visibility = View.VISIBLE
         }
 
         binding.btnGuardar.setOnClickListener {
@@ -126,6 +131,7 @@ class NombresActivity : AppCompatActivity() {
                         val fechaActual = Date(System.currentTimeMillis())
                         val diferencia = fechaActual.time - fechaNacimientoDate?.time!!
                         val edad : Float = diferencia.toFloat() / (31536000000)
+                        val embarazada = binding.checkEmbarazada.isChecked
 
                         val datosRetorno = RegistroNombres(
                             0,
@@ -137,6 +143,7 @@ class NombresActivity : AppCompatActivity() {
                             fechaNacimiento,
                             edad > 18,
                             sexo,
+                            embarazada
                         )
 
                         dataActivityViewM.saveToDB(datosRetorno)

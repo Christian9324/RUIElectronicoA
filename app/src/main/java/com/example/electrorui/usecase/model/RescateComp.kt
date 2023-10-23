@@ -67,6 +67,7 @@ data class RescateComp(
     val parentesco : String,
     val fechaNacimiento : String,
     val sexo : Boolean,
+    val embarazo : Boolean,
     val numFamilia : Int,
     val edad : Int,
     ){
@@ -113,6 +114,7 @@ data class RescateComp(
         rescateF.parentesco,
         rescateF.fechaNacimiento,
         rescateF.sexo,
+        rescateF.embarazo,
         rescateF.numFamilia,
         rescateF.getEdad(),
     )
@@ -160,6 +162,7 @@ data class RescateComp(
         "",
         rescateF.fechaNacimiento,
         rescateF.sexo,
+        rescateF.embarazo,
         0,
         rescateF.getEdad(),
     )
@@ -188,6 +191,7 @@ fun RescateCompEntity.toUC() = RescateComp(
     parentesco,
     fechaNacimiento,
     sexo,
+    embarazo,
     numFamilia,
     edad)
 
@@ -233,6 +237,7 @@ fun RescateCompModel.toUC() = RescateComp(
     parentesco,
     fechaNacimiento,
     sexo,
+    embarazo,
     numFamilia,
     edad)
 

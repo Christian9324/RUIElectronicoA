@@ -171,6 +171,29 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/LL_embarazado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="-10dp">
+
+
+                <CheckBox
+                    android:id="@+id/checkEmbarazada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Embarazada"
+                    android:textColor="@color/verde" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"

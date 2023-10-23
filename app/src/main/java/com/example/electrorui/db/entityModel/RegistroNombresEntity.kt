@@ -17,6 +17,7 @@ data class RegistroNombresEntity(
     @ColumnInfo(name = "Fecha Nacimiento") val fechaNacimiento : String,
     @ColumnInfo(name = "Adulto") val adulto : Boolean,
     @ColumnInfo(name = "Sexo") val sexo : Boolean,
+    @ColumnInfo(name = "Embarazo") val embarazo : Boolean,
 )
 
 fun RegistroNombres.toDB() = RegistroNombresEntity(
@@ -28,6 +29,7 @@ fun RegistroNombres.toDB() = RegistroNombresEntity(
     fechaNacimiento = fechaNacimiento,
     adulto = adulto,
     sexo = sexo,
+    embarazo = embarazo,
 )
 
 fun RegistroNombres.toUpdateDB() = RegistroNombresEntity(
@@ -40,4 +42,5 @@ fun RegistroNombres.toUpdateDB() = RegistroNombresEntity(
     fechaNacimiento = fechaNacimiento,
     adulto = adulto,
     sexo = sexo,
+    embarazo = embarazo,
 )

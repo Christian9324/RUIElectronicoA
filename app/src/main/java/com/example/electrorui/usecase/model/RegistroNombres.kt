@@ -19,6 +19,7 @@ data class RegistroNombres(
     val fechaNacimiento : String,
     val adulto : Boolean,
     val sexo : Boolean,
+    val embarazo : Boolean,
 ) {
     fun getEdad() : Int {
 
@@ -45,5 +46,6 @@ fun RegistroNombresEntity.toUC() = RegistroNombres(
     noIdentidad,
     fechaNacimiento,
     adulto,
-    sexo
+    sexo,
+    embarazo,
 )

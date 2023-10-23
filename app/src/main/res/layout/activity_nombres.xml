@@ -8,13 +8,15 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="116dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -34,12 +36,12 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:hint="@string/ingresaPais"
-                android:gravity="center"
                 android:ellipsize="end"
-                android:maxLines="1"
-                android:inputType="none"
+                android:gravity="center"
+                android:hint="@string/ingresaPais"
                 android:imeOptions="actionNext"
+                android:inputType="none"
+                android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView5" />
@@ -64,8 +66,8 @@
                 android:layout_marginTop="16dp"
                 android:ems="10"
                 android:hint="@string/apellidos"
-                android:textSize="18sp"
                 android:inputType="text"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etNombre" />
@@ -78,9 +80,9 @@
                 android:ems="10"
                 android:hint="@string/noDeDocumento"
                 android:inputType="text"
+                android:text="00"
                 android:textSize="18sp"
                 android:visibility="gone"
-                android:text="00"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etApellidos" />
@@ -91,10 +93,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:text="@string/fNacimiento"
                 android:gravity="center_horizontal"
-                android:textSize="20sp"
+                android:text="@string/fNacimiento"
                 android:textColor="@color/verde_oscuro"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etNoIdentidad" />
@@ -112,39 +114,37 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_basic1"
                     app:ldp_date_format="dd-mm-yyyy"
-                    app:ldp_text_color="@color/verde_oscuro"
-                    />
+                    app:ldp_text_color="@color/verde_oscuro" />
 
                 <ImageView
                     android:id="@+id/fechaNacIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_basic1"
                     android:src="@drawable/ic_error_24"
                     android:visibility="gone"
-                    android:layout_gravity="center_vertical"
-                    app:tint="@color/rojo"
-                    android:layout_marginLeft="@dimen/margin_basic1"
-                    />
+                    app:tint="@color/rojo" />
 
             </LinearLayout>
 
-<!--            <EditText-->
-<!--                android:id="@+id/etFechaNacimiento"-->
-<!--                android:layout_width="150dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:ems="6"-->
-<!--                android:gravity="center"-->
-<!--                android:hint="dd/mm/aaaa"-->
-<!--                android:clickable="false"-->
-<!--                android:focusable="false"-->
-<!--                android:maxLength="10"-->
-<!--                android:textSize="20sp"-->
-<!--                android:inputType="date"-->
-<!--                android:textColor="@color/verde_oscuro"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/tvFechaNacimiento" />-->
+            <!--            <EditText-->
+            <!--                android:id="@+id/etFechaNacimiento"-->
+            <!--                android:layout_width="150dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:ems="6"-->
+            <!--                android:gravity="center"-->
+            <!--                android:hint="dd/mm/aaaa"-->
+            <!--                android:clickable="false"-->
+            <!--                android:focusable="false"-->
+            <!--                android:maxLength="10"-->
+            <!--                android:textSize="20sp"-->
+            <!--                android:inputType="date"-->
+            <!--                android:textColor="@color/verde_oscuro"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/tvFechaNacimiento" />-->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -159,33 +159,58 @@
                     android:id="@+id/tvSexo"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:ems="10"
                     android:gravity="center"
-                    android:layout_gravity="center"
                     android:text="Sexo:"
-                    android:visibility="gone"
                     android:textColor="@color/verde_oscuro"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:visibility="gone" />
 
                 <CheckBox
                     android:id="@+id/checkHombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Hombre"
-                    android:textColor="@color/verde"/>
+                    android:textColor="@color/verde" />
 
                 <CheckBox
                     android:id="@+id/checkMujer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mujer"
-                    android:textColor="@color/verde"/>
+                    android:textColor="@color/verde" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LL_embarazado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="-10dp">
+
+
+                <CheckBox
+                    android:id="@+id/checkEmbarazada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Embarazada"
+                    android:textColor="@color/verde" />
 
             </LinearLayout>
 
@@ -274,7 +299,6 @@
                 </FrameLayout>
 
             </LinearLayout>
-
 
 
         </LinearLayout>

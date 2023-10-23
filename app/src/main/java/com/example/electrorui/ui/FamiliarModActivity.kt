@@ -70,11 +70,16 @@ class FamiliarModActivity : AppCompatActivity() {
         binding.checkHombre.setOnClickListener {
             binding.checkHombre.isChecked = true
             binding.checkMujer.isChecked = false
+
+            binding.LLEmbarazado.visibility = View.GONE
+            binding.checkEmbarazada.isChecked = false
         }
 
         binding.checkMujer.setOnClickListener {
             binding.checkHombre.isChecked = false
             binding.checkMujer.isChecked = true
+
+            binding.LLEmbarazado.visibility = View.VISIBLE
         }
 
         dataActivityViewM.dataRegistro.observe(this){
@@ -157,6 +162,7 @@ class FamiliarModActivity : AppCompatActivity() {
                                 val fechaActual = Date(System.currentTimeMillis())
                                 val diferencia = fechaActual.time - fechaNacimientoDate?.time!!
                                 val edad : Float = diferencia.toFloat() / (31536000000)
+                                val embarazada = binding.checkEmbarazada.isChecked
 
                                 val datosRetorno = RegistroFamilias(
                                     intent.getIntExtra(EXTRA_IDFAMILIA_DB, 1),
@@ -169,6 +175,7 @@ class FamiliarModActivity : AppCompatActivity() {
                                     fechaNacimiento,
                                     edad > 18,
                                     sexo,
+                                    embarazada,
                                     numeroFamilia,
                                 )
 
