@@ -11,14 +11,16 @@ class SetDatosPendientesAPI @Inject constructor(
 ) {
     suspend operator fun invoke() {
         val registrosConteo = repository.getAllDataConteoRapidoFromDB()
-        val registrosC = repository.getAllRescateCompletoFromDB()
+        val registrosCompleto = repository.getAllRescateCompletoFromDB()
         try {
             if ( !registrosConteo.isNullOrEmpty()) {
+//                Log.e("info Conteo Api", "Entro a funcion")
                 repository.insertConteosFromApi(registrosConteo)
                 repository.deleteAllDataConteoRapidoFromDB()
             }
-            if ( !registrosC.isNullOrEmpty()) {
-                repository.insertRescatesCompletos(registrosC)
+            if ( !registrosCompleto.isNullOrEmpty()) {
+//                Log.e("info Rescate Api", "Entro a funcion")
+                repository.insertRescatesFromApi(registrosCompleto)
                 repository.deleteAllRescateCompletoFromDB()
             }
         }catch (e : Exception){

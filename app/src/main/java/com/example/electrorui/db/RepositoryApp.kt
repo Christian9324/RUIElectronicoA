@@ -301,7 +301,12 @@ class RepositoryApp @Inject constructor(
     suspend fun deleteAllRescateCompletoFromDB() {
         rescateCompDao.deleteAll()
     }
-
+    suspend fun deleteRegistroNombreIdFromDB(item : RegistroNombres ) {
+        registroNombresDao.deleteEntry(item.toUpdateDB())
+    }
+    suspend fun deleteRegistroFamiliasIdFromDB(item : RegistroFamilias ) {
+        registroFamiliasDao.deleteEntry(item.toUpdateDB())
+    }
     suspend fun updateNombres(registro : RegistroNombres) {
         registroNombresDao.update(registro.toUpdateDB())
     }

@@ -13,6 +13,7 @@
         android:background="@color/marron_oscuro"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
+        android:longClickable="false"
         android:layout_margin="@dimen/margin_basic03">
 
         <TextView

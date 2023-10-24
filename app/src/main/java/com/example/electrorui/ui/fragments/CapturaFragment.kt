@@ -337,23 +337,34 @@ class CapturaFragment : Fragment() {
         }
 // -------------- Button de Enviar Información ----------------
         binding.btnEnviar.setOnClickListener {
-            val infoPuntoR = binding.spinnerPuntoR.text.toString()
-            val formatterH = DateTimeFormatter.ofPattern("HH:mm")
-            val currentH = LocalDateTime.now().format(formatterH)
-            binding.editTextHora.setText(currentH)
 
-            binding.editTextHora.error = null
-            if(infoPuntoR.isNullOrEmpty()){
-                binding.spinnerPuntoR.setError("LLENAR PARA CONTINUAR", icon)
-                binding.spinnerPuntoR.requestFocus()
+            val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork : NetworkInfo? = cm.activeNetworkInfo
+            isConnected = activeNetwork?.isConnectedOrConnecting == true
+            prefManager.setConnection(isConnected)
+            vistoMensajeInternet = prefManager.vistoPopUInternet()!!
+            if (!isConnected and !vistoMensajeInternet){
+                popUpInternet()
+                prefManager.setvistasPopUpInternet(true)
             } else {
-                binding.spinnerPuntoR.error = null
+                val infoPuntoR = binding.spinnerPuntoR.text.toString()
+                val formatterH = DateTimeFormatter.ofPattern("HH:mm")
+                val currentH = LocalDateTime.now().format(formatterH)
+                binding.editTextHora.setText(currentH)
 
-                dataRescateP.puntoEstra = infoPuntoR
-                verifyData()
-                showPopUpEnviar()
+                binding.editTextHora.error = null
+                if(infoPuntoR.isNullOrEmpty()){
+                    binding.spinnerPuntoR.setError("LLENAR PARA CONTINUAR", icon)
+                    binding.spinnerPuntoR.requestFocus()
+                } else {
+                    binding.spinnerPuntoR.error = null
+
+                    dataRescateP.puntoEstra = infoPuntoR
+                    verifyData()
+                    showPopUpEnviar()
 
 
+                }
             }
         }
 

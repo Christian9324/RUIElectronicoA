@@ -51,8 +51,6 @@ class NombresModActivity : AppCompatActivity() {
         DrawableCompat.setTint(icon, resources.getColor(com.example.electrorui.R.color.rojo))
         icon.setBounds(0, 0, icon.intrinsicWidth, icon.intrinsicHeight)
 
-        binding.checkHombre.isChecked = true
-
         var autocompleteArrayAdapter = ArrayAdapter<String>(this, R.layout.simple_spinner_dropdown_item, nacio)
         binding.spinnerPAIS.threshold = 1
         binding.spinnerPAIS.setAdapter(autocompleteArrayAdapter)

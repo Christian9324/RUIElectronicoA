@@ -25,7 +25,7 @@ interface RegistroFamiliasDao {
     @Query("SELECT Nacionalidad AS nacionalidad, COUNT(Nombre) AS totales, Sexo AS sexo, Adulto as adulto, `Numero de Familia` AS familia \n" +
             "FROM datos_registro_familias_table \n" +
             "group by `Numero de Familia`,Nacionalidad, Adulto, Sexo \n" +
-            "Order by Nacionalidad DESC, Adulto DESC, Sexo DESC")
+            "Order by `Numero de Familia` ASC, Nacionalidad DESC, Adulto DESC, Sexo DESC")
     suspend fun getDataForPin() : List<PinFamilias>
 
     @Query("SELECT IFNULL(max(`Numero de Familia`), 0) as fam FROM datos_registro_familias_table")

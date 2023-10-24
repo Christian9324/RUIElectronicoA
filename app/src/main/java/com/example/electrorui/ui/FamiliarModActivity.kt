@@ -55,8 +55,6 @@ class FamiliarModActivity : AppCompatActivity() {
         DrawableCompat.setTint(icon, resources.getColor(com.example.electrorui.R.color.rojo))
         icon.setBounds(0, 0, icon.intrinsicWidth, icon.intrinsicHeight)
 
-        binding.checkHombre.isChecked = true
-
         val nacio  = emptyList<String>()
 
         var autocompleteArrayAdapter = ArrayAdapter<String>(this, R.layout.simple_spinner_dropdown_item, nacio)

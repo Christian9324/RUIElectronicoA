@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.electrorui.usecase.DelAllRegistrosUC
+import com.example.electrorui.usecase.DelFamiliarByIdUC
 import com.example.electrorui.usecase.GetAllPaisesUC
 import com.example.electrorui.usecase.GetAllRegistrosConteoUC
 import com.example.electrorui.usecase.GetFamiliaByNumberUC
@@ -22,6 +23,7 @@ class RescatesFamilias_AVM @Inject constructor(
     private val getAllPaisesUC: GetAllPaisesUC,
     private val getFamiliaByNumberUC: GetFamiliaByNumberUC,
     private val getTotalFamilias: GetTotalFamilias,
+    private val delRegFamById : DelFamiliarByIdUC,
 
 ) : ViewModel(){
 
@@ -44,6 +46,12 @@ class RescatesFamilias_AVM @Inject constructor(
 //                datosNombres.value = getRegNombresByNacioUC(paisPadre.value.toString())
 //            }
 
+        }
+    }
+
+    fun delRegFam(item: RegistroFamilias) {
+        viewModelScope.launch {
+            delRegFamById(item)
         }
     }
 

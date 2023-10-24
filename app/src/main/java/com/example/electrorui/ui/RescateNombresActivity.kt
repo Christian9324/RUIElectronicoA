@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import com.example.electrorui.databinding.ActivityRescateNombresBinding
 import com.example.electrorui.ui.adapters.RescateNombresAdapter
 import com.example.electrorui.ui.viewModel.RescatesNombres_AVM
+import com.example.electrorui.usecase.model.RegistroNombres
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,15 +50,24 @@ class RescateNombresActivity : AppCompatActivity() {
             dataActivityViewM.onCreate()
         }
 
-        nacNombresAdapter = RescateNombresAdapter(emptyList()){
-            data , pos ->
-            val intentRegistroNombres = Intent(this, NombresModActivity::class.java)
-            intentRegistroNombres.putExtra(
-                NombresModActivity.EXTRA_IDNOMBRE_DB,
-                pos
-            )
-            startActivity(intentRegistroNombres)
-        }
+        nacNombresAdapter = RescateNombresAdapter(emptyList(),
+            { data , pos ->
+                val intentRegistroNombres = Intent(this, NombresModActivity::class.java)
+                intentRegistroNombres.putExtra(
+                    NombresModActivity.EXTRA_IDNOMBRE_DB,
+                    pos
+                )
+                startActivity(intentRegistroNombres)
+            }, { data, pos ->
+                val dataToDel = RegistroNombres(
+                    pos, data.nacionalidad, data.iso3,
+                    data.nombre, data.apellidos, data.noIdentidad, data.fechaNacimiento,
+                    data.adulto, data.sexo, data.embarazo)
+                dataActivityViewM.delRegNombre(dataToDel)
+                Toast.makeText(this, "Elemento Eliminado", Toast.LENGTH_SHORT).show()
+                dataActivityViewM.onCreate()
+            }
+        )
         binding.recyclerNombres.adapter = nacNombresAdapter
 
         dataActivityViewM.datosNombres.observe(this){

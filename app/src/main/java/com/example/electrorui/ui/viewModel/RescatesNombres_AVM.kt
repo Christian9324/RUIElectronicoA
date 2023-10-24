@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.electrorui.usecase.DelAllRegistrosUC
+import com.example.electrorui.usecase.DelFamiliarByIdUC
+import com.example.electrorui.usecase.DelNombreByIdUC
 import com.example.electrorui.usecase.GetAllPaisesUC
 import com.example.electrorui.usecase.GetAllRegistrosConteoUC
 import com.example.electrorui.usecase.GetRegNombresByNacioUC
@@ -18,8 +20,9 @@ import javax.inject.Inject
 class RescatesNombres_AVM @Inject constructor(
     private val getAllPaisesUC: GetAllPaisesUC,
     private val getRegNombresByNacioUC: GetRegNombresByNacioUC,
+    private val delRegNomById : DelNombreByIdUC,
 
-) : ViewModel(){
+    ) : ViewModel(){
 
     val paisPadre by lazy { MutableLiveData<String>() }
     val paises by lazy { MutableLiveData<List<String>>() }
@@ -38,6 +41,12 @@ class RescatesNombres_AVM @Inject constructor(
                 datosNombres.value = getRegNombresByNacioUC(paisPadre.value.toString())
             }
 
+        }
+    }
+
+    fun delRegNombre(dataToDel: RegistroNombres) {
+        viewModelScope.launch {
+            delRegNomById(dataToDel)
         }
     }
 

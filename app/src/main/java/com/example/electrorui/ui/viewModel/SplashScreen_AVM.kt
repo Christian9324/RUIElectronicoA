@@ -36,7 +36,9 @@ class SplashScreen_AVM @Inject constructor(
 
 
     fun onCreate(){
+        val stadoIngreso = true
         viewModelScope.launch {
+
             porcentProgress.value = 10
 
 //          Obtiene datos del usuario de la BD
@@ -47,13 +49,12 @@ class SplashScreen_AVM @Inject constructor(
 //          Teniendo conexión a internet
             if(conectadoInternet.value!!){
                 try {
-
 //                  Se Envian datos pendientes de enviar al server
                     porcentProgress.value = 40
                     setDatosPendientesAPI()
 
 //                  Petición API para Verificar que el usuario loggeado tenga credenciales correctas
-                    porcentProgress.value = 70
+                    porcentProgress.value = 50
                     val infoUsuario = getverifyUser(usuarioDatos)
                     oficinaRepresentacion.value = infoUsuario.estado.toString()
 

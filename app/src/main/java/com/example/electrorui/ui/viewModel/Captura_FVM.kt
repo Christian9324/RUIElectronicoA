@@ -101,6 +101,20 @@ class Captura_FVM @Inject constructor(
             noRescatados.value = totalRegistros
             masivo.value = totalRegistros >= 40
 
+
+//  ------- Se colocan a los aeropuertos por defecto ------
+            val auxPI = getAllPuntosIDB()
+            puntoInter.value = auxPI
+
+            var aeropuertos = ArrayList<String>()
+            auxPI?.forEach {
+                if( it.estadoPunto.equals(oficinaRepresentacion.value) and it.tipoPunto.equals("AEREOS") ){
+                    aeropuertos.add(it.nombrePunto)
+                }
+            }
+            puntoRescateNom.value = aeropuertos
+//          ------------------------------------
+
         }
     }
 
@@ -431,7 +445,7 @@ class Captura_FVM @Inject constructor(
 
                     if (totalFam > 0){
                         appendLine()
-                        bold { appendLine("NÚCLEOS FAMILIARES ${totalFam}") }
+                        bold { appendLine("NÚCLEOS FAMILIARES: ${totalFam}") }
 
                         if (!infoPinFamilias.isEmpty()){
                             for (i in infoPinFamilias){

@@ -1,7 +1,10 @@
 package com.example.electrorui.ui.adapters
 
 import android.graphics.Color
+import android.os.Handler
 import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.electrorui.databinding.ViewFamiliaItemBinding
@@ -13,7 +16,8 @@ import java.util.Date
 class RescateFamiliaAdapter(
 
     var registroFamilias : List<RegistroFamilias>,
-    private val registroFamiliasClickedListener: (RegistroFamilias, Int) -> Unit // se modifico esta linea labda
+    private val registroFamiliasClickedListener: (RegistroFamilias, Int) -> Unit, // se modifico esta linea labda
+    private val registroFamiliasLongClickListener: (RegistroFamilias , Int) -> Unit // se modifico esta linea labda
 
 ) : RecyclerView.Adapter<RescateFamiliaAdapter.ViewHolder>() {
 
@@ -32,6 +36,30 @@ class RescateFamiliaAdapter(
         holder.itemView.setOnClickListener {
             registroFamiliasClickedListener(registro, registro.idF) // Se modifico esta linea lambda
         }
+//        holder.itemView.setOnLongClickListener {
+//            registroFamiliasLongClickListener(registro, registro.idF)
+//            return@setOnLongClickListener true
+//        }
+        holder.itemView.setOnVeryLongClickListener {
+            registroFamiliasLongClickListener(registro, registro.idF)
+        }
+    }
+
+    fun View.setOnVeryLongClickListener(listener: () -> Unit) {
+        setOnTouchListener(object : View.OnTouchListener {
+
+            private val longClickDuration = 2500L
+            private val handler = Handler()
+
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                if (event?.action == MotionEvent.ACTION_DOWN) {
+                    handler.postDelayed({ listener.invoke() }, longClickDuration)
+                } else if (event?.action == MotionEvent.ACTION_UP) {
+                    handler.removeCallbacksAndMessages(null)
+                }
+                return true
+            }
+        })
     }
 
     override fun getItemCount() = registroFamilias.size
