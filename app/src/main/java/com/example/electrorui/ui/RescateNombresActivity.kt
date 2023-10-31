@@ -1,6 +1,7 @@
 package com.example.electrorui.ui
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.example.electrorui.databinding.ActivityPopupCorreccionesBinding
 import com.example.electrorui.databinding.ActivityRescateNombresBinding
 import com.example.electrorui.ui.adapters.RescateNombresAdapter
 import com.example.electrorui.ui.viewModel.RescatesNombres_AVM
@@ -50,24 +52,12 @@ class RescateNombresActivity : AppCompatActivity() {
             dataActivityViewM.onCreate()
         }
 
-        nacNombresAdapter = RescateNombresAdapter(emptyList(),
-            { data , pos ->
-                val intentRegistroNombres = Intent(this, NombresModActivity::class.java)
-                intentRegistroNombres.putExtra(
-                    NombresModActivity.EXTRA_IDNOMBRE_DB,
-                    pos
-                )
-                startActivity(intentRegistroNombres)
-            }, { data, pos ->
-                val dataToDel = RegistroNombres(
-                    pos, data.nacionalidad, data.iso3,
-                    data.nombre, data.apellidos, data.noIdentidad, data.fechaNacimiento,
-                    data.adulto, data.sexo, data.embarazo)
-                dataActivityViewM.delRegNombre(dataToDel)
-                Toast.makeText(this, "Elemento Eliminado", Toast.LENGTH_SHORT).show()
-                dataActivityViewM.onCreate()
-            }
-        )
+        nacNombresAdapter = RescateNombresAdapter(emptyList())
+        { data, pos ->
+//                Toast.makeText(this, "Elemento Eliminado", Toast.LENGTH_SHORT).show()
+                popUpCambios(data, pos)
+
+        }
         binding.recyclerNombres.adapter = nacNombresAdapter
 
         dataActivityViewM.datosNombres.observe(this){
@@ -95,6 +85,36 @@ class RescateNombresActivity : AppCompatActivity() {
         dataActivityViewM.onCreate()
 
     }
+
+    private fun popUpCambios(data: RegistroNombres, pos: Int) {
+        var bindingN = ActivityPopupCorreccionesBinding.inflate(layoutInflater)
+        var dialogN = Dialog(this)
+        dialogN.setCancelable(true)
+        dialogN.setContentView(bindingN.root)
+
+        bindingN.btnCorreccion.setOnClickListener {
+            val intentRegistroNombres = Intent(this, NombresModActivity::class.java)
+            intentRegistroNombres.putExtra(
+                NombresModActivity.EXTRA_IDNOMBRE_DB,
+                pos
+            )
+            startActivity(intentRegistroNombres)
+            dialogN.dismiss()
+        }
+
+        bindingN.btnEliminar.setOnClickListener {
+            val dataToDel = RegistroNombres(
+                pos, data.nacionalidad, data.iso3,
+                data.nombre, data.apellidos, data.noIdentidad, data.fechaNacimiento,
+                data.adulto, data.sexo, data.embarazo)
+            dataActivityViewM.delRegNombre(dataToDel)
+            dataActivityViewM.onCreate()
+            dialogN.dismiss()
+        }
+
+        dialogN.show()
+    }
+
     override fun onResume() {
         super.onResume()
         dataActivityViewM.onCreate()

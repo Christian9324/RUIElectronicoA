@@ -1,10 +1,12 @@
 package com.example.electrorui.ui
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.example.electrorui.databinding.ActivityPopupCorreccionesBinding
 import com.example.electrorui.databinding.ActivityRescateFamiliasBinding
 import com.example.electrorui.ui.adapters.RescateFamiliaAdapter
 import com.example.electrorui.ui.viewModel.RescatesFamilias_AVM
@@ -26,27 +28,10 @@ class RescateFamiliasActivity : AppCompatActivity() {
         binding = ActivityRescateFamiliasBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        familiasAdapter = RescateFamiliaAdapter(emptyList(), {
-                data , pos ->
-            val intentRegistroFamilias = Intent(this, FamiliarModActivity::class.java)
-            intentRegistroFamilias.putExtra(
-                FamiliarModActivity.EXTRA_IDFAMILIA_DB,
-                pos
-            )
-            startActivity(intentRegistroFamilias)
-             },
-            {data , pos ->
-                val dataToDel = RegistroFamilias(
-                    pos,
-                    data.nacionalidad, data.iso3,
-                    data.nombre, data.apellidos,
-                    data.noIdentidad, data.parentesco,
-                    data.fechaNacimiento, data.adulto, data.sexo, data.embarazo, data.numFamilia)
-                dataActivityViewM.delRegFam(dataToDel)
-                Toast.makeText(this, "Elemento Eliminado", Toast.LENGTH_SHORT).show()
-                dataActivityViewM.onCreate( intent.getIntExtra(EXTRA_NOM_FAMILIA,1) )
-            }
-        )
+        familiasAdapter = RescateFamiliaAdapter(emptyList())
+        { data , pos ->
+            popUpCambiosF(data, pos)
+        }
 
         binding.RecyclerFamilias.adapter = familiasAdapter
 
@@ -71,6 +56,42 @@ class RescateFamiliasActivity : AppCompatActivity() {
 
         dataActivityViewM.onCreate( intent.getIntExtra(EXTRA_NOM_FAMILIA,1) )
 
+    }
+
+    private fun popUpCambiosF(data: RegistroFamilias, pos: Int) {
+
+        var bindingF = ActivityPopupCorreccionesBinding.inflate(layoutInflater)
+        var dialogF = Dialog(this)
+        dialogF.setCancelable(true)
+        dialogF.setContentView(bindingF.root)
+
+
+        bindingF.btnCorreccion.setOnClickListener {
+            val intentRegistroFamilias = Intent(this, FamiliarModActivity::class.java)
+            intentRegistroFamilias.putExtra(
+                FamiliarModActivity.EXTRA_IDFAMILIA_DB,
+                pos
+            )
+            startActivity(intentRegistroFamilias)
+            dialogF.dismiss()
+        }
+
+        bindingF.btnEliminar.setOnClickListener {
+
+            val dataToDel = RegistroFamilias(
+                pos,
+                data.nacionalidad, data.iso3,
+                data.nombre, data.apellidos,
+                data.noIdentidad, data.parentesco,
+                data.fechaNacimiento, data.adulto, data.sexo, data.embarazo, data.numFamilia)
+            dataActivityViewM.delRegFam(dataToDel)
+            Toast.makeText(this, "Elemento Eliminado", Toast.LENGTH_SHORT).show()
+            dataActivityViewM.onCreate( intent.getIntExtra(EXTRA_NOM_FAMILIA,1) )
+
+            dialogF.dismiss()
+        }
+
+        dialogF.show()
     }
 
     override fun onResume() {

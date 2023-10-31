@@ -13,7 +13,7 @@ import com.example.electrorui.usecase.model.RegistroNombres
 class RescateNombresAdapter(
 
     var registroNombres : List<RegistroNombres>,
-    private val nacionalidadesClickedListener: (RegistroNombres, Int) -> Unit, // se modifico esta linea labda
+//    private val nacionalidadesClickedListener: (RegistroNombres, Int) -> Unit, // se modifico esta linea labda
     private val nacionalidadesLongClickListener: (RegistroNombres, Int) -> Unit, // se modifico esta linea labda
 
 ) : RecyclerView.Adapter<RescateNombresAdapter.ViewHolder>() {
@@ -30,12 +30,16 @@ class RescateNombresAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val registro = registroNombres[position]
         holder.bind(registro)
-        holder.itemView.setOnClickListener {
-            nacionalidadesClickedListener(registro, registro.idNombres) // Se modifico esta linea lambda
-        }
-        holder.itemView.setOnVeryLongClickListener {
+        holder.itemView.setOnLongClickListener {
             nacionalidadesLongClickListener(registro, registro.idNombres)
+            return@setOnLongClickListener true
         }
+//        holder.itemView.setOnClickListener {
+//            nacionalidadesClickedListener(registro, registro.idNombres) // Se modifico esta linea lambda
+//        }
+//        holder.itemView.setOnVeryLongClickListener {
+//            nacionalidadesLongClickListener(registro, registro.idNombres)
+//        }
     }
 
     fun View.setOnVeryLongClickListener(listener: () -> Unit) {

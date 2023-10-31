@@ -16,7 +16,7 @@ import java.util.Date
 class RescateFamiliaAdapter(
 
     var registroFamilias : List<RegistroFamilias>,
-    private val registroFamiliasClickedListener: (RegistroFamilias, Int) -> Unit, // se modifico esta linea labda
+//    private val registroFamiliasClickedListener: (RegistroFamilias, Int) -> Unit, // se modifico esta linea labda
     private val registroFamiliasLongClickListener: (RegistroFamilias , Int) -> Unit // se modifico esta linea labda
 
 ) : RecyclerView.Adapter<RescateFamiliaAdapter.ViewHolder>() {
@@ -33,22 +33,22 @@ class RescateFamiliaAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val registro = registroFamilias[position]
         holder.bind(registro)
-        holder.itemView.setOnClickListener {
-            registroFamiliasClickedListener(registro, registro.idF) // Se modifico esta linea lambda
-        }
-//        holder.itemView.setOnLongClickListener {
-//            registroFamiliasLongClickListener(registro, registro.idF)
-//            return@setOnLongClickListener true
+//        holder.itemView.setOnClickListener {
+//            registroFamiliasClickedListener(registro, registro.idF) // Se modifico esta linea lambda
 //        }
-        holder.itemView.setOnVeryLongClickListener {
+        holder.itemView.setOnLongClickListener {
             registroFamiliasLongClickListener(registro, registro.idF)
+            return@setOnLongClickListener true
         }
+//        holder.itemView.setOnVeryLongClickListener {
+//            registroFamiliasLongClickListener(registro, registro.idF)
+//        }
     }
 
     fun View.setOnVeryLongClickListener(listener: () -> Unit) {
         setOnTouchListener(object : View.OnTouchListener {
 
-            private val longClickDuration = 2500L
+            private val longClickDuration = 1500L
             private val handler = Handler()
 
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {

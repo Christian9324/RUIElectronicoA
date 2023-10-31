@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llPopCorreccionN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:background="@color/rojo"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/etTextoInfo"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_basic05"
+                android:layout_marginBottom="@dimen/margin_basic05"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="¿Corregir o Eliminar?"
+                android:textColor="@color/marron"
+                android:textColorHint="@color/marron"
+                android:textSize="26sp"/>
+
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_gravity="center">
+
+               <Button
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/btnEliminar"
+                   android:layout_gravity="center_horizontal"
+                   android:text="Eliminar"
+                   android:layout_marginLeft="@dimen/margin_basic1"
+                   android:layout_marginBottom="@dimen/margin_basic1"
+                   android:layout_marginRight="@dimen/margin_basic1"
+                   android:textColor="@color/rojo"/>
+
+               <Button
+                   android:layout_width="40dp"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/btnEspacio"
+                   android:layout_gravity="center_horizontal"
+                   android:text=""
+                   android:visibility="invisible"
+                   android:layout_marginBottom="@dimen/margin_basic1"
+                   android:textColor="@color/rojo"/>
+
+               <Button
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/btnCorreccion"
+                   android:layout_gravity="center_horizontal"
+                   android:text="Corregir"
+                   android:layout_marginLeft="@dimen/margin_basic1"
+                   android:layout_marginBottom="@dimen/margin_basic1"
+                   android:textColor="@color/rojo"/>
+
+           </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/pbEnvirarConteoPopUp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:indeterminateTint="@color/azul"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:visibility="gone"
+            android:background="@drawable/ic_close_24"
+            android:backgroundTint="@color/white"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
