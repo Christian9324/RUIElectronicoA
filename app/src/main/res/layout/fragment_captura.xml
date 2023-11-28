@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".ui.fragments.CapturaFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/rojo">
+            android:background="?attr/bgBar">
 
             <TextView
                 android:layout_width="match_parent"
@@ -39,7 +38,7 @@
                 android:gravity="center"
                 android:text="Rescates"
                 android:textAllCaps="true"
-                android:textColor="@color/marron"
+                android:textColor="?attr/txtBar"
                 android:textSize="35sp"
                 android:textStyle="bold"/>
 
@@ -50,8 +49,8 @@
                 android:layout_gravity="center_horizontal"
                 android:hint="Rescates"
                 android:textAllCaps="true"
-                android:textColor="@color/marron"
-                android:textColorHint="@color/marron"
+                android:textColor="?attr/txtBar"
+                android:textColorHint="?attr/txtBar"
                 android:textSize="18sp"
                 android:layout_marginTop="-7dp"
                 android:layout_marginBottom="1dp"/>
@@ -74,7 +73,7 @@
                 android:fontFamily="@font/montserrat"
                 android:text="OR: "
                 android:textAllCaps="true"
-                android:textColor="@color/gris_oscuro"
+                android:textColor="?attr/txtTitle"
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
@@ -88,7 +87,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     app:srcCompat="@drawable/ic_calendar_month_24"
-                    app:tint="@color/rojo" />
+                    app:tint="?attr/colorIcon" />
 
                 <TextView
                     android:id="@+id/textViewFecha"
@@ -97,7 +96,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/margin_basic05"
                     android:text=""
-                    android:textColor="@color/gris_oscuro"
+                    android:textColor="?attr/txtTitle"
                     android:textSize="21sp"
                     tools:text="Fecha:" />
 
@@ -147,7 +146,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/montserrat"
                 android:textAllCaps="true"
-                android:textColor="@color/gris_oscuro"
+                android:textColor="?attr/txtTitle"
                 android:textSize="14sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="-30dp"
@@ -174,11 +173,11 @@
                     android:id="@+id/spinnerTipo"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="?attr/bgAll"
                     android:gravity="center"
                     android:padding="9dp"
                     android:text="Información"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/txtT"
                     android:textColorHint="@color/gris_claro"
                     android:textSize="16sp"
                     app:spinner_arrow_gravity="end"
@@ -188,7 +187,7 @@
                     app:spinner_divider_size="1dp"
                     app:spinner_item_height="60dp"
                     app:spinner_popup_animation="normal"
-                    app:spinner_popup_background="@color/white"
+                    app:spinner_popup_background="?attr/bgAll"
                     app:spinner_popup_elevation="14dp"/>
 
                 <ImageView
@@ -268,6 +267,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
                         android:text="Adultos y NNA No Acompañados"
+                        android:textColor="?attr/txtTitle"
                         android:textSize="23sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -285,30 +285,35 @@
                         android:layout_width="180dp"
                         android:layout_height="50dp"
                         android:layout_margin="@dimen/margin_basic1"
+                        android:background="?attr/bgAll"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:background="?attr/bgAll">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="2dp"
                                 android:layout_weight="1"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:background="?attr/bgAll">
 
                                 <RelativeLayout
                                     android:layout_width="2dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1">
+                                    android:layout_weight="1"
+                                    android:background="?attr/bgAll">
 
                                     <RelativeLayout
                                         android:layout_width="180dp"
                                         android:layout_height="50dp"
                                         android:layout_centerInParent="true"
-                                        android:background="@drawable/bg_marron">
+                                        android:background="@drawable/bg_marron"
+                                        android:backgroundTint="?attr/colorBtnN">
 
                                         <ImageView
                                             android:layout_width="match_parent"
@@ -318,7 +323,7 @@
                                             android:layout_marginEnd="3dp"
                                             android:layout_marginBottom="3dp"
                                             android:src="@drawable/bg_marron"
-                                            app:tint="#FFF" />
+                                            app:tint="?attr/bgAll" />
 
                                         <RelativeLayout
                                             android:layout_width="40dp"
@@ -326,7 +331,8 @@
                                             android:layout_alignParentLeft="true"
                                             android:layout_centerVertical="true"
                                             android:layout_marginLeft="5dp"
-                                            android:background="@drawable/bg_marron">
+                                            android:background="@drawable/bg_marron"
+                                            android:backgroundTint="?attr/colorBtnN">
 
                                             <ImageView
                                                 android:layout_width="match_parent"
@@ -336,7 +342,8 @@
                                                 android:scaleX="1.8"
                                                 android:scaleY="1.8"
                                                 android:src="@drawable/ic_add_40"
-                                                app:tint="#fff" />
+                                                android:backgroundTint="?attr/colorBtnN"
+                                                app:tint="?attr/bgAll" />
                                         </RelativeLayout>
 
                                         <TextView
@@ -346,7 +353,7 @@
                                             android:layout_marginRight="10dp"
                                             android:gravity="center"
                                             android:text="NACIONALIDAD"
-                                            android:textColor="@color/marron_oscuro"
+                                            android:textColor="?attr/colorBtnN"
                                             android:textSize="16sp"
                                             android:textStyle="bold" />
                                     </RelativeLayout>
@@ -409,7 +416,8 @@
                                     <RelativeLayout
                                         android:layout_width="140dp"
                                         android:layout_height="50dp"
-                                        android:background="@drawable/bg_verde">
+                                        android:background="@drawable/bg_verde"
+                                        android:backgroundTint="?attr/colorBtnF">
 
                                         <ImageView
                                             android:layout_width="match_parent"
@@ -419,7 +427,7 @@
                                             android:layout_marginEnd="3dp"
                                             android:layout_marginBottom="3dp"
                                             android:src="@drawable/bg_verde"
-                                            app:tint="#FFF" />
+                                            app:tint="?attr/bgAll"/>
 
                                         <RelativeLayout
                                             android:layout_width="40dp"
@@ -427,7 +435,8 @@
                                             android:layout_alignParentLeft="true"
                                             android:layout_centerVertical="true"
                                             android:layout_marginLeft="5dp"
-                                            android:background="@drawable/bg_verde">
+                                            android:background="@drawable/bg_verde"
+                                            android:backgroundTint="?attr/colorBtnF">
 
                                             <ImageView
                                                 android:layout_width="match_parent"
@@ -437,7 +446,7 @@
                                                 android:scaleX="1.8"
                                                 android:scaleY="1.8"
                                                 android:src="@drawable/ic_add_40"
-                                                app:tint="#fff" />
+                                                app:tint="?attr/bgAll" />
                                         </RelativeLayout>
 
                                         <TextView
@@ -447,7 +456,7 @@
                                             android:layout_marginRight="10dp"
                                             android:gravity="center"
                                             android:text="FAMILIA"
-                                            android:textColor="@color/verde_claro"
+                                            android:textColor="?attr/colorBtnF"
                                             android:textSize="16sp"
                                             android:textStyle="bold" />
                                     </RelativeLayout>
@@ -493,7 +502,8 @@
                         android:layout_width="130dp"
                         android:layout_height="50dp"
                         android:layout_centerInParent="true"
-                        android:background="@drawable/ic_envio">
+                        android:background="@drawable/ic_envio"
+                        android:backgroundTint="?attr/colorBtn">
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -503,7 +513,7 @@
                             android:layout_marginEnd="3dp"
                             android:layout_marginBottom="3dp"
                             android:src="@drawable/ic_envio"
-                            app:tint="#FFF" />
+                            app:tint="?attr/bgAll" />
 
                         <RelativeLayout
                             android:layout_width="40dp"
@@ -511,7 +521,8 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_marginRight="5dp"
-                            android:background="@drawable/ic_envio">
+                            android:background="@drawable/ic_envio"
+                            android:backgroundTint="?attr/colorBtn">
 
                             <ImageView
                                 android:layout_width="80dp"
@@ -521,7 +532,7 @@
                                 android:scaleX="1.3"
                                 android:scaleY="1.3"
                                 android:src="@drawable/ic_send_24"
-                                app:tint="#fff" />
+                                app:tint="?attr/bgAll" />
                         </RelativeLayout>
 
                         <TextView
@@ -531,7 +542,7 @@
                             android:layout_marginRight="50dp"
                             android:gravity="center"
                             android:text="ENVIAR"
-                            android:textColor="@color/rojo"
+                            android:textColor="?attr/colorBtn"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </RelativeLayout>

@@ -1,13 +1,11 @@
 package com.example.electrorui.usecase.model
 
-import android.os.Parcelable
 import com.example.electrorui.db.entityModel.DatosRegistroEntity
 import com.example.electrorui.networkApi.model.RegistroNacionalidadModel
-import kotlinx.parcelize.Parcelize
 
 
-@Parcelize
 data class RegistroNacionalidad(
+    val idRegistro : Int,
     val nacionalidad : String,
     val iso3 : String,
     val AS_hombres : Int,
@@ -23,9 +21,10 @@ data class RegistroNacionalidad(
     val NNAsS_hombres : Int,
     val NNAsS_mujeresNoEmb : Int,
     val NNAsS_mujeresEmb : Int,
-) : Parcelable
+)
 
 fun RegistroNacionalidadModel.toUC() = RegistroNacionalidad(
+    1,
     nacionalidad,
     iso3,
     AS_hombres,
@@ -44,6 +43,26 @@ fun RegistroNacionalidadModel.toUC() = RegistroNacionalidad(
 )
 
 fun DatosRegistroEntity.toUC() = RegistroNacionalidad(
+    idRegistro,
+    nacionalidad,
+    iso3,
+    AS_hombres,
+    AS_mujeresNoEmb,
+    AS_mujeresEmb,
+    nucleosFamiliares,
+    AA_NNAs_hombres,
+    AA_NNAs_mujeresNoEmb,
+    AA_NNAs_mujeresEmb,
+    NNAsA_hombres,
+    NNAsA_mujeresNoEmb,
+    NNAsA_mujeresEmb,
+    NNAsS_hombres,
+    NNAsS_mujeresNoEmb,
+    NNAsS_mujeresEmb
+)
+
+fun DatosRegistroEntity.toUpdate() = RegistroNacionalidad(
+    idRegistro,
     nacionalidad,
     iso3,
     AS_hombres,

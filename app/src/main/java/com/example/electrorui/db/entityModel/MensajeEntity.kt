@@ -12,4 +12,5 @@ data class MensajeEntity(
     @ColumnInfo(name = "mensaje") val mensaje : String
 )
 
-fun Mensaje.toDB() = MensajeEntity(id, mensaje)
+fun Mensaje.toDB() = MensajeEntity(
+    mensaje = mensaje)

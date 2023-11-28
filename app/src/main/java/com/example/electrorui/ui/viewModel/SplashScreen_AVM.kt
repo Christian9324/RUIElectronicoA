@@ -33,7 +33,8 @@ class SplashScreen_AVM @Inject constructor(
     val dataUser by lazy { MutableLiveData<User>() }
     val statusMessage by lazy { MutableLiveData<String>() }
     val oficinaRepresentacion by lazy { MutableLiveData<String>() }
-
+    val nombreUser by lazy { MutableLiveData<String>() }
+    val mensajeNotif by lazy { MutableLiveData<String>() }
 
     fun onCreate(){
         val stadoIngreso = true
@@ -51,7 +52,7 @@ class SplashScreen_AVM @Inject constructor(
                 try {
 //                  Se Envian datos pendientes de enviar al server
                     porcentProgress.value = 40
-                    setDatosPendientesAPI()
+                    mensajeNotif.value = setDatosPendientesAPI()
 
 //                  Petición API para Verificar que el usuario loggeado tenga credenciales correctas
                     porcentProgress.value = 50
@@ -60,6 +61,8 @@ class SplashScreen_AVM @Inject constructor(
 
 //                  El usuario tiene credenciales correctas
                     if ( (!infoUsuario.password.equals("error") and !infoUsuario.password.equals(""))){
+
+                        nombreUser.value = "${infoUsuario.nombre} ${infoUsuario.apellido}"
 
 //                      Se descarga y guarda la información en la DB
                         getAllPaises()

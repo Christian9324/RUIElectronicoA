@@ -20,9 +20,12 @@
     <color name="marron_oscuro">#FFBC955C</color>
     <color name="marron">#FFDDC9A3</color>
     <color name="dorado">#D4C19C</color>
+    <color name="gris_txt">#BFBFBF</color>
     <color name="gris_claro">#FF98989A</color>
     <color name="gris_oscuro">#FF6F7271</color>
     <color name="rosa_claro">#F2DEDB</color>
     <color name="azul">#4BACC6</color>
+
+    <color name="uno">?attr/colorBtnF</color>
 
 </resources>

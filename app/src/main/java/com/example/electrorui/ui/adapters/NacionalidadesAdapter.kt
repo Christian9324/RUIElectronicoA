@@ -10,7 +10,8 @@ import com.example.electrorui.usecase.model.RegistroNacionalidad
 class NacionalidadesAdapter(
 
     var registroNacionalidad : List<RegistroNacionalidad>,
-    private val nacionalidadesClickedListener: (RegistroNacionalidad, Int) -> Unit // se modifico esta linea labda
+//    private val nacionalidadesClickedListener: (RegistroNacionalidad, Int) -> Unit // se modifico esta linea labda
+    private val nacionalidadesLongClickListener: (RegistroNacionalidad, Int) -> Unit // se modifico esta linea labda
 
 ) : RecyclerView.Adapter<NacionalidadesAdapter.ViewHolder>() {
 
@@ -26,8 +27,12 @@ class NacionalidadesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val registro = registroNacionalidad[position]
         holder.bind(registro)
-        holder.itemView.setOnClickListener {
-            nacionalidadesClickedListener(registro, position) // Se modifico esta linea lambda
+//        holder.itemView.setOnClickListener {
+//            nacionalidadesClickedListener(registro, position) // Se modifico esta linea lambda
+//        }
+        holder.itemView.setOnLongClickListener {
+            nacionalidadesLongClickListener(registro, registro.idRegistro)
+            return@setOnLongClickListener true
         }
     }
 

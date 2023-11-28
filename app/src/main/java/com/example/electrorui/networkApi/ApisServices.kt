@@ -8,6 +8,7 @@ import com.example.electrorui.networkApi.model.PaisModel
 import com.example.electrorui.networkApi.model.PuntosInterModel
 import com.example.electrorui.networkApi.model.RescateCompModel
 import com.example.electrorui.usecase.model.ConteoRapidoComp
+import com.example.electrorui.usecase.model.RespuestaA
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -30,9 +31,9 @@ interface ApisServices {
     suspend fun getAllPuntosInter() : List<PuntosInterModel>
 
     @POST("registro/insertR")
-    suspend fun insertRescates(@Body registros : List<RescateCompModel>)
+    suspend fun insertRescates(@Body registros : List<RescateCompModel>): RespuestaA
 
     @POST("registro/insertC")
-    suspend fun insertConteo(@Body registros : List<ConteoRapidoCompModel>)
+    suspend fun insertConteo(@Body registros : List<ConteoRapidoCompModel>) : RespuestaA
 
 }

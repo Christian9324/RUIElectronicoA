@@ -63,7 +63,8 @@
                         android:layout_width="160dp"
                         android:layout_height="50dp"
                         android:layout_centerInParent="true"
-                        android:background="@drawable/bg_verde">
+                        android:background="@drawable/bg_verde"
+                        android:backgroundTint="?attr/colorBtnF">
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -73,7 +74,7 @@
                             android:layout_marginEnd="3dp"
                             android:layout_marginBottom="3dp"
                             android:src="@drawable/bg_verde"
-                            app:tint="#FFF" />
+                            app:tint="?attr/bgAll" />
 
                         <RelativeLayout
                             android:layout_width="40dp"
@@ -81,7 +82,8 @@
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="5dp"
-                            android:background="@drawable/bg_verde">
+                            android:background="@drawable/bg_verde"
+                            android:backgroundTint="?attr/colorBtnF">
 
                             <ImageView
                                 android:layout_width="match_parent"
@@ -91,7 +93,7 @@
                                 android:scaleX="1.8"
                                 android:scaleY="1.8"
                                 android:src="@drawable/ic_add_40"
-                                app:tint="#fff" />
+                                app:tint="?attr/bgAll" />
                         </RelativeLayout>
 
                         <TextView
@@ -102,7 +104,7 @@
                             android:gravity="center"
                             android:text="Familiar"
                             android:textAllCaps="true"
-                            android:textColor="@color/verde_claro"
+                            android:textColor="?attr/colorBtnF"
                             android:textSize="20sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -141,7 +143,8 @@
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_centerInParent="true"
-                        android:background="@drawable/bg_rojo">
+                        android:background="@drawable/bg_rojo"
+                        android:backgroundTint="?attr/colorBtn">
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -151,7 +154,7 @@
                             android:layout_marginEnd="3dp"
                             android:layout_marginBottom="3dp"
                             android:src="@drawable/bg_verde"
-                            app:tint="#FFF" />
+                            app:tint="?attr/bgAll" />
 
                         <RelativeLayout
                             android:layout_width="40dp"
@@ -159,7 +162,8 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_marginRight="5dp"
-                            android:background="@drawable/bg_rojo">
+                            android:background="@drawable/bg_rojo"
+                            android:backgroundTint="?attr/colorBtn">
 
                             <ImageView
                                 android:layout_width="80dp"
@@ -169,7 +173,7 @@
                                 android:scaleX="1.5"
                                 android:scaleY="1.5"
                                 android:src="@drawable/ic_save_24"
-                                app:tint="#fff" />
+                                app:tint="?attr/bgAll" />
 
                         </RelativeLayout>
 
@@ -180,7 +184,7 @@
                             android:layout_marginRight="50dp"
                             android:gravity="center"
                             android:text="GUARDAR"
-                            android:textColor="@color/rojo"
+                            android:textColor="?attr/colorBtn"
                             android:textSize="18sp"
                             android:textStyle="bold" />
                     </RelativeLayout>

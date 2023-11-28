@@ -1,15 +1,22 @@
 package com.example.electrorui.ui
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import com.example.electrorui.R
 import com.example.electrorui.db.PrefManager
 import com.example.electrorui.databinding.ActivitySplashScreenBinding
 import com.example.electrorui.ui.viewModel.SplashScreen_AVM
@@ -17,6 +24,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SplashScreen : AppCompatActivity() {
+
+    companion object{
+        const val MY_CHANNEL_ID = "channelRUI"
+    }
 
     private lateinit var binding: ActivitySplashScreenBinding
     private lateinit var prefManager: PrefManager
@@ -34,6 +45,8 @@ class SplashScreen : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        createChannel()
+
         init()
 
         val cm = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -48,6 +61,16 @@ class SplashScreen : AppCompatActivity() {
         dataActivityViewM.porcentProgress.observe(this){
             binding.progressBar.progress = it
             binding.tvProcent.setText("${it}%")
+        }
+
+        dataActivityViewM.mensajeNotif.observe(this){
+            if (!it.isNullOrEmpty()){
+                createSimpleNotif(it)
+            }
+        }
+
+        dataActivityViewM.nombreUser.observe(this){
+            prefManager.setUsername(it)
         }
 
         dataActivityViewM.statusMessage.observe(this){
@@ -79,5 +102,38 @@ class SplashScreen : AppCompatActivity() {
 
     private fun init(){
         prefManager = PrefManager(this)
+    }
+
+    fun createChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val channel = NotificationChannel(
+                MY_CHANNEL_ID,
+                "MyRUISChannel",
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = "Informacion envio"
+            }
+
+            val notificationManager : NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    fun createSimpleNotif(info : String){
+
+        var nBuilder = NotificationCompat
+            .Builder(this, MY_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_rui)
+            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.ic_rui))
+            .setContentTitle("Datos del RUI")
+            .setContentText("Consulta el envio de datos")
+            .setStyle(
+                NotificationCompat.BigTextStyle().bigText(info)
+            )
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(this)){
+            notify(1, nBuilder.build())
+        }
     }
 }

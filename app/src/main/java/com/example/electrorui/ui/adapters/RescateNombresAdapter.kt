@@ -2,11 +2,13 @@ package com.example.electrorui.ui.adapters
 
 import android.graphics.Color
 import android.os.Handler
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.electrorui.R
 import com.example.electrorui.databinding.ViewANnaItemBinding
 import com.example.electrorui.usecase.model.RegistroNombres
 
@@ -68,10 +70,20 @@ class RescateNombresAdapter(
             val tipo : String
             if (edad > 18){
                 tipo = "A"
-                binding.LLi.setBackgroundColor(Color.parseColor("#FFBC955C"))
+                val typedValue = TypedValue()
+                binding.root.context.theme.resolveAttribute(R.attr.colorBtnN, typedValue, true)
+                val colorA = typedValue.data
+                binding.LLi.setBackgroundColor(colorA)
+//                binding.LLi.setBackgroundColor(Color.parseColor("#FFBC955C"))
+//                binding.LLi.setBackgroundColor(R.attr.colorBtnN)
             } else {
                 tipo = "NNA"
-                binding.LLi.setBackgroundColor(Color.parseColor("#FF047832"))
+                val typedValue = TypedValue()
+                binding.root.context.theme.resolveAttribute(R.attr.colorBtnF, typedValue, true)
+                val colorN = typedValue.data
+                binding.LLi.setBackgroundColor(colorN)
+//                binding.LLi.setBackgroundColor(Color.parseColor("#FF047832"))
+//                binding.LLi.setBackgroundColor(R.attr.colorBtnF)
             }
 
 

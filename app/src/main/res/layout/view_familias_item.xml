@@ -9,38 +9,64 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/verde_claro"
+        android:background="?attr/colorBtnF"
         android:layout_gravity="center_horizontal"
         android:layout_margin="3dp">
 
         <TextView
             android:id="@+id/tvNombre"
-            android:layout_width="90dp"
+            android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/margin_basic05"
-            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/margin_basic03"
             android:gravity="center"
-            android:hint="Familia"
+            android:hint="Fam. "
             android:text=""
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textColorHint="?attr/bgAll"
+            android:textColor="?attr/bgAll"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tvTotal"
-            android:layout_width="70dp"
+            android:layout_width="20dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/margin_basic05"
-            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/margin_basic03"
             android:gravity="center"
             android:hint="00"
             android:text=""
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textColorHint="?attr/bgAll"
+            android:textColor="?attr/bgAll"
+            android:textSize="14sp"
             android:layout_marginRight="@dimen/margin_basic05"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:textSize="10sp"
+                android:textColorHint="?attr/bgAll"
+                android:textColor="?attr/bgAll"/>
+
+            <TextView
+                android:id="@+id/tv_totales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_basic03"
+                android:hint="00"
+                android:textSize="12sp"
+                android:layout_gravity="center_horizontal"
+                android:textColorHint="?attr/bgAll"
+                android:textColor="?attr/bgAll"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
 

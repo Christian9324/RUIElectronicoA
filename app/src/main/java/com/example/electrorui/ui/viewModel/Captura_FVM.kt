@@ -30,6 +30,7 @@ import com.example.electrorui.usecase.model.Fuerza
 import com.example.electrorui.usecase.model.Iso
 import com.example.electrorui.usecase.model.Mensaje
 import com.example.electrorui.usecase.model.Municipios
+import com.example.electrorui.usecase.model.NumerosFam
 import com.example.electrorui.usecase.model.PuntosInter
 import com.example.electrorui.usecase.model.RegistroFamilias
 import com.example.electrorui.usecase.model.Rescate
@@ -68,7 +69,7 @@ class Captura_FVM @Inject constructor(
     val paises by lazy { MutableLiveData<List<String>>() }
     val iso3 by lazy { MutableLiveData<List<String>>() }
     val datosIso by lazy { MutableLiveData<List<Iso>>() }
-    val numerosFamilias by lazy { MutableLiveData<List<Int>>() }
+    val numerosFamilias by lazy { MutableLiveData<List<NumerosFam>>() }
     val oficinas by lazy { MutableLiveData<List<String>>() }
     val municipiosNom by lazy { MutableLiveData<List<String>>() }
     val municipios by lazy { MutableLiveData<List<Municipios>>() }
@@ -92,10 +93,13 @@ class Captura_FVM @Inject constructor(
             datosIso.value = getRegistrosByIsoCountUC()
             oficinas.value = getAllOrs()
 
-            val totalFam = getTotalFamilias()
-            numFamilia.value = totalFam + 1
+//            val totalFam = getTotalFamilias()
+//            numFamilia.value = totalFam + 1
+//
+//            numerosFamilias.value = List(totalFam){ it + 1}
+            numerosFamilias.value = getTotalFamilias()
+            numFamilia.value = numerosFamilias.value!!.size + 1
 
-            numerosFamilias.value = List(totalFam){ it + 1}
 //            numFamilia.value = 1
             val totalRegistros = getInfoMasivo()
             noRescatados.value = totalRegistros
@@ -121,11 +125,12 @@ class Captura_FVM @Inject constructor(
     fun onResume(){
         viewModelScope.launch {
 
-            val totalFam = getTotalFamilias()
-            numFamilia.value = totalFam + 1
+//            val totalFam = getTotalFamilias()
+//            numFamilia.value = totalFam + 1
 
             datosIso.value = getRegistrosByIsoCountUC()
-            numerosFamilias.value = List(totalFam){ it + 1}
+//            numerosFamilias.value = List(totalFam){ it + 1}
+            numerosFamilias.value = getTotalFamilias()
 //            numFamilia.value = 1
             val totalRegistros = getInfoMasivo()
             noRescatados.value = totalRegistros
@@ -301,7 +306,8 @@ class Captura_FVM @Inject constructor(
             val infoPinNombres = getDataPinNombres()
             val infoPinFamilias = getDataPinFamilias()
             val noRescatesTotales = noRescatados.value
-            val totalFam = getTotalFamilias()
+
+            val totalFam = getTotalFamilias().size
 
             if(noRescatesTotales!! > 0){
                 val mensajeStr = buildSpannedString {

@@ -8,6 +8,7 @@ import androidx.room.Update
 import com.example.electrorui.db.entityModel.IsoEntityA
 import com.example.electrorui.db.entityModel.RegistroFamiliasEntity
 import com.example.electrorui.db.entityModel.RegistroNombresEntity
+import com.example.electrorui.usecase.model.NumerosFam
 import com.example.electrorui.usecase.model.PinFamilias
 
 @Dao
@@ -28,8 +29,13 @@ interface RegistroFamiliasDao {
             "Order by `Numero de Familia` ASC, Nacionalidad DESC, Adulto DESC, Sexo DESC")
     suspend fun getDataForPin() : List<PinFamilias>
 
-    @Query("SELECT IFNULL(max(`Numero de Familia`), 0) as fam FROM datos_registro_familias_table")
-    suspend fun getNumFamilias() : Int
+//    @Query("SELECT IFNULL(max(`Numero de Familia`), 0) as fam FROM datos_registro_familias_table")
+//    suspend fun getNumFamilias() : Int
+    @Query("SELECT IFNULL(`Numero de Familia`,0) AS numFam, IFNULL(COUNT(Nombre),0) AS totales\n" +
+            "FROM datos_registro_familias_table \n" +
+            "group by `Numero de Familia`\n" +
+            "Order by `Numero de Familia` ASC")
+    suspend fun getNumFamilias() : List<NumerosFam>
 
     @Query("SELECT * FROM datos_registro_familias_table WHERE `Numero de Familia` = :num")
     suspend fun getFamiliaByNum(num : Int) : List<RegistroFamiliasEntity>

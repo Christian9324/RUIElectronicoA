@@ -4,16 +4,47 @@
 
         <item name="windowNoTitle">true</item>
 
-        <!-- Primary brand color. -->
+        <item name="android:windowBackground">@color/black</item>
+
         <item name="colorPrimary">@color/marron</item>
-        <item name="colorPrimaryVariant">@color/marron_oscuro</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimaryContainer">@color/black</item>
+        <item name="colorPrimaryDark">@color/marron_oscuro</item>
+        <item name="actionBarItemBackground">@color/verde</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondary">@color/verde</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/verde</item>
         <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/verde</item>
+        
+        <item name="bgAll">@color/black</item>
+        <item name="bgSplash">@color/black</item>
+        <item name="bgBar">@color/marron</item>
+        <item name="txtBar">@color/rojo</item>
+        <item name="txtTitle">@color/gris_txt</item>
+        <item name="txtT">@color/white</item>
+        <item name="txtFecha">@color/white</item>
+        <item name="colorIcon">@color/white</item>
+        <item name="colorBtn">@color/azul</item>
+        <item name="colorBtnM">@color/azul</item>
+        <item name="colorBtnN">@color/marron</item>
+        <item name="colorBtnF">@color/rosa_claro</item>
+        <item name="colorBtnW">@color/azul</item>
+        <item name="colorChk">@color/rosa_claro</item>
+
+<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/marron</item>-->
+<!--        <item name="colorPrimaryVariant">@color/marron_oscuro</item>-->
+<!--        <item name="colorOnPrimary">@color/black</item>-->
+<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
+<!--        <item name="colorSecondary">@color/teal_200</item>-->
+<!--        <item name="colorSecondaryVariant">@color/teal_200</item>-->
+<!--        <item name="colorOnSecondary">@color/black</item>-->
+<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
+<!--        <item name="android:statusBarColor">@color/verde</item>-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
     </style>
 </resources>

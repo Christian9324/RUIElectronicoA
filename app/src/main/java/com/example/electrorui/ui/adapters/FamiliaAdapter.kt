@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.electrorui.databinding.ViewFamiliasItemBinding
 import com.example.electrorui.databinding.ViewRegistroItemBinding
 import com.example.electrorui.usecase.model.Iso
+import com.example.electrorui.usecase.model.NumerosFam
 import com.example.electrorui.usecase.model.RegistroFamilias
 
 class FamiliaAdapter(
 
-    var registroByFamilia : List<Int>,
-    private val familiasClickedListener: (Int, Int) -> Unit // se modifico esta linea labda
+    var registroByFamilia : List<NumerosFam>,
+    private val familiasClickedListener: (NumerosFam, Int) -> Unit // se modifico esta linea labda
 
 ) : RecyclerView.Adapter<FamiliaAdapter.ViewHolder>() {
 
@@ -35,8 +36,9 @@ class FamiliaAdapter(
     override fun getItemCount() = registroByFamilia.size
 
     class ViewHolder(private val binding: ViewFamiliasItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(registro : Int){
-            binding.tvTotal.text = registro.toString()
+        fun bind(registro : NumerosFam){
+            binding.tvTotal.text = registro.numFam.toString()
+            binding.tvTotales.text = registro.totales.toString()
         }
     }
 }

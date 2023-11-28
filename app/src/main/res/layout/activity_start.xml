@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#235B4E"
     tools:context=".ui.StartActivity">
 
     <ImageView
@@ -22,9 +21,9 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="120dp"
-        android:backgroundTint="#BC955C"
+        android:backgroundTint="?attr/colorBtn"
         android:text="Entrar"
-        android:textColor="@color/verde"
+        android:textColor="?attr/bgAll"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -123,12 +123,10 @@ class FamiliarModActivity : AppCompatActivity() {
             val noIdentidad = binding.etNoIdentidadF.text.toString()
             val parentesco = binding.spinnerParentescoF.selectedItem.toString().uppercase()
             val sexo : Boolean = binding.checkHombre.isChecked
-            val numeroFamilia = intent.getIntExtra(FamiliarActivity.EXTRA_FAMILIA, 1)
+            val numeroFamilia = dataActivityViewM.dataRegistro.value!!.numFamilia
 
             val paises = dataActivityViewM.paises.value
             val indexNacionalidad = paises?.indexOf(nacionalidad)
-
-
 
             if(nacionalidad.isNullOrEmpty()){
                 binding.spinnerPAISF.setError("LLENAR PARA CONTINUAR", icon)

@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.electrorui.usecase.DelAllRegistrosUC
+import com.example.electrorui.usecase.DelConteoRByIdUC
 import com.example.electrorui.usecase.GetAllRegistrosConteoUC
 import com.example.electrorui.usecase.GetAllRescatesDB
 import com.example.electrorui.usecase.GetInfoMasivoConteoRap
@@ -31,6 +32,7 @@ class ConteoR_AVM @Inject constructor(
     private val setConteoRapidoCompletoAPI: SetConteoRapidoCompletoAPI,
     private val setMensajeDB: SetMensajeDB,
     private val getInfoMasivoConteoRap: GetInfoMasivoConteoRap,
+    private val delConteoRByIdUC: DelConteoRByIdUC,
 ) : ViewModel(){
 
     val registros by lazy { MutableLiveData<List<RegistroNacionalidad>>() }
@@ -73,6 +75,7 @@ class ConteoR_AVM @Inject constructor(
                 setConteoRapidoCompletoAPI()
 
                 val mensajeStr = buildSpannedString {
+                    bold { appendLine("     ---Conteo Preliminar---") }
                     bold { appendLine("OR: ${puntoR.oficinaRepre}") }
                     appendLine("Fecha: ${puntoR.fecha}")
 //                    appendLine("Hora: ${puntoR.hora}")
@@ -189,9 +192,12 @@ class ConteoR_AVM @Inject constructor(
                         if(it.NNAsS_hombres > 0) appendLine("${it.NNAsS_hombres} MENOR(ES) MASCULINO(S)")
                         if(it.NNAsS_mujeresNoEmb > 0) appendLine("${it.NNAsS_mujeresNoEmb} MENOR(ES) FEMENINO(S) NO EMBARAZADO(S)")
                         if(it.NNAsS_mujeresEmb > 0) appendLine("${it.NNAsS_mujeresEmb} MENOR(ES) FEMENINO(S) EMBARAZADO(S)")
+                    }
+
+                    registrosConteo.forEach {
                         appendLine()
                         if(it.nucleosFamiliares > 0){
-                            bold { appendLine("NÚCLEOS FAMILIARES: ${it.nucleosFamiliares}") }
+                            bold { appendLine("NÚCLEOS FAMILIARES: ${it.nucleosFamiliares} DE ${it.nacionalidad}") }
                             if(it.AA_NNAs_hombres > 0) appendLine("${it.AA_NNAs_hombres} ADULTO(S) MASCULINO(S)")
                             if(it.AA_NNAs_mujeresNoEmb > 0) appendLine("${it.AA_NNAs_mujeresNoEmb} ADULTO(S) FEMENINO(S) NO EMBARAZADO(S)")
                             if(it.AA_NNAs_mujeresEmb > 0) appendLine("${it.AA_NNAs_mujeresEmb} ADULTO(S) FEMENINO(S) EMBARAZADO(S)")
@@ -248,59 +254,59 @@ class ConteoR_AVM @Inject constructor(
                 } else if (puntoR.carretero == true){
                     appendLine("Carretero: ${puntoR.puntoEstra}")
                     appendLine()
-                    appendLine("Tipo de vehículo: ${puntoR.tipoVehic}")
-                    appendLine()
-                    appendLine("Línea/empresa: ${puntoR.lineaAutobus}")
-                    appendLine()
-                    appendLine("No. Economico: ${puntoR.numeroEcono}")
-                    appendLine()
-                    appendLine("Placas: ${puntoR.placas}")
-                    appendLine()
-                    if (puntoR.vehiculoAseg){
-                        appendLine("Vehiculo Asegurado")
-                        appendLine()
-                    }
-                    appendLine("Municipio: ${puntoR.municipio}")
-                    appendLine()
-                    if (puntoR.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
-                        appendLine()
-                    }
+//                        appendLine("Tipo de vehículo: ${puntoR.tipoVehic}")
+//                        appendLine()
+//                        appendLine("Línea/empresa: ${puntoR.lineaAutobus}")
+//                        appendLine()
+//                        appendLine("No. Economico: ${puntoR.numeroEcono}")
+//                        appendLine()
+//                        appendLine("Placas: ${puntoR.placas}")
+//                        appendLine()
+//                        if (puntoR.vehiculoAseg){
+//                            appendLine("Vehiculo Asegurado")
+//                            appendLine()
+//                        }
+//                        appendLine("Municipio: ${puntoR.municipio}")
+//                        appendLine()
+//                        if (puntoR.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                 }
                 else if (puntoR.casaSeguridad == true){
                     appendLine("Casa de Seguridad")
                     appendLine("Municipio: ${puntoR.municipio}")
-                    if (puntoR.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
-                        appendLine()
-                    }
+//                        if (puntoR.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                 }
                 else if (puntoR.centralAutobus == true){
                     appendLine("Central de Autobús: ${puntoR.puntoEstra}")
-                    appendLine()
-                    if (puntoR.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
-                        appendLine()
-                    }
+//                        appendLine()
+//                        if (puntoR.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                 }
                 else if (puntoR.ferrocarril == true){
                     appendLine("Ferrocarril: ${puntoR.puntoEstra}")
                     appendLine()
-                    appendLine("Empresa: ${puntoR.empresa}")
-                    appendLine()
-                    if (puntoR.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
-                        appendLine()
-                    }
+//                        appendLine("Empresa: ${puntoR.empresa}")
+//                        appendLine()
+//                        if (puntoR.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                 }
                 else if (puntoR.hotel == true){
                     appendLine("Hotel")
-                    appendLine("Nombre: ${puntoR.nombreHotel}")
+//                        appendLine("Nombre: ${puntoR.nombreHotel}")
                     appendLine("Municipio: ${puntoR.municipio}")
-                    if (puntoR.presuntosDelincuentes){
-                        appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
-                        appendLine()
-                    }
+//                        if (puntoR.presuntosDelincuentes){
+//                            appendLine("Presuntos Delincuentes: ${puntoR.numPresuntosDelincuentes}")
+//                            appendLine()
+//                        }
                 }
                 else if (puntoR.puestosADispo == true){
                     appendLine("Puestos a Disposición")
@@ -342,21 +348,25 @@ class ConteoR_AVM @Inject constructor(
                 registrosConteo.forEach {
                     appendLine()
                     bold { appendLine("${it.nacionalidad}") }
-                    appendLine("${it.AS_hombres} ADULTOS MASCULINOS")
-                    appendLine("${it.AS_mujeresNoEmb} ADULTOS FEMENINOS NO EMBARAZADOS")
-                    appendLine("${it.AS_mujeresEmb} ADULTOS FEMENINOS EMBARAZADOS")
-                    appendLine("${it.NNAsS_hombres} MENORES MASCULINOS")
-                    appendLine("${it.NNAsS_mujeresNoEmb} MENORES FEMENINOS NO EMBARAZADOS")
-                    appendLine("${it.NNAsS_mujeresEmb} MENORES FEMENINOS EMBARAZADOS")
+                    if(it.AS_hombres > 0) appendLine("${it.AS_hombres} ADULTO(S) MASCULINO(S)")
+                    if(it.AS_mujeresNoEmb > 0) appendLine("${it.AS_mujeresNoEmb} ADULTO(S) FEMENINO(S) NO EMBARAZADO(S)")
+                    if(it.AS_mujeresEmb > 0) appendLine("${it.AS_mujeresEmb} ADULTO(S) FEMENINO(S) EMBARAZADO(S)")
+                    if(it.NNAsS_hombres > 0) appendLine("${it.NNAsS_hombres} MENOR(ES) MASCULINO(S)")
+                    if(it.NNAsS_mujeresNoEmb > 0) appendLine("${it.NNAsS_mujeresNoEmb} MENOR(ES) FEMENINO(S) NO EMBARAZADO(S)")
+                    if(it.NNAsS_mujeresEmb > 0) appendLine("${it.NNAsS_mujeresEmb} MENOR(ES) FEMENINO(S) EMBARAZADO(S)")
+                }
+
+                registrosConteo.forEach {
                     appendLine()
-                    bold { appendLine("NÚCLEOS FAMILIARES: ${it.nucleosFamiliares}") }
-                    appendLine("${it.AA_NNAs_hombres} ADULTOS MASCULINOS")
-                    appendLine("${it.AA_NNAs_mujeresNoEmb} ADULTOS FEMENINOS NO EMBARAZADOS")
-                    appendLine("${it.AA_NNAs_mujeresEmb} ADULTOS FEMENINOS EMBARAZADOS")
-                    appendLine("${it.NNAsA_hombres} MENORES MASCULINOS")
-                    appendLine("${it.NNAsA_mujeresNoEmb} MENORES FEMENINOS NO EMBARAZADOS")
-                    appendLine("${it.NNAsA_mujeresEmb} MENORES FEMENINOS EMBARAZADOS")
-                    appendLine()
+                    if(it.nucleosFamiliares > 0){
+                        bold { appendLine("NÚCLEOS FAMILIARES: ${it.nucleosFamiliares} DE ${it.nacionalidad}") }
+                        if(it.AA_NNAs_hombres > 0) appendLine("${it.AA_NNAs_hombres} ADULTO(S) MASCULINO(S)")
+                        if(it.AA_NNAs_mujeresNoEmb > 0) appendLine("${it.AA_NNAs_mujeresNoEmb} ADULTO(S) FEMENINO(S) NO EMBARAZADO(S)")
+                        if(it.AA_NNAs_mujeresEmb > 0) appendLine("${it.AA_NNAs_mujeresEmb} ADULTO(S) FEMENINO(S) EMBARAZADO(S)")
+                        if(it.NNAsA_hombres > 0) appendLine("${it.NNAsA_hombres} MENOR(ES) MASCULINOS")
+                        if(it.NNAsA_mujeresNoEmb > 0) appendLine("${it.NNAsA_mujeresNoEmb} MENOR(ES) FEMENINO(S) NO EMBARAZADO(S)")
+                        if(it.NNAsA_mujeresEmb > 0) appendLine("${it.NNAsA_mujeresEmb} MENOR(ES) FEMENINO(S) EMBARAZADO(S)")
+                    }
                 }
 
 
@@ -368,6 +378,12 @@ class ConteoR_AVM @Inject constructor(
                 listOf(Mensaje(0, mensajeDB))
             )
 
+        }
+    }
+
+    fun delRegConteoR(dataToDel: RegistroNacionalidad) {
+        viewModelScope.launch {
+            delConteoRByIdUC(dataToDel)
         }
     }
 

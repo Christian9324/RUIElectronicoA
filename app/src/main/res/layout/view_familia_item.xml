@@ -10,7 +10,7 @@
         android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/verde_claro"
+        android:background="?attr/colorBtnF"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:longClickable="false"
@@ -32,8 +32,8 @@
                 android:gravity="center_horizontal"
                 android:hint="NNA"
                 android:text=""
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
+                android:textColorHint="?attr/bgAll"
+                android:textColor="?attr/bgAll"
                 android:textSize="16sp" />
 
             <TextView
@@ -46,8 +46,8 @@
                 android:gravity="center_horizontal"
                 android:hint="ISO"
                 android:text=""
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
+                android:textColorHint="?attr/bgAll"
+                android:textColor="?attr/bgAll"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -65,8 +65,8 @@
             android:lines="3"
             android:maxLines="3"
             android:text=""
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
+            android:textColorHint="?attr/bgAll"
+            android:textColor="?attr/bgAll"
             android:textSize="12sp" />
 
     </LinearLayout>

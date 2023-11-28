@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="bgSplash" format="reference|color" />
+    <attr name="bgAll" format="reference|color" />
+    <attr name="bgBar" format="reference|color" />
+    <attr name="txtBar" format="reference|color" />
+    <attr name="txtTitle" format="reference|color" />
+    <attr name="txtT" format="reference|color" />
+    <attr name="txtFecha" format="reference|color" />
+    <attr name="colorIcon" format="reference|color" />
+    <attr name="colorBtn" format="reference|color" />
+    <attr name="colorBtnF" format="reference|color" />
+    <attr name="colorBtnN" format="reference|color" />
+    <attr name="colorBtnW" format="reference|color" />
+    <attr name="colorChk" format="reference|color" />
+    <attr name="colorBtnM" format="reference|color" />
+
+</resources>

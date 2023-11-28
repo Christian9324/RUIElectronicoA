@@ -1,17 +1,17 @@
 package com.example.electrorui.ui.adapters
 
-import android.graphics.Color
 import android.os.Handler
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.electrorui.R
 import com.example.electrorui.databinding.ViewFamiliaItemBinding
-import com.example.electrorui.databinding.ViewFamiliasItemBinding
 import com.example.electrorui.usecase.model.RegistroFamilias
-import java.text.SimpleDateFormat
-import java.util.Date
+import kotlin.coroutines.coroutineContext
+
 
 class RescateFamiliaAdapter(
 
@@ -71,10 +71,19 @@ class RescateFamiliaAdapter(
             val tipo : String
             if (edad > 18){
                 tipo = "A"
-                binding.LLfam.setBackgroundColor(Color.parseColor("#FF047832"))
+                val typedValue = TypedValue()
+                binding.root.context.theme.resolveAttribute(R.attr.colorBtnF, typedValue, true)
+                val colorA = typedValue.data
+                binding.LLfam.setBackgroundColor(colorA)
+//                binding.LLfam.setBackgroundColor(Color.parseColor("#FF047832"))
             } else {
                 tipo = "NNA"
-                binding.LLfam.setBackgroundColor(Color.parseColor("#FF9F2241"))
+                val typedValue = TypedValue()
+                binding.root.context.theme.resolveAttribute(R.attr.colorBtnM, typedValue, true)
+                val colorN = typedValue.data
+                binding.LLfam.setBackgroundColor(colorN)
+//                binding.LLfam.setBackgroundColor(Color.parseColor("#FF9F2241"))
+//                binding.LLfam.setBackgroundColor(R.attr.colorBtnM)
             }
 
             binding.tvNombreC.text = "${registro.apellidos} ${registro.nombre}".toString()

@@ -5,7 +5,9 @@
         <!-- Primary brand color. -->
         <item name="windowNoTitle">true</item>
 
+         <item name="android:windowBackground">@color/white</item>
         <item name="colorPrimary">@color/marron</item>
+         <item name="colorPrimaryContainer">@color/verde</item>
          <item name="colorPrimaryDark">@color/marron_oscuro</item>
          <item name="actionBarItemBackground">@color/verde</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -17,5 +19,21 @@
         <!-- Status bar color. -->
         <!-- Customize your theme here. -->
          <item name="android:statusBarColor">@color/verde</item>
+
+         <item name="bgAll">@color/white</item>
+         <item name="bgSplash">@color/verde</item>
+         <item name="bgBar">@color/rojo</item>
+         <item name="txtBar">@color/marron</item>
+         <item name="txtTitle">@color/gris_oscuro</item>
+         <item name="txtT">@color/black</item>
+         <item name="txtFecha">@color/verde</item>
+         <item name="colorIcon">@color/rojo</item>
+         <item name="colorBtn">@color/rojo</item>
+         <item name="colorBtnM">@color/rojo</item>
+         <item name="colorBtnN">@color/marron_oscuro</item>
+         <item name="colorBtnF">@color/verde_claro</item>
+         <item name="colorBtnW">@color/verde</item>
+         <item name="colorChk">@color/verde</item>
+
      </style>
 </resources>

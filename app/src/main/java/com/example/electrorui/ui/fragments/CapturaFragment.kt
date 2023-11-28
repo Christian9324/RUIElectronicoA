@@ -264,7 +264,7 @@ class CapturaFragment : Fragment() {
         }
 //############## inicializar el RecyclerView de Familias ###############
         familiaAdapter = FamiliaAdapter(emptyList()) { datos, pos ->
-            navigateToFamiliaA(datos)
+            navigateToFamiliaA(pos)
         }
         binding.RecFamilias.adapter = familiaAdapter
         dataActivityViewM.numerosFamilias.observe(viewLifecycleOwner){
@@ -363,7 +363,6 @@ class CapturaFragment : Fragment() {
                     verifyData()
                     showPopUpEnviar()
 
-
                 }
             }
         }
@@ -412,7 +411,7 @@ class CapturaFragment : Fragment() {
 
     private fun navigateToFamiliaA(datos: Int) {
         val intentRegistroFamilias = Intent(requireContext(), RescateFamiliasActivity::class.java)
-        intentRegistroFamilias.putExtra( RescateFamiliasActivity.EXTRA_NOM_FAMILIA, datos)
+        intentRegistroFamilias.putExtra( RescateFamiliasActivity.EXTRA_NOM_FAMILIA, datos + 1)
         startActivity(intentRegistroFamilias)
     }
 

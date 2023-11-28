@@ -9,15 +9,19 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.electrorui.databinding.ActivityRegistroNuevoBinding
-import com.example.electrorui.ui.viewModel.RegistroNuevo_AVM
+import com.example.electrorui.ui.viewModel.RegistroNuevoMod_AVM
 import com.example.electrorui.usecase.model.RegistroNacionalidad
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegistroNuevoActivity : AppCompatActivity() {
+class RegistroNuevoModActivity : AppCompatActivity() {
+
+    companion object{
+        val EXTRA_IDCONTEO_DB = "RegistroNuevoModActivity:IdConteo"
+    }
 
     private lateinit var binding: ActivityRegistroNuevoBinding
-    private val dataActivityViewM : RegistroNuevo_AVM by viewModels()
+    private val dataActivityViewM : RegistroNuevoMod_AVM by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityRegistroNuevoBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -55,8 +59,30 @@ class RegistroNuevoActivity : AppCompatActivity() {
             autocompleteArrayAdapter.notifyDataSetChanged()
         }
 
+        dataActivityViewM.datosConteoR.observe(this){
+            binding.spinnerPAIS.setText(dataActivityViewM.datosConteoR.value!!.nacionalidad.toString())
+            binding.editTextASHombres.setText(dataActivityViewM.datosConteoR.value!!.AS_hombres.toString())
+            binding.editTextASMujeresNoEmb.setText(dataActivityViewM.datosConteoR.value!!.AS_mujeresNoEmb.toString())
+            binding.editTextASMujeresEmb.setText(dataActivityViewM.datosConteoR.value!!.AS_mujeresEmb.toString())
+
+            binding.editTextNucleosFam.setText(dataActivityViewM.datosConteoR.value!!.nucleosFamiliares.toString())
+
+            binding.editTextAANNAsHombres.setText(dataActivityViewM.datosConteoR.value!!.AA_NNAs_hombres.toString())
+            binding.editTextAANNAsMujeresNoEmb.setText(dataActivityViewM.datosConteoR.value!!.AA_NNAs_mujeresNoEmb.toString())
+            binding.editTextAANNAsMujeresEmb.setText(dataActivityViewM.datosConteoR.value!!.AA_NNAs_mujeresEmb.toString())
+
+            binding.editTextNNAsAHombres.setText(dataActivityViewM.datosConteoR.value!!.NNAsA_hombres.toString())
+            binding.editTextNNAsAMujeresNoEmb.setText(dataActivityViewM.datosConteoR.value!!.NNAsA_mujeresNoEmb.toString())
+            binding.editTextNNAsAMujeresEmb.setText(dataActivityViewM.datosConteoR.value!!.NNAsA_mujeresEmb.toString())
+
+            binding.editTextNNAsSHombres.setText(dataActivityViewM.datosConteoR.value!!.NNAsS_hombres.toString())
+            binding.editTextNNAsSMujeresNoEmb.setText(dataActivityViewM.datosConteoR.value!!.NNAsS_mujeresNoEmb.toString())
+            binding.editTextNNAsSMujeresEmb.setText(dataActivityViewM.datosConteoR.value!!.NNAsS_mujeresEmb.toString())
+        }
+
         binding.buttonGuardarForm.setOnClickListener {
 
+            val idRegistroC = dataActivityViewM.datosConteoR.value!!.idRegistro
             val iso3D = dataActivityViewM.iso3.value
             val paises = dataActivityViewM.paises.value
 
@@ -67,13 +93,24 @@ class RegistroNuevoActivity : AppCompatActivity() {
 
             val nucleosFamiliares = (binding.editTextNucleosFam.text.toString())
 
-            val AA_NNAs_hombres = (binding.editTextAANNAsHombres.text.toString())
-            val AA_NNAs_mujeresNoEmb = (binding.editTextAANNAsMujeresNoEmb.text.toString())
-            val AA_NNAs_mujeresEmb = (binding.editTextAANNAsMujeresEmb.text.toString())
+            var AA_NNAs_hombres = "0"
+            var AA_NNAs_mujeresNoEmb = "0"
+            var AA_NNAs_mujeresEmb = "0"
 
-            val NNAsA_hombres = (binding.editTextNNAsAHombres.text.toString())
-            val NNAsA_mujeresNoEmb = (binding.editTextNNAsAMujeresNoEmb.text.toString())
-            val NNAsA_mujeresEmb = (binding.editTextNNAsAMujeresEmb.text.toString())
+            var NNAsA_hombres = "0"
+            var NNAsA_mujeresNoEmb = "0"
+            var NNAsA_mujeresEmb = "0"
+
+            if (nucleosFamiliares.toInt() > 0 ){
+                AA_NNAs_hombres = (binding.editTextAANNAsHombres.text.toString())
+                AA_NNAs_mujeresNoEmb = (binding.editTextAANNAsMujeresNoEmb.text.toString())
+                AA_NNAs_mujeresEmb = (binding.editTextAANNAsMujeresEmb.text.toString())
+
+                NNAsA_hombres = (binding.editTextNNAsAHombres.text.toString())
+                NNAsA_mujeresNoEmb = (binding.editTextNNAsAMujeresNoEmb.text.toString())
+                NNAsA_mujeresEmb = (binding.editTextNNAsAMujeresEmb.text.toString())
+
+            }
 
             val NNAsS_hombres = (binding.editTextNNAsSHombres.text.toString())
             val NNAsS_mujeresNoEmb = (binding.editTextNNAsSMujeresNoEmb.text.toString())
@@ -82,7 +119,7 @@ class RegistroNuevoActivity : AppCompatActivity() {
             val indexNacionalidad = paises?.indexOf(nacionalidad)
 
             val datosRetorno = RegistroNacionalidad(
-                1,
+                idRegistroC,
                 nacionalidad,
                 iso3D!![indexNacionalidad!!],
                 verificarDatoInt(AS_hombres),
@@ -100,7 +137,7 @@ class RegistroNuevoActivity : AppCompatActivity() {
                 verificarDatoInt(NNAsS_mujeresEmb),
             )
 
-            dataActivityViewM.saveToDB(datosRetorno)
+            dataActivityViewM.updateToDB(datosRetorno)
 //            val datosRetornoIntent = Intent()
 //            datosRetornoIntent.putExtra(CapturaFragment.EXTRA_REGISTRO_NUEVO, datosRetorno)
 //            setResult(RESULT_OK, datosRetornoIntent)
@@ -109,7 +146,7 @@ class RegistroNuevoActivity : AppCompatActivity() {
             finish()
         }
 
-        dataActivityViewM.onCreate()
+        dataActivityViewM.onCreate(intent.getIntExtra(EXTRA_IDCONTEO_DB, 1))
     }
 
     fun verificarDatoInt( dato : String) : Int{

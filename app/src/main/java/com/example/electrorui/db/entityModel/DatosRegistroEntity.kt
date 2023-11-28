@@ -45,3 +45,22 @@ fun RegistroNacionalidad.toDB() = DatosRegistroEntity(
     NNAsS_mujeresNoEmb = NNAsS_mujeresNoEmb,
     NNAsS_mujeresEmb = NNAsS_mujeresEmb,
 )
+
+fun RegistroNacionalidad.toUpdateDB() = DatosRegistroEntity(
+    idRegistro = idRegistro,
+    nacionalidad = nacionalidad,
+    iso3 = iso3,
+    AS_hombres = AS_hombres,
+    AS_mujeresNoEmb = AS_mujeresNoEmb,
+    AS_mujeresEmb = AS_mujeresEmb,
+    nucleosFamiliares = nucleosFamiliares,
+    AA_NNAs_hombres = AA_NNAs_hombres,
+    AA_NNAs_mujeresNoEmb = AA_NNAs_mujeresNoEmb,
+    AA_NNAs_mujeresEmb = AA_NNAs_mujeresEmb,
+    NNAsA_hombres = NNAsA_hombres,
+    NNAsA_mujeresNoEmb = NNAsA_mujeresNoEmb,
+    NNAsA_mujeresEmb = NNAsA_mujeresEmb,
+    NNAsS_hombres = NNAsS_hombres,
+    NNAsS_mujeresNoEmb = NNAsS_mujeresNoEmb,
+    NNAsS_mujeresEmb = NNAsS_mujeresEmb,
+)

@@ -1,11 +1,6 @@
 package com.example.electrorui.usecase.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.example.electrorui.db.entityModel.RegistroNombresEntity
-import com.example.electrorui.usecase.model.RegistroNacionalidad
-import java.sql.Date
 import java.text.SimpleDateFormat
 
 

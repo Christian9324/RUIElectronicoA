@@ -31,6 +31,7 @@ import com.example.electrorui.usecase.model.Fuerza
 import com.example.electrorui.usecase.model.Iso
 import com.example.electrorui.usecase.model.Mensaje
 import com.example.electrorui.usecase.model.Municipios
+import com.example.electrorui.usecase.model.NumerosFam
 import com.example.electrorui.usecase.model.Pais
 import com.example.electrorui.usecase.model.PinFamilias
 import com.example.electrorui.usecase.model.PinNacionalidad
@@ -40,9 +41,11 @@ import com.example.electrorui.usecase.model.RegistroNacionalidad
 import com.example.electrorui.usecase.model.RegistroNombres
 import com.example.electrorui.usecase.model.Rescate
 import com.example.electrorui.usecase.model.RescateComp
+import com.example.electrorui.usecase.model.RespuestaA
 import com.example.electrorui.usecase.model.User
 import com.example.electrorui.usecase.model.toPaisUC
 import com.example.electrorui.usecase.model.toUC
+import com.example.electrorui.usecase.model.toUpdate
 import com.example.electrorui.usecase.model.toUser
 import javax.inject.Inject
 
@@ -83,12 +86,12 @@ class RepositoryApp @Inject constructor(
         return response.map { it.toUC() }
     }
 
-    suspend fun insertRescatesFromApi(registros : List<RescateComp>){
-        api.setRescates(registros.map { it.toAPI() } )
+    suspend fun insertRescatesFromApi(registros : List<RescateComp>): RespuestaA{
+        return api.setRescates(registros.map { it.toAPI() } )
     }
 
-    suspend fun insertConteosFromApi(registros : List<ConteoRapidoComp>){
-        api.setConteos(registros.map { it.toAPI() } )
+    suspend fun insertConteosFromApi(registros : List<ConteoRapidoComp>) : RespuestaA{
+       return api.setConteos(registros.map { it.toAPI() } )
     }
 //    ---------------------------------------------
 //--------- Obtener datos de la Base de Datos DB ---------------------
@@ -200,7 +203,7 @@ class RepositoryApp @Inject constructor(
         val response = registroFamiliasDao.getFamiliaByNum(numeroFamilia)
         return response.map { it.toUC() }
     }
-    suspend fun getNumFamiliasDB() : Int {
+    suspend fun getNumFamiliasDB() : List<NumerosFam> {
         return registroFamiliasDao.getNumFamilias()
     }
     suspend fun getPuntosAeropuertoDB() : List<String> {
@@ -208,6 +211,9 @@ class RepositoryApp @Inject constructor(
     }
     suspend fun getPuntosTerrestresDB() : List<String> {
         return puntoIDao.getByTerrestres()
+    }
+    suspend fun getRegistrosByIdFromDB( id : Int) : RegistroNacionalidad{
+        return datosRegistroDao.getById(id).toUpdate()
     }
     suspend fun insertUser(usuario : List<UsuarioEntity>) {
         usuarioDao.insert(usuario)
@@ -307,6 +313,9 @@ class RepositoryApp @Inject constructor(
     suspend fun deleteRegistroFamiliasIdFromDB(item : RegistroFamilias ) {
         registroFamiliasDao.deleteEntry(item.toUpdateDB())
     }
+    suspend fun deleteConteoRByIdFromDB(item : RegistroNacionalidad) {
+        datosRegistroDao.deleteEntry(item.toUpdateDB())
+    }
     suspend fun updateNombres(registro : RegistroNombres) {
         registroNombresDao.update(registro.toUpdateDB())
     }
@@ -316,5 +325,7 @@ class RepositoryApp @Inject constructor(
     suspend fun updateRescateCompleto(registro : RescateComp) {
         rescateCompDao.update(registro.toDB())
     }
-
+    suspend fun updateConteoR(registro : RegistroNacionalidad) {
+        datosRegistroDao.update(registro.toUpdateDB())
+    }
 }

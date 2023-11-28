@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDFDFD"
+    android:background="?attr/bgAll"
     tools:context=".ui.fragments.MensajesFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -15,6 +15,7 @@
         android:layout_marginBottom="8dp"
         android:scaleType="center"
         android:src="@drawable/ic_whatsapp_48"
+        android:backgroundTint="?attr/colorBtnW"
         android:tint="@color/marron"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

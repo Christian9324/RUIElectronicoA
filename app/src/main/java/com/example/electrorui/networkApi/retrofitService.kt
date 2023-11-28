@@ -7,6 +7,7 @@ import com.example.electrorui.networkApi.model.MunicipiosModel
 import com.example.electrorui.networkApi.model.PaisModel
 import com.example.electrorui.networkApi.model.PuntosInterModel
 import com.example.electrorui.networkApi.model.RescateCompModel
+import com.example.electrorui.usecase.model.RespuestaA
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -49,15 +50,16 @@ class retrofitService @Inject constructor(
         }
     }
 
-    suspend fun setRescates(registros : List<RescateCompModel>) {
+    suspend fun setRescates(registros : List<RescateCompModel>): RespuestaA {
         return withContext(Dispatchers.IO){
             retrofit.insertRescates(registros)
         }
     }
 
-    suspend fun setConteos(registros : List<ConteoRapidoCompModel>) {
+    suspend fun setConteos(registros : List<ConteoRapidoCompModel>): RespuestaA{
         return withContext(Dispatchers.IO){
-            retrofit.insertConteo(registros)
+           val response = retrofit.insertConteo(registros)
+            response
         }
     }
 

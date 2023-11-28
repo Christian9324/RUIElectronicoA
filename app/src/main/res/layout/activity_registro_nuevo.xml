@@ -443,6 +443,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="GUARDAR"
+                android:backgroundTint="?attr/colorBtn"
                 android:layout_marginTop="@dimen/margin_basic1"
                 android:layout_marginBottom="@dimen/margin_basic3"/>
 

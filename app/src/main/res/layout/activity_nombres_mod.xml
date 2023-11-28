@@ -93,7 +93,7 @@
                 android:ems="10"
                 android:text="@string/fNacimiento"
                 android:textSize="20sp"
-                android:textColor="@color/verde_oscuro"
+                android:textColor="?attr/txtTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etNoIdentidad" />
@@ -111,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_basic1"
                     app:ldp_date_format="dd-mm-yyyy"
-                    app:ldp_text_color="@color/verde_oscuro"
+                    app:ldp_text_color="?attr/txtFecha"
                     />
 
                 <ImageView
@@ -151,22 +151,26 @@
                 <CheckBox
                     android:id="@+id/checkHombre"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:buttonTint="?attr/colorChk" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Hombre"
-                    android:textColor="@color/verde"/>
+                    android:textColor="?attr/txtT"/>
 
                 <CheckBox
                     android:id="@+id/checkMujer"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:buttonTint="?attr/colorChk"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mujer"
-                    android:textColor="@color/verde"/>
+                    android:textColor="?attr/txtT"/>
 
             </LinearLayout>
 
@@ -183,13 +187,14 @@
                 <CheckBox
                     android:id="@+id/checkEmbarazada"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:buttonTint="?attr/colorChk"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Embarazada"
-                    android:textColor="@color/verde" />
+                    android:textColor="?attr/txtT" />
 
             </LinearLayout>
 
@@ -228,7 +233,8 @@
                                     android:layout_width="150dp"
                                     android:layout_height="50dp"
                                     android:layout_centerInParent="true"
-                                    android:background="@drawable/bg_rojo">
+                                    android:background="@drawable/bg_rojo"
+                                    android:backgroundTint="?attr/colorBtn">
 
                                     <ImageView
                                         android:layout_width="match_parent"
@@ -238,7 +244,7 @@
                                         android:layout_marginEnd="3dp"
                                         android:layout_marginBottom="3dp"
                                         android:src="@drawable/bg_verde"
-                                        app:tint="#FFF" />
+                                        app:tint="?attr/bgAll" />
 
                                     <RelativeLayout
                                         android:layout_width="40dp"
@@ -246,7 +252,8 @@
                                         android:layout_alignParentRight="true"
                                         android:layout_centerVertical="true"
                                         android:layout_marginRight="5dp"
-                                        android:background="@drawable/bg_rojo">
+                                        android:background="@drawable/bg_rojo"
+                                        android:backgroundTint="?attr/colorBtn">
 
                                         <ImageView
                                             android:layout_width="80dp"
@@ -256,7 +263,7 @@
                                             android:scaleX="1.5"
                                             android:scaleY="1.5"
                                             android:src="@drawable/ic_save_24"
-                                            app:tint="#fff" />
+                                            app:tint="?attr/bgAll" />
 
                                     </RelativeLayout>
 
@@ -267,7 +274,7 @@
                                         android:layout_marginRight="50dp"
                                         android:gravity="center"
                                         android:text="GUARDAR"
-                                        android:textColor="@color/rojo"
+                                        android:textColor="?attr/colorBtn"
                                         android:textSize="18sp"
                                         android:textStyle="bold" />
                                 </RelativeLayout>
