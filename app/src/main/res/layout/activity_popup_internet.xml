@@ -21,7 +21,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
-            android:background="@color/rojo"
+            android:background="?attr/bgBar"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -42,7 +42,7 @@
                     android:gravity="center"
                     android:hint="TIPO: "
                     android:text="@string/texto1_SinConexion"
-                    android:textColor="@color/marron"
+                    android:textColor="?attr/txtBar"
                     android:textColorHint="@color/marron"
                     android:textSize="26sp"
                     />
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/texto2_SinConexion"
-                android:textColor="@color/marron"
+                android:textColor="?attr/txtBar"
                 android:gravity="center"
                 android:textSize="16sp"
                 android:layout_marginLeft="@dimen/margin_basic4"
@@ -75,7 +75,8 @@
                    android:text="OK"
                    android:layout_marginLeft="@dimen/margin_basic1"
                    android:layout_marginBottom="@dimen/margin_basic1"
-                   android:textColor="@color/rojo"/>
+                   android:textColor="?attr/bgBar"
+                    android:backgroundTint="?attr/txtBar"/>
 
            </LinearLayout>
 

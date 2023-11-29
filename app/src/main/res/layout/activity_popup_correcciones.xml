@@ -14,69 +14,71 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
-            android:background="@color/rojo"
+            android:background="?attr/bgBar"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/etTextoInfo"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_basic05"
                 android:layout_marginBottom="@dimen/margin_basic05"
                 android:gravity="center"
-                android:layout_gravity="center"
                 android:text="¿Corregir o Eliminar?"
-                android:textColor="@color/marron"
+                android:textColor="?attr/txtBar"
                 android:textColorHint="@color/marron"
-                android:textSize="26sp"/>
+                android:textSize="26sp" />
 
-           <LinearLayout
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:layout_gravity="center">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
-               <Button
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:id="@+id/btnEliminar"
-                   android:layout_gravity="center_horizontal"
-                   android:text="Eliminar"
-                   android:layout_marginLeft="@dimen/margin_basic1"
-                   android:layout_marginBottom="@dimen/margin_basic1"
-                   android:layout_marginRight="@dimen/margin_basic1"
-                   android:textColor="@color/rojo"/>
+                <Button
+                    android:id="@+id/btnEliminar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/margin_basic1"
+                    android:layout_marginRight="@dimen/margin_basic1"
+                    android:layout_marginBottom="@dimen/margin_basic1"
+                    android:text="Eliminar"
+                    android:textColor="?attr/bgBar"
+                    android:backgroundTint="?attr/txtBar"/>
 
-               <Button
-                   android:layout_width="40dp"
-                   android:layout_height="wrap_content"
-                   android:id="@+id/btnEspacio"
-                   android:layout_gravity="center_horizontal"
-                   android:text=""
-                   android:visibility="invisible"
-                   android:layout_marginBottom="@dimen/margin_basic1"
-                   android:textColor="@color/rojo"/>
+                <Button
+                    android:id="@+id/btnEspacio"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/margin_basic1"
+                    android:text=""
+                    android:textColor="@color/rojo"
+                    android:visibility="invisible" />
 
-               <Button
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:id="@+id/btnCorreccion"
-                   android:layout_gravity="center_horizontal"
-                   android:text="Corregir"
-                   android:layout_marginLeft="@dimen/margin_basic1"
-                   android:layout_marginBottom="@dimen/margin_basic1"
-                   android:textColor="@color/rojo"/>
+                <Button
+                    android:id="@+id/btnCorreccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/margin_basic1"
+                    android:layout_marginBottom="@dimen/margin_basic1"
+                    android:layout_marginRight="@dimen/margin_basic1"
+                    android:text="Corregir"
+                    android:textColor="?attr/bgBar"
+                    android:backgroundTint="?attr/txtBar"/>
 
-           </LinearLayout>
+            </LinearLayout>
 
             <ProgressBar
                 android:id="@+id/pbEnvirarConteoPopUp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:visibility="gone"
                 android:indeterminateTint="@color/azul"
-                />
+                android:visibility="gone" />
 
         </LinearLayout>
 

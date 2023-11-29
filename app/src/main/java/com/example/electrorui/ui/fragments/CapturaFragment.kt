@@ -5,6 +5,8 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -12,6 +14,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.DisplayMetrics
 import android.util.Log
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +25,7 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -32,6 +36,7 @@ import com.example.electrorui.R
 import com.example.electrorui.databinding.ActivityPopupCarreteroBinding
 import com.example.electrorui.databinding.ActivityPopupEnviarBinding
 import com.example.electrorui.databinding.FragmentCapturaBinding
+import com.example.electrorui.databinding.SpinnerItemBinding
 import com.example.electrorui.databinding.ToastLayoutErrorBinding
 import com.example.electrorui.db.PrefManager
 import com.example.electrorui.ui.ConteoRActivity
@@ -148,7 +153,8 @@ class CapturaFragment : Fragment() {
                     IconSpinnerItem(text = "HOTEL", icon= icon6),
                     IconSpinnerItem(text = "PUESTOS A DISPOSICIÓN", icon= icon7),
                     IconSpinnerItem(text = "VOLUNTARIOS", icon= icon8),
-                    IconSpinnerItem(text = "OTRO", icon=icon9)))
+//                    IconSpinnerItem(text = "OTRO", icon=icon9)
+                ))
             getSpinnerRecyclerView().layoutManager = GridLayoutManager(context, 1)
             selectItemByIndex(0) // select a default item.
             lifecycleOwner = viewLifecycleOwner
@@ -157,12 +163,20 @@ class CapturaFragment : Fragment() {
 //############## inicializar spinner de Selección de Punto de Rescate --Vacio-- ###############
         var dataTipoRescate = emptyList<String>()
         val spinnerTipoRadapter = ArrayAdapter(
-            requireActivity().applicationContext,
-            android.R.layout.simple_spinner_item,
+            requireContext(),
+            R.layout.spinner_item,
             dataTipoRescate
         )
+
+        spinnerTipoRadapter.setDropDownViewResource(R.layout.spinner_item)
         binding.spinnerPuntoR.threshold = 1
         binding.spinnerPuntoR.setAdapter(spinnerTipoRadapter)
+
+        val typedValue = TypedValue()
+        binding.root.context.theme.resolveAttribute(R.attr.colorSpinner, typedValue, true)
+        val colorSp = typedValue.data
+        binding.spinnerPuntoR.setDropDownBackgroundDrawable(ColorDrawable(colorSp))
+//        binding.spinnerPuntoR.setDropDownBackgroundDrawable(ColorDrawable(ContextCompat.getColor(requireContext(), R.color.marron)))
 
 // --------- Cargar por defecto la información de la fecha y la hora en los editText
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yy")
@@ -371,6 +385,8 @@ class CapturaFragment : Fragment() {
             prefManager.setTipoRescate(0)
             prefManager.setPuntoRevision("")
             binding.editTextHora.setText("")
+            dataActivityViewM.etPuntoRescate.value = ""
+//            Log.e("entro", "entro")
 //            if (it){
 //                navigateToMensajes()
 //            }
@@ -1007,13 +1023,15 @@ class CapturaFragment : Fragment() {
                         override fun onFinish() {
                             bindings1.pbEnvirarConteoPopUp.visibility = View.GONE
 
-//                      Se settean los valores en Cero de los datos guardados
+//                          Se settean los valores en Cero de los datos guardados
                             binding.spinnerTipo.selectItemByIndex(prefManager.getTipoRescate()!!)
                             binding.spinnerPuntoR.setText(prefManager.getPuntoRevision())
                             binding.LLPuntoRescate.visibility = View.GONE
                             dataActivityViewM.numerosFamilias.value = emptyList()
                             dataActivityViewM.datosIso.value = emptyList()
                             dataActivityViewM.delAllDatos()
+
+                            binding.spinnerPuntoR.setText("")
                             prefManager.setPuntoRevision("")
                             prefManager.setTipoRescate(0)
 
@@ -1041,12 +1059,14 @@ class CapturaFragment : Fragment() {
                         bindings1.pbEnvirarConteoPopUp.visibility = View.GONE
 //                      Se settean los valores en Cero de los datos guardados
                         binding.spinnerTipo.selectItemByIndex(prefManager.getTipoRescate()!!)
-                        binding.spinnerPuntoR.setText(prefManager.getPuntoRevision())
+//                        binding.spinnerPuntoR.setText(prefManager.getPuntoRevision())
                         binding.LLPuntoRescate.visibility = View.GONE
                         dataActivityViewM.numerosFamilias.value = emptyList()
                         dataActivityViewM.datosIso.value = emptyList()
                         dataActivityViewM.delAllDatos()
+//                        dataActivityViewM.puntoRescateNom.value = ""
                         prefManager.setPuntoRevision("")
+                        binding.spinnerPuntoR.setText("")
                         prefManager.setTipoRescate(0)
 //                      SE LLama a la funcion de pasar de vista de fragmento
                         dataActivityViewM.pasarVentana.value = true

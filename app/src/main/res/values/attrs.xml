@@ -14,5 +14,6 @@
     <attr name="colorBtnW" format="reference|color" />
     <attr name="colorChk" format="reference|color" />
     <attr name="colorBtnM" format="reference|color" />
+    <attr name="colorSpinner" format="reference|color" />
 
 </resources>

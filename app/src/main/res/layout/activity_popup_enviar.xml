@@ -21,7 +21,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
-            android:background="@color/rojo"
+            android:background="?attr/bgBar"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -42,7 +42,7 @@
                     android:gravity="center"
                     android:text="¿Datos Correctos?"
                     android:hint="TIPO: "
-                    android:textColor="@color/marron"
+                    android:textColor="?attr/txtBar"
                     android:textColorHint="@color/marron"
                     android:textSize="30sp" />
 
@@ -62,7 +62,8 @@
                    android:text="REVISAR"
                    android:layout_marginLeft="@dimen/margin_basic1"
                    android:layout_marginBottom="@dimen/margin_basic1"
-                   android:textColor="@color/rojo"/>
+                   android:textColor="?attr/bgBar"
+                   android:backgroundTint="?attr/txtBar"/>
                <Button
                    android:layout_width="40dp"
                    android:layout_height="wrap_content"
@@ -71,7 +72,8 @@
                    android:text=""
                    android:visibility="invisible"
                    android:layout_marginBottom="@dimen/margin_basic1"
-                   android:textColor="@color/rojo"/>
+                   android:textColor="?attr/bgBar"
+                   android:backgroundTint="?attr/txtBar"/>
 
                <Button
                    android:layout_width="wrap_content"
@@ -82,7 +84,8 @@
                    android:layout_marginLeft="@dimen/margin_basic1"
                    android:layout_marginBottom="@dimen/margin_basic1"
                    android:layout_marginRight="@dimen/margin_basic1"
-                   android:textColor="@color/rojo"/>
+                   android:textColor="?attr/bgBar"
+                   android:backgroundTint="?attr/txtBar"/>
 
            </LinearLayout>
 

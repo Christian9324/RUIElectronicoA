@@ -212,17 +212,19 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/spinnerPuntoR"
+                    android:paddingTop="@dimen/margin_basic1"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-
                     android:hint="Punto de rescate"
+                    android:textColor="?attr/txtT"
                     android:inputType="textAutoComplete"
                     android:visibility="visible"
                     android:gravity="center"
                     android:ellipsize="end"
                     android:imeOptions="actionDone"
-                    android:layout_gravity="center_horizontal"/>
+                    android:layout_gravity="center_horizontal"
+                    />
 
             </LinearLayout>
 

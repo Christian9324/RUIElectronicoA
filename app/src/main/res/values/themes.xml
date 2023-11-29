@@ -35,5 +35,7 @@
          <item name="colorBtnW">@color/verde</item>
          <item name="colorChk">@color/verde</item>
 
+         <item name="colorSpinner">@color/white</item>
+
      </style>
 </resources>

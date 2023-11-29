@@ -7,7 +7,6 @@
         <item name="android:windowBackground">@color/black</item>
 
         <item name="colorPrimary">@color/marron</item>
-        <item name="colorPrimaryContainer">@color/black</item>
         <item name="colorPrimaryDark">@color/marron_oscuro</item>
         <item name="actionBarItemBackground">@color/verde</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -15,7 +14,7 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/verde</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <!-- Customize your theme here. -->
         <item name="android:statusBarColor">@color/verde</item>
@@ -34,6 +33,8 @@
         <item name="colorBtnF">@color/rosa_claro</item>
         <item name="colorBtnW">@color/azul</item>
         <item name="colorChk">@color/rosa_claro</item>
+
+        <item name="colorSpinner">@color/marron</item>
 
 <!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
 <!--        <item name="colorPrimary">@color/marron</item>-->
