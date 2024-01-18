@@ -26,6 +26,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.hilt.android.AndroidEntryPoint
 import org.threeten.bp.format.DateTimeFormatter
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.Date
 
 @AndroidEntryPoint
@@ -43,7 +44,7 @@ class FamiliarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFamiliarBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        AndroidThreeTen.init(this)
+//        AndroidThreeTen.init(this)
 
         binding.checkHombre.isChecked = true
 
@@ -82,7 +83,13 @@ class FamiliarActivity : AppCompatActivity() {
             binding.LLEmbarazado.visibility = View.VISIBLE
         }
 
-        binding.ldFechaNacimiento.setMaxLocalDate(org.threeten.bp.LocalDate.now())
+//        binding.ldFechaNacimiento.setMaxLocalDate(org.threeten.bp.LocalDate.now())
+        binding.ldFechaNacimiento.setMaxLocalDate(
+            org.threeten.bp.LocalDate.parse(
+                LocalDate.now().toString(),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            )
+        )
         binding.ldFechaNacimiento.setMinLocalDate(
             org.threeten.bp.LocalDate.parse(
                 "01/01/1920",

@@ -88,6 +88,16 @@ class SplashScreen_AVM @Inject constructor(
                 } catch (error : Exception){
                     Log.e("Error Conexión", error.toString())
                     statusMessage.value = "Servidor en mantenimiento"
+
+                    if( !usuarioDatos.nickname.equals("")){
+                        porcentProgress.value = 100
+//                  Pasa a la captura
+                        continuar.value = 1
+                    } else{ //if( (usuarioDatos.password.equals("error") or usuarioDatos.password.equals("") ) ) {
+                        porcentProgress.value = 100
+//                  Pasa a el Loggin
+                        continuar.value = 2
+                    }
                 }
 //          No tiene Internet
             } else {

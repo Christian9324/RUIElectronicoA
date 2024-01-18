@@ -46,7 +46,7 @@ class NombresActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNombresBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        AndroidThreeTen.init(this)
+//        AndroidThreeTen.init(this)
 
         val nacio  = emptyList<String>()
 
@@ -76,7 +76,13 @@ class NombresActivity : AppCompatActivity() {
             binding.checkEmbarazada.isChecked = false
         }
 
-        binding.ldFechaNacimiento.setMaxLocalDate(org.threeten.bp.LocalDate.now())
+//        binding.ldFechaNacimiento.setMaxLocalDate(org.threeten.bp.LocalDate.now())
+        binding.ldFechaNacimiento.setMaxLocalDate(
+            org.threeten.bp.LocalDate.parse(
+                LocalDate.now().toString(),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            )
+        )
         binding.ldFechaNacimiento.setMinLocalDate(
             org.threeten.bp.LocalDate.parse(
                 "01/01/1920",
